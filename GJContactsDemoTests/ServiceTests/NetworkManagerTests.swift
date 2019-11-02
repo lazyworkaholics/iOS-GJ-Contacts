@@ -44,6 +44,7 @@ class NetworkManagerTests: XCTestCase {
         networkManagerToTest?.httpRequest("test",
                                           params: nil,
                                           method: HTTPRequestType.GET,
+                                          headers: nil,
                                           body: nil,
                                           onSuccess: {
                                             (responseData) in
@@ -65,6 +66,7 @@ class NetworkManagerTests: XCTestCase {
         networkManagerToTest?.httpRequest("test",
                                           params: nil,
                                           method: HTTPRequestType.GET,
+                                          headers: nil,
                                           body: nil,
                                           onSuccess: { (
                                             responseData) in
@@ -76,7 +78,7 @@ class NetworkManagerTests: XCTestCase {
         })
     }
     
-    func testNetworkCallSuccessCase() {
+    func testSuccessCase() {
         let mockSession = URLSessionMock()
         let mockRequestData = Data.init(base64Encoded:"tahfahfhfaisfhaihf")
         let mockResponseData = Data.init(base64Encoded:"VGhpcyBpcyBub3QgYSBKU09O")
@@ -97,6 +99,7 @@ class NetworkManagerTests: XCTestCase {
         networkManagerToTest?.httpRequest("test",
                                           params: ["biw":"1881", "bih":"1066"],
                                           method: HTTPRequestType.GET,
+                                          headers: nil,
                                           body: mockRequestData,
                                           onSuccess: {
                                             (responseData) in

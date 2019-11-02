@@ -22,7 +22,7 @@ class NetworkManager
     var urlSession : URLSession
     var reachability : Reachability
     
-    private init() {
+    init() {
         let defaultConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession.init(configuration: defaultConfiguration)
         self.reachability = Reachability.forInternetConnection()
@@ -32,6 +32,7 @@ class NetworkManager
     func httpRequest(_ urlPath:String,
                      params: [String: String]?,
                      method: HTTPRequestType,
+                     headers: [String: String]?,
                      body: Data?,
                      onSuccess successBlock:@escaping (Data)->Void,
                      onFailure failureBlock:@escaping (NSError)->Void) {
@@ -46,7 +47,7 @@ class NetworkManager
         }
         
         // check if a valid urlRequest be constructed out of the given input fields
-        guard let urlRequest = self.requestConstructor(urlPath, params: params, method: method, body: body) else {
+        guard let urlRequest = self.requestConstructor(urlPath, params: params, method: method, headers: headers, body: body) else {
             return
         }
         
@@ -71,7 +72,7 @@ class NetworkManager
                 if let urlResponse = urlResponse as? HTTPURLResponse
                 {
                     //The API call was successful, go ahead and parse the data
-                    if urlResponse.statusCode == 200
+                    if urlResponse.statusCode >= 200 && urlResponse.statusCode <= 206
                     {
                         if let responseData = responseData
                         {
@@ -80,7 +81,7 @@ class NetworkManager
                         else
                         {
                             //Oops we should never get here in the first place. Abort!
-                            let errorObject = self.errorObjectFromString("Couldnot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
+                            let errorObject = self.errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
                             failureBlock(errorObject)
                         }
                     }
@@ -95,7 +96,7 @@ class NetworkManager
                 else
                 {
                     //Oops we should never get here in the first place. Abort!
-                    let errorObject = self.errorObjectFromString("Couldnot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
+                    let errorObject = self.errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
                     failureBlock(errorObject)
                 }
             }
@@ -112,26 +113,28 @@ class NetworkManager
     private func requestConstructor(_ urlPath:String,
                             params: [String: String]?,
                             method: HTTPRequestType,
+                            headers: [String: String]?,
                             body: Data?) -> URLRequest?
     {
-        var urlString = Network_Constants.BASE_URL + urlPath
-        
-        guard let url = URL.init(string: urlString) else {
+        guard var url = URL.init(string: Network_Constants.BASE_URL) else {
             return nil
         }
         
+        var relativePath = urlPath
         if params != nil
         {
-            urlString = urlString + "?"
+            relativePath = relativePath + "?"
             var isFirstIteration:Bool = true
             for (key, value) in params ?? [:] {
                 if !isFirstIteration {
-                    urlString = urlString + "&"
+                    relativePath = relativePath + "&"
                     isFirstIteration = false
                 }
-                urlString = urlString + key + "=" + value
+                relativePath = relativePath + key + "=" + value
             }
         }
+        
+        url.appendPathComponent(relativePath)
         
         var urlRequest = URLRequest.init(url:url,
                                          cachePolicy: .useProtocolCachePolicy,
@@ -141,6 +144,10 @@ class NetworkManager
         if body != nil
         {
             urlRequest.httpBody = body
+        }
+        
+        for (key, value) in headers ?? [:] {
+            urlRequest.setValue(value, forHTTPHeaderField: key)
         }
         
         return urlRequest

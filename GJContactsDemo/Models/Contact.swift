@@ -6,7 +6,7 @@
 //  Copyright © 2019 SPH. All rights reserved.
 //
 
-public struct Contact: Codable {
+public struct Contact: Codable, Equatable {
     var id: Int!
     var firstName: String!
     var lastName: String!
@@ -24,9 +24,8 @@ public struct Contact: Codable {
     var fullName:String {
         if firstName != "" && lastName != "" {
             return firstName + " " + lastName
-        } else {
-            return firstName + lastName
         }
+        return firstName + lastName
     }
     
     enum CodingKeys: String, CodingKey {
@@ -40,5 +39,52 @@ public struct Contact: Codable {
         case email = "email"
         case createDate = "created_at"
         case lastUpdateDate = "updated_at"
+    }
+    
+    public static func == (lhs: Contact, rhs: Contact) -> Bool {
+        if (lhs.id == rhs.id) &&
+            (lhs.firstName == rhs.firstName) &&
+            (lhs.lastName == rhs.lastName) &&
+            (lhs.profilePicUrl == rhs.profilePicUrl) &&
+            (lhs.isFavorite == rhs.isFavorite) &&
+            (lhs.detailsUrl == rhs.detailsUrl) &&
+            (lhs.phoneNumber == rhs.phoneNumber) &&
+            (lhs.email == rhs.email) &&
+            (lhs.createDate == rhs.createDate) &&
+            (lhs.lastUpdateDate == rhs.lastUpdateDate)
+        {
+            return true
+        }
+        return false
+    }
+    
+    public static func != (lhs: Contact, rhs: Contact) -> Bool {
+        if  (lhs.id != rhs.id) ||
+            (lhs.firstName != rhs.firstName) ||
+            (lhs.lastName != rhs.lastName) ||
+            (lhs.profilePicUrl != rhs.profilePicUrl) ||
+            (lhs.isFavorite != rhs.isFavorite) ||
+            (lhs.detailsUrl != rhs.detailsUrl) ||
+            (lhs.phoneNumber != rhs.phoneNumber) ||
+            (lhs.email != rhs.email) ||
+            (lhs.createDate != rhs.createDate) ||
+            (lhs.lastUpdateDate != rhs.lastUpdateDate)
+        {
+            return true
+        }
+        return false
+    }
+    
+    mutating func update(contact:Contact) {
+        self.id = contact.id
+        self.firstName = contact.firstName
+        self.lastName = contact.lastName
+        self.profilePicUrl = contact.profilePicUrl
+        self.isFavorite = contact.isFavorite
+        self.detailsUrl = contact.detailsUrl
+        self.phoneNumber = contact.phoneNumber
+        self.email = contact.email
+        self.createDate = contact.createDate
+        self.lastUpdateDate = contact.lastUpdateDate
     }
 }
