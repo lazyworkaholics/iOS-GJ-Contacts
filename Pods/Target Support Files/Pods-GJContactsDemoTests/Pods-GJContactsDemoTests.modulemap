@@ -1,0 +1,6 @@
+framework module Pods_GJContactsDemoTests {
+  umbrella header "Pods-GJContactsDemoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
