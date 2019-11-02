@@ -23,6 +23,9 @@
 		45BAD772236D660900B1534F /* ReachabilityMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD771236D660900B1534F /* ReachabilityMock.swift */; };
 		45BAD774236D665000B1534F /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD773236D665000B1534F /* URLSessionMock.swift */; };
 		45BAD776236D668700B1534F /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD775236D668700B1534F /* NetworkManagerTests.swift */; };
+		45BAD779236D729500B1534F /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD778236D729500B1534F /* Contact.swift */; };
+		45BAD77B236D7FD200B1534F /* ContactModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD77A236D7FD200B1534F /* ContactModelTests.swift */; };
+		45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD77C236D826800B1534F /* ServiceManager.swift */; };
 		9C3821E5ECC68BB22FD52317 /* Pods_GJContactsDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */; };
 		FC37A7EA49391AE13F691B9B /* Pods_GJContactsDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -68,6 +71,9 @@
 		45BAD771236D660900B1534F /* ReachabilityMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityMock.swift; sourceTree = "<group>"; };
 		45BAD773236D665000B1534F /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
 		45BAD775236D668700B1534F /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		45BAD778236D729500B1534F /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		45BAD77A236D7FD200B1534F /* ContactModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModelTests.swift; sourceTree = "<group>"; };
+		45BAD77C236D826800B1534F /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		5C677716BB7560DDCD4135EF /* Pods-GJContactsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemo.release.xcconfig"; path = "Target Support Files/Pods-GJContactsDemo/Pods-GJContactsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6C8538D3D43932B1B4F51B68 /* Pods-GJContactsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoTests/Pods-GJContactsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +156,7 @@
 				45BAD770236D65E700B1534F /* Mocks */,
 				45BAD749236C988A00B1534F /* GJContactsDemoTests.swift */,
 				45BAD775236D668700B1534F /* NetworkManagerTests.swift */,
+				45BAD77A236D7FD200B1534F /* ContactModelTests.swift */,
 				45BAD74B236C988A00B1534F /* Info.plist */,
 			);
 			path = GJContactsDemoTests;
@@ -186,6 +193,7 @@
 		45BAD764236D378E00B1534F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				45BAD778236D729500B1534F /* Contact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +216,7 @@
 		45BAD76B236D3B1B00B1534F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				45BAD77C236D826800B1534F /* ServiceManager.swift */,
 				45BAD76C236D418500B1534F /* NetworkManager.swift */,
 			);
 			path = Services;
@@ -506,6 +515,8 @@
 				45BAD73A236C988900B1534F /* GJContactsDemo.xcdatamodeld in Sources */,
 				45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */,
 				45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */,
+				45BAD779236D729500B1534F /* Contact.swift in Sources */,
+				45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */,
 				45BAD76F236D434100B1534F /* NetworkConstants.swift in Sources */,
 				45BAD769236D389C00B1534F /* ContactEditViewController.swift in Sources */,
 				45BAD732236C988900B1534F /* AppDelegate.swift in Sources */,
@@ -517,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BAD776236D668700B1534F /* NetworkManagerTests.swift in Sources */,
+				45BAD77B236D7FD200B1534F /* ContactModelTests.swift in Sources */,
 				45BAD774236D665000B1534F /* URLSessionMock.swift in Sources */,
 				45BAD772236D660900B1534F /* ReachabilityMock.swift in Sources */,
 				45BAD74A236C988A00B1534F /* GJContactsDemoTests.swift in Sources */,
