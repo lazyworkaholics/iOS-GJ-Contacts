@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: 249117ca541ab7d6b9c593e5c1fc6b9f0628c043
+PODS:
+  - Reachability (3.2)
+
+DEPENDENCIES:
+  - Reachability
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Reachability
+
+SPEC CHECKSUMS:
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+
+PODFILE CHECKSUM: 516f27b89dee0357eafa6f077c98c53d629656b3
 
 COCOAPODS: 1.7.3

@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="177" y="135"/>
         </scene>
-        <!--Contact Edit View Controller-->
+        <!--Contact Details View Controller-->
         <scene sceneID="sGU-iF-IZl">
             <objects>
-                <viewController id="4e6-z9-ROy" customClass="ContactEditViewController" customModule="GJContactsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactDetailsViewController" id="4e6-z9-ROy" customClass="ContactDetailsViewController" customModule="GJContactsDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XGL-Cz-6HI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="946" y="135"/>
         </scene>
-        <!--View Controller-->
+        <!--Contact Edit View Controller-->
         <scene sceneID="TvQ-bW-XuO">
             <objects>
-                <viewController id="1eG-fV-llN" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactEditViewController" id="1eG-fV-llN" customClass="ContactEditViewController" customModule="GJContactsDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ig1-EH-5tL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
