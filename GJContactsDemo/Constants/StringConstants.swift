@@ -29,6 +29,7 @@ struct StringConstants {
     
     struct Assets {
         static let PLACEHOLDER_PHOTO = "placeholder_photo"
+        static let HOME_FAVOURITE = "home_favourite"
         static let FAVOURITE_BUTTON = "favourite_button"
         static let FAVOURITE_BUTTON_SELECTED = "favourite_button_selected"
     }
