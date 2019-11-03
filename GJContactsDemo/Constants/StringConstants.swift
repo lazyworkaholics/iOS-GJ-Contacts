@@ -9,7 +9,9 @@ import UIKit
 
 struct StringConstants {
     
-    static let MAIN = "Main"
+    static let MAIN     = "Main"
+    static let OK       = "OK"
+    static let ERROR    = "Error"
     
     struct ViewControllers {
         
@@ -18,6 +20,12 @@ struct StringConstants {
     
     struct Views {
         static let LIST_TABLE_VIEW_CELL = "ListTableViewCell"
+    }
+    
+    struct Assets {
+        static let PLACEHOLDER_PHOTO = "placeholder_photo"
+        static let FAVOURITE_BUTTON = "favourite_button"
+        static let FAVOURITE_BUTTON_SELECTED = "favourite_button_selected"
     }
 }
 

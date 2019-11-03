@@ -7,7 +7,87 @@
 //
 
 import Foundation
+import UIKit
 
-class ContactsListViewModel: ViewModelProtocol {
+protocol ContactsListViewModelProtocol {
     
+    func showStaticAlert(_ title: String, message: String)
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+    func reloadTableView()
+}
+
+struct ContactListSection {
+    let sectionTitle: String
+    let contacts: [Contact]
+}
+
+class ContactsListViewModel {
+    
+    var contactsDataSource:[Int:ContactListSection] = [:]
+    var dataSourceError:NSError?
+    
+    var listProtocol:ContactsListViewModelProtocol?
+    
+    init() {
+        ServiceManager.sharedInstance.getContactsList(
+            onSuccess: {
+                (contacts) in
+                self.contactsDataSource = self.sortContacts(contacts: contacts)
+                self.listProtocol?.reloadTableView()
+                self.listProtocol?.hideLoadingIndicator()
+        },
+            onFailure: {
+                (error) in
+                self.dataSourceError = error
+                self.listProtocol?.hideLoadingIndicator()
+                self.listProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        })
+    }
+    
+    // MARK:- tableView's data source handler functions
+    func getSectionCount() -> Int {
+        
+        return contactsDataSource.keys.count
+    }
+    
+    func getRowCount(for section:Int) -> Int {
+        
+        return contactsDataSource[section]?.contacts.count ?? 0
+    }
+    
+    func getContact(for indexPath:IndexPath) -> Contact {
+        
+        let contacts = contactsDataSource[indexPath.section]?.contacts
+        return contacts![indexPath.row]
+    }
+    
+    func getSectionTitles() -> [String] {
+        
+        var titles:[String] = []
+        for (_, list) in contactsDataSource {
+            titles.append(list.sectionTitle)
+        }
+        return titles
+    }
+    
+    // MARK: - internal functions
+    private func sortContacts(contacts:[Contact]) -> [Int: ContactListSection] {
+        
+        var sortedContactList: [Int: ContactListSection] = [:]
+        
+        let sortedContacts = contacts.sorted(by: { $0.fullName < $1.fullName })
+        let sectionTitles = UILocalizedIndexedCollation.current().sectionTitles
+        
+        var index = 0
+        for title in sectionTitles {
+            let contacts = sortedContacts.filter({ $0.fullName.capitalized.hasPrefix(title)})
+            if contacts.count > 0 {
+                sortedContactList[index] = ContactListSection.init(sectionTitle: title, contacts: contacts)
+                index += 1
+            }
+        }
+        
+        return sortedContactList
+    }
 }

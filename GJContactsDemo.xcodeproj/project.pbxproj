@@ -30,8 +30,6 @@
 		45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD787236DFAA900B1534F /* ListTableViewCell.swift */; };
 		45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */; };
 		45F3F646236E715E008B7D33 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F645236E715E008B7D33 /* StringConstants.swift */; };
-		45F3F649236E7214008B7D33 /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F648236E7214008B7D33 /* ViewModelProtocol.swift */; };
-		45F3F64B236E7292008B7D33 /* ViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64A236E7292008B7D33 /* ViewControllerProtocol.swift */; };
 		45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64C236E777D008B7D33 /* AppLauncher.swift */; };
 		45F3F650236E7FBB008B7D33 /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */; };
 		45F3F652236E83D5008B7D33 /* OtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F651236E83D5008B7D33 /* OtherTests.swift */; };
@@ -89,13 +87,12 @@
 		45BAD787236DFAA900B1534F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		45F3F645236E715E008B7D33 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
-		45F3F648236E7214008B7D33 /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
-		45F3F64A236E7292008B7D33 /* ViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProtocol.swift; sourceTree = "<group>"; };
 		45F3F64C236E777D008B7D33 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 		45F3F651236E83D5008B7D33 /* OtherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherTests.swift; sourceTree = "<group>"; };
 		45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		45F3F659236E9A72008B7D33 /* UIImageViewExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensionTests.swift; sourceTree = "<group>"; };
+		45F3F65B236EBEEB008B7D33 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		5C677716BB7560DDCD4135EF /* Pods-GJContactsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemo.release.xcconfig"; path = "Target Support Files/Pods-GJContactsDemo/Pods-GJContactsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6C8538D3D43932B1B4F51B68 /* Pods-GJContactsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoTests/Pods-GJContactsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +165,7 @@
 				45BAD763236C9A3000B1534F /* StoryBoards */,
 				45BAD764236D378E00B1534F /* Models */,
 				45F3F654236E90C0008B7D33 /* Extensions */,
+				45F3F65C236EBF3C008B7D33 /* OtherFiles */,
 				45BAD73B236C988A00B1534F /* Assets.xcassets */,
 				45BAD740236C988A00B1534F /* Info.plist */,
 				45BAD738236C988900B1534F /* GJContactsDemo.xcdatamodeld */,
@@ -287,8 +285,6 @@
 		45F3F647236E7205008B7D33 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				45F3F648236E7214008B7D33 /* ViewModelProtocol.swift */,
-				45F3F64A236E7292008B7D33 /* ViewControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -334,6 +330,14 @@
 				45F3F659236E9A72008B7D33 /* UIImageViewExtensionTests.swift */,
 			);
 			path = UtilityTests;
+			sourceTree = "<group>";
+		};
+		45F3F65C236EBF3C008B7D33 /* OtherFiles */ = {
+			isa = PBXGroup;
+			children = (
+				45F3F65B236EBEEB008B7D33 /* Bridging-Header.h */,
+			);
+			path = OtherFiles;
 			sourceTree = "<group>";
 		};
 		5F09F100B7EC89C6A9117563 /* Pods */ = {
@@ -620,7 +624,6 @@
 				45BAD73A236C988900B1534F /* GJContactsDemo.xcdatamodeld in Sources */,
 				45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */,
 				45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */,
-				45F3F64B236E7292008B7D33 /* ViewControllerProtocol.swift in Sources */,
 				45BAD779236D729500B1534F /* Contact.swift in Sources */,
 				45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */,
 				45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */,
@@ -628,7 +631,6 @@
 				45BAD76F236D434100B1534F /* NetworkConstants.swift in Sources */,
 				45F3F646236E715E008B7D33 /* StringConstants.swift in Sources */,
 				45BAD769236D389C00B1534F /* ContactEditViewController.swift in Sources */,
-				45F3F649236E7214008B7D33 /* ViewModelProtocol.swift in Sources */,
 				45BAD732236C988900B1534F /* AppDelegate.swift in Sources */,
 				45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */,
 				45F3F656236E90DF008B7D33 /* UIImageViewExtension.swift in Sources */,
@@ -824,6 +826,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gojek.GJContactsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GJContactsDemo/OtherFiles/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -843,6 +846,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gojek.GJContactsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GJContactsDemo/OtherFiles/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

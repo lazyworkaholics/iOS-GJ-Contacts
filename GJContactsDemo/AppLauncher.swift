@@ -14,7 +14,7 @@ struct AppLauncher {
     public func initialViewController() -> UIViewController {
         
         let viewModel = ContactsListViewModel.init()
-        let contactsListViewController = ContactsListViewController.initWithViewModel(viewModel) as! ContactsListViewController
+        let contactsListViewController = ContactsListViewController.initWithViewModel(viewModel)
         
         UINavigationBar.appearance().tintColor = ColorConstants.NAVBAR_TINT_COLOR
         let navigationController = UINavigationController(rootViewController: contactsListViewController)

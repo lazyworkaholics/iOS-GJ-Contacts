@@ -17,6 +17,11 @@ class ListTableViewCell: UITableViewCell {
     func configUI(contact: Contact) {
         
         name_lbl.text = contact.fullName
-        profilePic_imgView.image = 
+        profilePic_imgView.image(urlString: contact.profilePicUrl, withPlaceHolder: UIImage.init(named: StringConstants.Assets.PLACEHOLDER_PHOTO), doOverwrite: false)
+        if contact.isFavorite {
+            isFavourite_btn.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON_SELECTED), for: .normal)
+        } else {
+            isFavourite_btn.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON), for: .normal)
+        }
     }
 }

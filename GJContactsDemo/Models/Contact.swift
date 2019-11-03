@@ -18,10 +18,10 @@ public struct Contact: Codable, Equatable {
     var phoneNumber: String?
     var email: String?
     
-    var createDate:String?
-    var lastUpdateDate:String?
+    var createDate: String?
+    var lastUpdateDate: String?
     
-    var fullName:String {
+    var fullName: String {
         if firstName != "" && lastName != "" {
             return firstName + " " + lastName
         }

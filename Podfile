@@ -3,6 +3,7 @@
 
 def commonPods
   pod 'Reachability'
+  pod 'MBProgressHUD', '~> 1.1.0'
 end
 
 target 'GJContactsDemo' do
