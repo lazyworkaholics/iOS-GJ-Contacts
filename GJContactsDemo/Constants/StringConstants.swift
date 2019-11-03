@@ -15,6 +15,10 @@ struct StringConstants {
         
         static let CONTACTSLISTVC = "ContactsListViewController"
     }
+    
+    struct Views {
+        static let LIST_TABLE_VIEW_CELL = "ListTableViewCell"
+    }
 }
 
 struct ColorConstants {

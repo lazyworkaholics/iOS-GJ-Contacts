@@ -35,6 +35,8 @@
 		45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64C236E777D008B7D33 /* AppLauncher.swift */; };
 		45F3F650236E7FBB008B7D33 /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */; };
 		45F3F652236E83D5008B7D33 /* OtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F651236E83D5008B7D33 /* OtherTests.swift */; };
+		45F3F656236E90DF008B7D33 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */; };
+		45F3F65A236E9A72008B7D33 /* UIImageViewExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F659236E9A72008B7D33 /* UIImageViewExtensionTests.swift */; };
 		9C3821E5ECC68BB22FD52317 /* Pods_GJContactsDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */; };
 		FC37A7EA49391AE13F691B9B /* Pods_GJContactsDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +94,8 @@
 		45F3F64C236E777D008B7D33 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
 		45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 		45F3F651236E83D5008B7D33 /* OtherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherTests.swift; sourceTree = "<group>"; };
+		45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		45F3F659236E9A72008B7D33 /* UIImageViewExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensionTests.swift; sourceTree = "<group>"; };
 		5C677716BB7560DDCD4135EF /* Pods-GJContactsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemo.release.xcconfig"; path = "Target Support Files/Pods-GJContactsDemo/Pods-GJContactsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6C8538D3D43932B1B4F51B68 /* Pods-GJContactsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoTests/Pods-GJContactsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +167,7 @@
 				45BAD76A236D3AF700B1534F /* Constants */,
 				45BAD763236C9A3000B1534F /* StoryBoards */,
 				45BAD764236D378E00B1534F /* Models */,
+				45F3F654236E90C0008B7D33 /* Extensions */,
 				45BAD73B236C988A00B1534F /* Assets.xcassets */,
 				45BAD740236C988A00B1534F /* Info.plist */,
 				45BAD738236C988900B1534F /* GJContactsDemo.xcdatamodeld */,
@@ -175,9 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				45BAD770236D65E700B1534F /* Mocks */,
-				45F3F651236E83D5008B7D33 /* OtherTests.swift */,
-				45F3F653236E85BE008B7D33 /* ModelTests */,
-				45BAD780236D90BB00B1534F /* ServiceTests */,
+				45F3F657236E9A2F008B7D33 /* Tests */,
 				45BAD74B236C988A00B1534F /* Info.plist */,
 			);
 			path = GJContactsDemoTests;
@@ -304,6 +307,33 @@
 				45BAD77A236D7FD200B1534F /* ContactModelTests.swift */,
 			);
 			path = ModelTests;
+			sourceTree = "<group>";
+		};
+		45F3F654236E90C0008B7D33 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		45F3F657236E9A2F008B7D33 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				45F3F658236E9A44008B7D33 /* UtilityTests */,
+				45F3F653236E85BE008B7D33 /* ModelTests */,
+				45BAD780236D90BB00B1534F /* ServiceTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		45F3F658236E9A44008B7D33 /* UtilityTests */ = {
+			isa = PBXGroup;
+			children = (
+				45F3F651236E83D5008B7D33 /* OtherTests.swift */,
+				45F3F659236E9A72008B7D33 /* UIImageViewExtensionTests.swift */,
+			);
+			path = UtilityTests;
 			sourceTree = "<group>";
 		};
 		5F09F100B7EC89C6A9117563 /* Pods */ = {
@@ -601,6 +631,7 @@
 				45F3F649236E7214008B7D33 /* ViewModelProtocol.swift in Sources */,
 				45BAD732236C988900B1534F /* AppDelegate.swift in Sources */,
 				45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */,
+				45F3F656236E90DF008B7D33 /* UIImageViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +645,7 @@
 				45BAD77B236D7FD200B1534F /* ContactModelTests.swift in Sources */,
 				45BAD774236D665000B1534F /* URLSessionMock.swift in Sources */,
 				45BAD782236D92A900B1534F /* ServiceManagerTests.swift in Sources */,
+				45F3F65A236E9A72008B7D33 /* UIImageViewExtensionTests.swift in Sources */,
 				45BAD772236D660900B1534F /* ReachabilityMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
