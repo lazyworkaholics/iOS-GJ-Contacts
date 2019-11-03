@@ -8,7 +8,17 @@
 
 import UIKit
 
-class ContactsListViewController: UIViewController {
-
+class ContactsListViewController: UIViewController, ViewControllerProtocol {
+    
+    var viewModel: ViewModelProtocol!
+    
+    class func initWithViewModel(_ viewModel:ViewModelProtocol) -> ViewControllerProtocol {
+        
+        let storyBoardRef = UIStoryboard.init(name: StringConstants.MAIN, bundle: nil)
+        let viewController = storyBoardRef.instantiateViewController(withIdentifier: StringConstants.ViewControllers.CONTACTSLISTVC) as! ContactsListViewController
+        
+        viewController.viewModel = viewModel
+        return viewController
+    }
 }
 

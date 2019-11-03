@@ -1,5 +1,5 @@
 //
-//  ContactsListViewModel.swift
+//  File.swift
 //  GJContactsDemo
 //
 //  Created by pvharsha on 3/11/19.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class ContactsListViewModel: ViewModelProtocol {
+protocol ViewModelProtocol {
     
 }
