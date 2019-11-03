@@ -21,16 +21,39 @@ class ContactsListViewController: UIViewController {
         
         viewController.viewModel = viewModel
         viewController.viewModel.listProtocol = viewController
+        viewController.title = StringConstants.CONTACT
+        
         return viewController
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showLoadingIndicator()
+        
+        let leftBarButton = UIBarButtonItem.init(title: StringConstants.GROUPS, style: .plain, target: self, action: #selector(ContactsListViewController.groupsButton_Action))
+        leftBarButton.accessibilityIdentifier = StringConstants.GROUPS
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(ContactsListViewController.addButton_Action))
+        rightBarButton.accessibilityIdentifier = StringConstants.ADD
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        self.viewModel.viewControllerLoaded()
+    }
+    
+    //MARK:- Custom Button Actions
+    @objc func groupsButton_Action() {
+        
+        self.showStaticAlert("In Progress", message: "To be implmented")
+    }
+    
+    @objc func addButton_Action() {
+        
+        self.showStaticAlert("In Progress", message: "To be implmented")
     }
 }
 
 extension ContactsListViewController: ContactsListViewModelProtocol {
+    
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in
             
@@ -78,7 +101,7 @@ extension ContactsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: StringConstants.Views.LIST_TABLE_VIEW_CELL) as! ListTableViewCell
-        cell.configUI(contact: viewModel.getContact(for: indexPath))
+        cell.configUI(contact: viewModel.getContact(for: indexPath), indexPath: indexPath)
         return cell
     }
     
@@ -86,8 +109,8 @@ extension ContactsListViewController: UITableViewDataSource {
         return viewModel.getSectionTitles()
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.getSectionHeaderTitle(section: section)
     }
 }
 

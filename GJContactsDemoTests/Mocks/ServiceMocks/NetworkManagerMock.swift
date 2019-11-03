@@ -10,9 +10,7 @@ import UIKit
 @testable import GJContactsDemo
 
 class NetworkManagerMock: NetworkManager {
-    typealias SuccessHandler = (Data) -> Void
-    typealias FailureHandler = (NSError?) -> Void
-    
+
     var data: Data?
     var error: NSError?
     var isSuccess: Bool?
@@ -38,6 +36,5 @@ class NetworkManagerMock: NetworkManager {
         {
             failureBlock(error!)
         }
-        
     }
 }

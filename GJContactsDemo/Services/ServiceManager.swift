@@ -12,7 +12,7 @@ class ServiceManager
     static let sharedInstance = ServiceManager()
     var networkManager : NetworkManager
     
-    private init() {
+    init() {
         networkManager = NetworkManager.sharedInstance
     }
     

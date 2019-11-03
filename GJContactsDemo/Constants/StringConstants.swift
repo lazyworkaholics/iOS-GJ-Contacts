@@ -12,6 +12,11 @@ struct StringConstants {
     static let MAIN     = "Main"
     static let OK       = "OK"
     static let ERROR    = "Error"
+    static let CONTACT  = "Contact"
+    static let GROUPS   = "Groups"
+    static let ADD      = "Add"
+    
+    static let LISTVIEW_CELL  = "ListViewCell"
     
     struct ViewControllers {
         

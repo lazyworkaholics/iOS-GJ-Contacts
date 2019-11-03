@@ -15,6 +15,7 @@ protocol ContactsListViewModelProtocol {
     func showLoadingIndicator()
     func hideLoadingIndicator()
     func reloadTableView()
+    
 }
 
 struct ContactListSection {
@@ -24,13 +25,15 @@ struct ContactListSection {
 
 class ContactsListViewModel {
     
-    var contactsDataSource:[Int:ContactListSection] = [:]
-    var dataSourceError:NSError?
+    private var contactsDataSource:[Int:ContactListSection] = [:]
+    private var dataSourceError:NSError?
     
     var listProtocol:ContactsListViewModelProtocol?
+    var serviceManager = ServiceManager.sharedInstance
     
-    init() {
-        ServiceManager.sharedInstance.getContactsList(
+    func viewControllerLoaded() {
+        self.listProtocol?.showLoadingIndicator()
+        serviceManager.getContactsList(
             onSuccess: {
                 (contacts) in
                 self.contactsDataSource = self.sortContacts(contacts: contacts)
@@ -65,10 +68,17 @@ class ContactsListViewModel {
     func getSectionTitles() -> [String] {
         
         var titles:[String] = []
-        for (_, list) in contactsDataSource {
-            titles.append(list.sectionTitle)
+        var index = 0
+        while contactsDataSource[index] != nil {
+            titles.append(contactsDataSource[index]!.sectionTitle)
+            index += 1
         }
         return titles
+    }
+    
+    func getSectionHeaderTitle(section: Int) -> String {
+        var titles = self.getSectionTitles()
+        return titles[section]
     }
     
     // MARK: - internal functions
