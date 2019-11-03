@@ -15,6 +15,7 @@ struct StringConstants {
     static let CONTACT  = "Contact"
     static let GROUPS   = "Groups"
     static let ADD      = "Add"
+    static let SEARCH   = "Search"
     
     static let LISTVIEW_CELL  = "ListViewCell"
     

@@ -13,6 +13,7 @@ class ContactsListViewController: UIViewController {
     @IBOutlet var tableView:UITableView!
     
     var viewModel: ContactsListViewModel!
+    var searchController:UISearchController!
     
     class func initWithViewModel(_ viewModel:ContactsListViewModel) -> ContactsListViewController {
         
@@ -37,6 +38,7 @@ class ContactsListViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.ADD
         self.navigationItem.rightBarButtonItem = rightBarButton
         
+        self.attachSearchController()
         self.viewModel.viewControllerLoaded()
     }
     
