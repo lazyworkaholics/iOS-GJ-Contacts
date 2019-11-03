@@ -15,23 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-//        var mockContact = Contact.init()
-//        mockContact.id = 13153
-//        mockContact.firstName = "Test_FirstName1"
-//        mockContact.lastName = "Test_LastName1"
-//        mockContact.email = ""
-//        mockContact.phoneNumber = ""
-//        mockContact.profilePicUrl = ""
-//        mockContact.isFavorite = false
 
-//        ServiceManager.sharedInstance.deleteContact(mockContact, onSuccess: { (contactUpdated) in
-//            print(contactUpdated)
-//        }) { (error) in
-//            print(error.localizedDescription)
-//        }
-        
         return true
     }
 

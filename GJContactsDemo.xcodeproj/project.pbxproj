@@ -28,6 +28,8 @@
 		45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD77C236D826800B1534F /* ServiceManager.swift */; };
 		45BAD782236D92A900B1534F /* ServiceManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD781236D92A900B1534F /* ServiceManagerTests.swift */; };
 		45BAD785236D95C100B1534F /* NetworkManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD784236D95C100B1534F /* NetworkManagerMock.swift */; };
+		45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD787236DFAA900B1534F /* ListTableViewCell.swift */; };
+		45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */; };
 		9C3821E5ECC68BB22FD52317 /* Pods_GJContactsDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */; };
 		FC37A7EA49391AE13F691B9B /* Pods_GJContactsDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -78,6 +80,8 @@
 		45BAD77C236D826800B1534F /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		45BAD781236D92A900B1534F /* ServiceManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManagerTests.swift; sourceTree = "<group>"; };
 		45BAD784236D95C100B1534F /* NetworkManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerMock.swift; sourceTree = "<group>"; };
+		45BAD787236DFAA900B1534F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		5C677716BB7560DDCD4135EF /* Pods-GJContactsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemo.release.xcconfig"; path = "Target Support Files/Pods-GJContactsDemo/Pods-GJContactsDemo.release.xcconfig"; sourceTree = "<group>"; };
 		6C8538D3D43932B1B4F51B68 /* Pods-GJContactsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoTests/Pods-GJContactsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,10 +145,11 @@
 			isa = PBXGroup;
 			children = (
 				45BAD731236C988900B1534F /* AppDelegate.swift */,
-				45BAD76A236D3AF700B1534F /* Constants */,
 				45BAD762236C9A2100B1534F /* ViewControllers */,
-				45BAD763236C9A3000B1534F /* StoryBoards */,
 				45BAD765236D379F00B1534F /* ViewModels */,
+				45BAD786236DF86300B1534F /* Views */,
+				45BAD76A236D3AF700B1534F /* Constants */,
+				45BAD763236C9A3000B1534F /* StoryBoards */,
 				45BAD764236D378E00B1534F /* Models */,
 				45BAD73B236C988A00B1534F /* Assets.xcassets */,
 				45BAD740236C988A00B1534F /* Info.plist */,
@@ -205,6 +210,7 @@
 		45BAD765236D379F00B1534F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -251,6 +257,14 @@
 				45BAD784236D95C100B1534F /* NetworkManagerMock.swift */,
 			);
 			path = ServiceMocks;
+			sourceTree = "<group>";
+		};
+		45BAD786236DF86300B1534F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45BAD787236DFAA900B1534F /* ListTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		5F09F100B7EC89C6A9117563 /* Pods */ = {
@@ -539,9 +553,11 @@
 				45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */,
 				45BAD779236D729500B1534F /* Contact.swift in Sources */,
 				45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */,
+				45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */,
 				45BAD76F236D434100B1534F /* NetworkConstants.swift in Sources */,
 				45BAD769236D389C00B1534F /* ContactEditViewController.swift in Sources */,
 				45BAD732236C988900B1534F /* AppDelegate.swift in Sources */,
+				45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
