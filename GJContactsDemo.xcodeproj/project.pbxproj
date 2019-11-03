@@ -11,7 +11,6 @@
 		45BAD732236C988900B1534F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD731236C988900B1534F /* AppDelegate.swift */; };
 		45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD733236C988900B1534F /* ContactsListViewController.swift */; };
 		45BAD737236C988900B1534F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD735236C988900B1534F /* Main.storyboard */; };
-		45BAD73A236C988900B1534F /* GJContactsDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD738236C988900B1534F /* GJContactsDemo.xcdatamodeld */; };
 		45BAD73C236C988A00B1534F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73B236C988A00B1534F /* Assets.xcassets */; };
 		45BAD73F236C988A00B1534F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73D236C988A00B1534F /* LaunchScreen.storyboard */; };
 		45BAD755236C988A00B1534F /* GJContactsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD754236C988A00B1534F /* GJContactsDemoUITests.swift */; };
@@ -68,7 +67,6 @@
 		45BAD731236C988900B1534F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BAD733236C988900B1534F /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 		45BAD736236C988900B1534F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		45BAD739236C988900B1534F /* GJContactsDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GJContactsDemo.xcdatamodel; sourceTree = "<group>"; };
 		45BAD73B236C988A00B1534F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45BAD73E236C988A00B1534F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45BAD740236C988A00B1534F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -179,7 +177,6 @@
 				45F3F65C236EBF3C008B7D33 /* OtherFiles */,
 				45BAD73B236C988A00B1534F /* Assets.xcassets */,
 				45BAD740236C988A00B1534F /* Info.plist */,
-				45BAD738236C988900B1534F /* GJContactsDemo.xcdatamodeld */,
 			);
 			path = GJContactsDemo;
 			sourceTree = "<group>";
@@ -652,7 +649,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BAD76D236D418500B1534F /* NetworkManager.swift in Sources */,
-				45BAD73A236C988900B1534F /* GJContactsDemo.xcdatamodeld in Sources */,
 				45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */,
 				45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */,
 				45BAD779236D729500B1534F /* Contact.swift in Sources */,
@@ -1014,19 +1010,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		45BAD738236C988900B1534F /* GJContactsDemo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				45BAD739236C988900B1534F /* GJContactsDemo.xcdatamodel */,
-			);
-			currentVersion = 45BAD739236C988900B1534F /* GJContactsDemo.xcdatamodel */;
-			path = GJContactsDemo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 45BAD726236C988900B1534F /* Project object */;
 }

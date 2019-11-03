@@ -25,5 +25,63 @@ class ContactModelTests: XCTestCase {
         let contact = Contact.init(id: 1101, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
         XCTAssertEqual(contact.fullName, "", "contact full name returned error")
     }
+    
+    func testNotEqualElementsComparision() {
+        
+        let contact1 = Contact.init(id: 1101, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        let contact2 = Contact.init(id: 1102, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        if contact1 != contact2 {
+            XCTAssert(true)
+        }
+        else {
+            XCTFail()
+        }
+        
+        if contact1 == contact2 {
+            XCTFail()
+        }
+        else {
+            XCTAssert(true)
+        }
+    }
+    
+    func testEqualElementsComparision() {
+        
+        let contact1 = Contact.init(id: 1101, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        let contact2 = Contact.init(id: 1101, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        if contact1 == contact2 {
+            XCTAssert(true)
+        }
+        else {
+            XCTFail()
+        }
+        
+        if contact1 != contact2 {
+            XCTFail()
+        }
+        else {
+            XCTAssert(true)
+        }
+    }
+    
+    func testUpdateFunctionality() {
+        
+        var contact1 = Contact.init(id: 1101, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        let contact2 = Contact.init(id: 1102, firstName: "", lastName: "", profilePicUrl: "profilePicURL", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        
+        contact1.update(contact: contact2)
+        
+        if contact1.id == 1102 {
+            XCTAssert(true)
+        }
+        else {
+            XCTFail()
+        }
+    }
 
 }
