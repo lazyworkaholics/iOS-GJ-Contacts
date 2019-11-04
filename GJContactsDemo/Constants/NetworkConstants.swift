@@ -8,6 +8,14 @@
 
 struct Network_Constants {
     static let BASE_URL = "http://gojek-contacts-app.herokuapp.com"
+    
+    static let CONTACTS_LIST_PATH = "contacts.json"
+    
+    static let EDIT_CONTACT_PRE_RELATIVE_PATH = "contacts/"
+    static let EDIT_CONTACT_POST_RELATIVE_PATH = ".json"
+    
+    static let HTTP_HEADER_CONTENT_TYPE_KEY = "Content-Type"
+    static let HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON = "application/json"
 }
 
 struct Network_Error_Constants {

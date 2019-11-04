@@ -50,4 +50,6 @@ class ContactDetailViewModel {
         let editViewController = ContactEditViewController.initWithViewModel(editViewModel)
         detailProtocol?.routeToEditView(editViewController)
     }
+    
+    // MARK:- viewcontroller handler functions
 }

@@ -18,9 +18,9 @@ class ServiceManager
     
     //MARK: - Core functions to handle webservices
     public func getContactsList(onSuccess successBlock:@escaping ([Contact])->Void,
-                                onFailure failureBlock:@escaping (NSError)->Void)
-    {
-        self.networkRequest(urlPath: "contacts.json", params: nil, method: .GET, headers: nil, body: nil,
+                                onFailure failureBlock:@escaping (NSError)->Void) {
+        
+        self.networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .GET, headers: nil, body: nil,
                             onSuccess: { (contacts) in
                                 
                                 successBlock(contacts)
@@ -33,9 +33,10 @@ class ServiceManager
     
     public func getContactDetails(_ contactId:Int,
                                   onSuccess successBlock:@escaping (Contact)->Void,
-                                  onFailure failureBlock:@escaping (NSError)->Void)
-    {
-        let relativePath = "contacts/" + String(contactId) + ".json"
+                                  onFailure failureBlock:@escaping (NSError)->Void) {
+        
+        let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contactId) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
+
         self.networkRequest(urlPath: relativePath, params: nil, method: .GET, headers: nil, body: nil,
                             onSuccess: { (updatedContact) in
                                 
@@ -49,12 +50,13 @@ class ServiceManager
 
     public func createNewContact(_ contact:Contact,
                                  onSuccess successBlock:@escaping (Contact)->Void,
-                                 onFailure failureBlock:@escaping (NSError)->Void)
-    {
+                                 onFailure failureBlock:@escaping (NSError)->Void) {
+        
         let encoder = JSONEncoder.init()
         do {
             let data = try encoder.encode(contact)
-            self.networkRequest(urlPath: "contacts.json", params: nil, method: .POST, headers: ["Content-Type":"application/json"], body: data,
+            let headers = [Network_Constants.HTTP_HEADER_CONTENT_TYPE_KEY : Network_Constants.HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON]
+            self.networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .POST, headers: headers, body: data,
                                 onSuccess: { (updatedContact) in
                                     
                                     successBlock(updatedContact)
@@ -71,13 +73,17 @@ class ServiceManager
 
     public func editContact(_ contact:Contact,
                                  onSuccess successBlock:@escaping (Contact)->Void,
-                                 onFailure failureBlock:@escaping (NSError)->Void)
-    {
+                                 onFailure failureBlock:@escaping (NSError)->Void) {
+        
         let encoder = JSONEncoder.init()
         do {
             let data = try encoder.encode(contact)
-            let relativePath = "contacts/" + String(contact.id) + ".json"
-            self.networkRequest(urlPath: relativePath, params: nil, method: .PUT, headers: ["Content-Type":"application/json"], body: data,
+            
+            let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
+            
+            let headers = [Network_Constants.HTTP_HEADER_CONTENT_TYPE_KEY : Network_Constants.HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON]
+            
+            self.networkRequest(urlPath: relativePath, params: nil, method: .PUT, headers: headers, body: data,
                                 onSuccess: { (updatedContact) in
                 
                                     successBlock(updatedContact)
@@ -94,9 +100,9 @@ class ServiceManager
 
     public func deleteContact(_ contact:Contact,
                             onSuccess successBlock:@escaping (Bool)->Void,
-                            onFailure failureBlock:@escaping (NSError)->Void)
-    {
-        let relativePath = "contacts/" + String(contact.id) + ".json"
+                            onFailure failureBlock:@escaping (NSError)->Void) {
+        
+        let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
         networkManager.httpRequest(relativePath, params: nil, method: .DELETE, headers: nil, body: nil,
                                    onSuccess: { (data) in
                                     
