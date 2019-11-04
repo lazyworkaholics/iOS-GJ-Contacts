@@ -10,7 +10,7 @@ import UIKit
 
 class Utilities {
 
-    // MARK: - internal functions
+    // MARK: - searchAndSort functions
     func searchAndSort(contacts:[Contact], with searchString:String) -> [Int: ContactListSection] {
         let searchContacts = self.search(contacts: contacts, with: searchString)
         
@@ -42,5 +42,22 @@ class Utilities {
             }
         }
         return searchContacts
+    }
+    
+    // MARK: - email and phone number validations
+    func isEmailAddressValid(_ emailString:String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}", options: .caseInsensitive)
+            return regex.firstMatch(in: emailString, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, emailString.count)) != nil
+        } catch {
+            return false
+        }
+    }
+    
+    func isPhoneNumberValid(_ phoneNumber: String) -> Bool {
+        let PHONE_REGEX = "^((\\+)|(00))[0-9]{6,14}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", PHONE_REGEX)
+        let result =  phoneTest.evaluate(with: phoneNumber)
+        return result
     }
 }

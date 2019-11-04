@@ -27,6 +27,14 @@ class ServiceManagerMock: ServiceManager {
     var is_getContactDetail_SuccessBlock_invoked = false
     var is_getContactDetail_FailureBlock_invoked = false
     
+    //stubs for editContact
+    var editContactService_contact: Contact?
+    var editContact_error: NSError?
+    var is_editContact_Success: Bool?
+    
+    var is_editContact_SuccessBlock_invoked = false
+    var is_editContact_FailureBlock_invoked = false
+    
     override init() {
         super.init()
     }
@@ -60,6 +68,21 @@ class ServiceManagerMock: ServiceManager {
             is_getContactDetail_SuccessBlock_invoked = false
             is_getContactDetail_FailureBlock_invoked = true
             failureBlock(getContactDetail_error!)
+        }
+    }
+    
+    override func editContact(_ contact: Contact, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+        if is_editContact_Success!
+        {
+            is_editContact_SuccessBlock_invoked = true
+            is_editContact_FailureBlock_invoked = false
+            successBlock(editContactService_contact!)
+        }
+        else
+        {
+            is_editContact_SuccessBlock_invoked = false
+            is_editContact_FailureBlock_invoked = true
+            failureBlock(editContact_error!)
         }
     }
 }

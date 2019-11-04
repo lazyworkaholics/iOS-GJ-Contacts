@@ -56,19 +56,32 @@ class ContactDetailsViewController: UIViewController {
     }
     
     @IBAction func message_buttonAction(sender:UIButton) {
-        
+        viewModel.textMessage()
     }
     
     @IBAction func phone_buttonAction(sender:UIButton) {
-        
+        viewModel.makePhoneCall()
     }
     
     @IBAction func email_buttonAction(sender:UIButton) {
-        
+        viewModel.invokeEmail()
     }
     
     @IBAction func favourite_buttonAction(sender:UIButton) {
         
+        if sender.tag == StringConstants.FAVOURITE_BUTTON_NOT_SELECTED_TAG {
+            
+            self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON_SELECTED), for: .normal)
+            sender.tag = StringConstants.FAVOURITE_BUTTON_SELECTED_TAG
+            
+            viewModel.markFavourite(true)
+        } else {
+            
+            self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON), for: .normal)
+            sender.tag = StringConstants.FAVOURITE_BUTTON_NOT_SELECTED_TAG
+            
+            viewModel.markFavourite(false)
+        }
     }
 }
 
@@ -81,8 +94,10 @@ extension ContactDetailsViewController: ContactDetailProtocol {
             self.name_lbl.text = contact.fullName
             if contact.isFavorite {
                 self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON_SELECTED), for: .normal)
+                self.favourite_button.tag = StringConstants.FAVOURITE_BUTTON_SELECTED_TAG
             } else {
                 self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON), for: .normal)
+                self.favourite_button.tag = StringConstants.FAVOURITE_BUTTON_NOT_SELECTED_TAG
             }
             self.email_lbl.text = contact.email
             self.phoneNumber_lbl.text = contact.phoneNumber

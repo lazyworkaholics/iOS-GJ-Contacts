@@ -44,6 +44,12 @@ class ContactsListViewController: UIViewController {
         self.viewModel.loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.loadData()
+    }
+    
     //MARK:- Custom Button Actions
     @objc func groups_buttonAction() {
         

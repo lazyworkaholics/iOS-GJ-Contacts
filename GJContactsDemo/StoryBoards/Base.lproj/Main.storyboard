@@ -115,6 +115,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXJ-9W-svR" userLabel="profilePicView">
                                 <rect key="frame" x="0.0" y="44" width="414" height="360"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r44-8J-dSM" userLabel="SeparatorView">
+                                        <rect key="frame" x="16" y="359" width="382" height="1"/>
+                                        <color key="backgroundColor" red="0.96470588239999999" green="0.95294117649999999" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="M2C-Jb-Djw"/>
+                                        </constraints>
+                                    </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pem-gX-4VC">
                                         <rect key="frame" x="127" y="40" width="160" height="160"/>
                                         <constraints>
@@ -212,7 +219,7 @@
                                         <color key="textColor" red="0.36074161529999998" green="0.36080884930000001" blue="0.3607373834" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijx-6V-SLD" userLabel="favourite button">
+                                    <button opaque="NO" tag="4000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ijx-6V-SLD" userLabel="favourite button">
                                         <rect key="frame" x="326" y="277" width="44" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Jyn-uF-NkB"/>
@@ -246,6 +253,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="r44-8J-dSM" secondAttribute="trailing" constant="16" id="0Xg-lu-3Aw"/>
                                     <constraint firstAttribute="bottom" secondItem="iNT-y5-cCl" secondAttribute="bottom" constant="12" id="1CW-VX-b8C"/>
                                     <constraint firstItem="AfH-R0-UsK" firstAttribute="leading" secondItem="lwK-Wz-aD7" secondAttribute="trailing" constant="36" id="1yx-OH-lQh"/>
                                     <constraint firstAttribute="bottom" secondItem="6ra-4s-YuD" secondAttribute="bottom" constant="12" id="5Fx-yI-k8W"/>
@@ -267,7 +275,9 @@
                                     <constraint firstItem="Ijx-6V-SLD" firstAttribute="leading" secondItem="3xO-67-GYE" secondAttribute="trailing" constant="36" id="kXH-uP-Jpk"/>
                                     <constraint firstAttribute="height" constant="360" id="kod-KV-XPF"/>
                                     <constraint firstAttribute="bottom" secondItem="y72-4g-09G" secondAttribute="bottom" constant="12" id="mee-pG-6ud"/>
+                                    <constraint firstItem="r44-8J-dSM" firstAttribute="leading" secondItem="KXJ-9W-svR" secondAttribute="leading" constant="16" id="qik-Rm-en3"/>
                                     <constraint firstItem="n2Y-aN-xvY" firstAttribute="top" secondItem="Ijx-6V-SLD" secondAttribute="bottom" constant="6" id="s34-UI-TMM"/>
+                                    <constraint firstAttribute="bottom" secondItem="r44-8J-dSM" secondAttribute="bottom" id="sSN-y5-SSH"/>
                                     <constraint firstItem="iNT-y5-cCl" firstAttribute="top" secondItem="3xO-67-GYE" secondAttribute="bottom" constant="6" id="tUm-uU-pAV"/>
                                 </constraints>
                             </view>

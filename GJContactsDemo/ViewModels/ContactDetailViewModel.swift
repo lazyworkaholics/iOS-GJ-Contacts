@@ -52,4 +52,63 @@ class ContactDetailViewModel {
     }
     
     // MARK:- viewcontroller handler functions
+    func textMessage() {
+        
+        if Utilities().isPhoneNumberValid(self.dataSource.phoneNumber ?? "") {
+            guard let smsUrl = URL.init(string: (StringConstants.SMS_URL_PRETEXT + self.dataSource.phoneNumber!)) else {
+                detailProtocol?.showStaticAlert(StringConstants.CANNOT_MESSAGE, message: StringConstants.INVALID_PHONE_NUMBER)
+                return
+            }
+            UIApplication.shared.open(smsUrl, options: [:], completionHandler: nil)
+        } else {
+            detailProtocol?.showStaticAlert(StringConstants.CANNOT_MESSAGE, message: StringConstants.INVALID_PHONE_NUMBER)
+        }
+    }
+    
+    func makePhoneCall() {
+        
+        if Utilities().isPhoneNumberValid(self.dataSource.phoneNumber ?? "") {
+            guard let phoneURL = URL.init(string: (StringConstants.PHONE_URL_PRETEXT + self.dataSource.phoneNumber!)) else {
+                detailProtocol?.showStaticAlert(StringConstants.CANNOT_PHONE, message: StringConstants.INVALID_PHONE_NUMBER)
+                return
+            }
+            UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+        } else {
+            detailProtocol?.showStaticAlert(StringConstants.CANNOT_PHONE, message: StringConstants.INVALID_PHONE_NUMBER)
+        }
+    }
+    
+    func invokeEmail() {
+        
+        if Utilities().isEmailAddressValid(self.dataSource.email ?? "") {
+            guard let emailURL = URL.init(string: (StringConstants.MAIL_URL_PRETEXT + self.dataSource.email!)) else {
+                detailProtocol?.showStaticAlert(StringConstants.CANNOT_EMAIL, message: StringConstants.INVALID_EMAIL_ADDRESS)
+                return
+            }
+            UIApplication.shared.open(emailURL, options: [:], completionHandler: nil)
+        } else {
+            detailProtocol?.showStaticAlert(StringConstants.CANNOT_EMAIL, message: StringConstants.INVALID_EMAIL_ADDRESS)
+        }
+    }
+    
+    func markFavourite(_ isFavourite:Bool) {
+        
+        detailProtocol?.showLoadingIndicator()
+        dataSource.isFavorite = isFavourite
+        serviceManager.editContact(dataSource,
+                                   onSuccess: { (contact) in
+                                    
+                                    self.dataSource.update(contact: contact)
+                                    self.detailProtocol?.loadData(self.dataSource)
+                                    self.detailProtocol?.hideLoadingIndicator()
+        },
+                                   onFailure:  { (error) in
+                                    
+                                    self.dataSource.isFavorite = !isFavourite
+                                    self.detailProtocol?.loadData(self.dataSource)
+                                    self.dataSourceError = error
+                                    self.detailProtocol?.hideLoadingIndicator()
+                                    self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        })
+    }
 }

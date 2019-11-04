@@ -30,6 +30,10 @@ class ContactDetailViewModelTests: XCTestCase {
                                                 code: 11010101843834,
                                                 userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
         
+        mockServiceManager.editContactService_contact = contact_before_serviceCall
+        
+        mockServiceManager.editContact_error = NSError.init(domain: "com.testingErrorDomain", code: 11010101843834, userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
+        
         detailVMProtocolStub = ContactDetailViewModelProtocol_StubClass()
         contactDetailViewModel = ContactDetailViewModel(contact_after_serviceCall)
     }
@@ -72,9 +76,30 @@ class ContactDetailViewModelTests: XCTestCase {
         mockServiceManager.is_getContactDetail_Success = true
         contactDetailViewModel.serviceManager = mockServiceManager
         contactDetailViewModel.detailProtocol = detailVMProtocolStub
-        contactDetailViewModel.loadData()
         
         contactDetailViewModel.invokeEditView()
         XCTAssertTrue(detailVMProtocolStub.is_routeToEditView_invoked)
     }
+    
+    func testMarkFavourite_failure() {
+        mockServiceManager.is_editContact_Success =  false
+        contactDetailViewModel.serviceManager = mockServiceManager
+        contactDetailViewModel.detailProtocol = detailVMProtocolStub
+        
+        contactDetailViewModel.markFavourite(true)
+        XCTAssertFalse(mockServiceManager.is_editContact_SuccessBlock_invoked)
+        XCTAssertTrue(mockServiceManager.is_editContact_FailureBlock_invoked)
+    }
+    
+    func testMarkFavourite_success() {
+        mockServiceManager.is_editContact_Success = true
+        contactDetailViewModel.serviceManager = mockServiceManager
+        contactDetailViewModel.detailProtocol = detailVMProtocolStub
+        
+        contactDetailViewModel.markFavourite(false)
+        XCTAssertTrue(mockServiceManager.is_editContact_SuccessBlock_invoked)
+        XCTAssertFalse(mockServiceManager.is_editContact_FailureBlock_invoked)
+    }
+    
+    
 }

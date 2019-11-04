@@ -20,6 +20,21 @@ struct StringConstants {
     static let DONE     = "Done"
     static let EDIT     = "Edit"
     
+    static let SMS_URL_PRETEXT      = "sms:"
+    static let PHONE_URL_PRETEXT    = "tel:"
+    static let MAIL_URL_PRETEXT     = "mailto:"
+    
+    static let CANNOT_MESSAGE   = "Cannot open messanger"
+    static let CANNOT_PHONE     = "Cannot make a phone call"
+    static let CANNOT_EMAIL     = "Cannot send a mail"
+    
+    static let INVALID_PHONE_NUMBER     = "phone number not valid"
+    static let INVALID_EMAIL_ADDRESS    = "email address not valid"
+    
+    
+    static let FAVOURITE_BUTTON_NOT_SELECTED_TAG    = 4000
+    static let FAVOURITE_BUTTON_SELECTED_TAG        = 4001
+    
     static let LISTVIEW_CELL  = "ListViewCell"
     
     struct ViewControllers {
