@@ -83,6 +83,18 @@ class ContactDetailsViewController: UIViewController {
             viewModel.markFavourite(false)
         }
     }
+    
+    @IBAction func delete_buttonAction(sender:UIButton) {
+        let alert = UIAlertController.init(title: "Delete this Contact?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: StringConstants.OK,
+                                           style: .default,
+                                           handler:{ (alertAction) in
+                                            self.viewModel.delete()
+        }))
+        alert.addAction(UIAlertAction.init(title: StringConstants.CANCEL, style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
 }
 
 extension ContactDetailsViewController: ContactDetailProtocol {
@@ -131,6 +143,12 @@ extension ContactDetailsViewController: ContactDetailProtocol {
     func routeToEditView(_ editViewController: ContactEditViewController) {
         DispatchQueue.main.async(execute: {() -> Void in
             self.present(UINavigationController.init(rootViewController: editViewController), animated: true, completion: nil)
+        })
+    }
+    
+    func dismissView() {
+        DispatchQueue.main.async(execute: {() -> Void in
+            self.navigationController?.popViewController(animated: true)
         })
     }
 }

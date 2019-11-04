@@ -22,7 +22,7 @@ class ContactEditViewModel {
     }
     
     func loadData() {
-        editProtocol?.loadData(self.dataSource!)
+        editProtocol?.loadData(self.dataSource)
     }
     
     func updateContact(_ contact:Contact) {

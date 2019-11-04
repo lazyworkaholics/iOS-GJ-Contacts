@@ -111,4 +111,27 @@ class ContactDetailViewModel {
                                     self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
         })
     }
+    
+    func delete() {
+        
+        detailProtocol?.showLoadingIndicator()
+        serviceManager.deleteContact(dataSource,
+                                     onSuccess: { (isSuccess) in
+            
+                                        self.detailProtocol?.hideLoadingIndicator()
+                                        if isSuccess{
+                                            self.detailProtocol?.dismissView()
+                                        } else {
+                                            self.detailProtocol?.hideLoadingIndicator()
+                                            self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: StringConstants.DELTE_CUSTOM_ERROR)
+                                        }
+        },
+                                     onFailure: {(error) in
+                                        
+                                        self.dataSourceError = error
+                                        self.detailProtocol?.hideLoadingIndicator()
+                                        self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        })
+        
+    }
 }

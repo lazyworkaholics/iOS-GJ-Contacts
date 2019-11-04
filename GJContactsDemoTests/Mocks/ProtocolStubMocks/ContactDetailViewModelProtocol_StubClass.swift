@@ -14,13 +14,14 @@ class ContactDetailViewModelProtocol_StubClass: ContactDetailProtocol {
     var isShowLoadingIndicator_invoked = false
     var isHideLoadingIndicator_invoked = false
 
-    
     var showStaticAlert_invoked = false
     var showStaticAlert_Title = ""
     var showStaticAlert_Message = ""
     
     var is_loadData_invoked = false
     var is_routeToEditView_invoked = false
+    
+    var is_dismissView_invoked = false
     
     func showStaticAlert(_ title: String, message: String) {
         showStaticAlert_invoked = true
@@ -42,5 +43,9 @@ class ContactDetailViewModelProtocol_StubClass: ContactDetailProtocol {
     
     func routeToEditView(_ editViewController: ContactEditViewController) {
         is_routeToEditView_invoked = true
+    }
+    
+    func dismissView() {
+        is_dismissView_invoked = false
     }
 }

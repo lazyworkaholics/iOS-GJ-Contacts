@@ -59,7 +59,7 @@ extension ContactEditViewController:ContactEditProtocol {
         })
     }
     
-    func loadData(_ contact: Contact) {
+    func loadData(_ contact: Contact?) {
         
     }
     

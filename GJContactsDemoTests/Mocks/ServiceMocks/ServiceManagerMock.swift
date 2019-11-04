@@ -43,6 +43,13 @@ class ServiceManagerMock: ServiceManager {
     var is_createContact_SuccessBlock_invoked = false
     var is_createContact_FailureBlock_invoked = false
     
+    //stubs for createContact
+    var deleteContact_error: NSError?
+    var is_deleteContact_Success: Bool?
+    
+    var is_deleteContact_SuccessBlock_invoked = false
+    var is_deleteContact_FailureBlock_invoked = false
+    
     override init() {
         super.init()
     }
@@ -106,6 +113,21 @@ class ServiceManagerMock: ServiceManager {
             is_createContact_SuccessBlock_invoked = false
             is_createContact_FailureBlock_invoked = true
             failureBlock(createContact_error!)
+        }
+    }
+    
+    override func deleteContact(_ contact: Contact, onSuccess successBlock: @escaping (Bool) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+        if is_deleteContact_Success!
+        {
+            is_deleteContact_SuccessBlock_invoked = true
+            is_deleteContact_FailureBlock_invoked = false
+            successBlock(true)
+        }
+        else
+        {
+            is_deleteContact_SuccessBlock_invoked = false
+            is_deleteContact_FailureBlock_invoked = true
+            failureBlock(deleteContact_error!)
         }
     }
 }

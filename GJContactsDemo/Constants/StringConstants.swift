@@ -30,6 +30,7 @@ struct StringConstants {
     
     static let INVALID_PHONE_NUMBER     = "phone number not valid"
     static let INVALID_EMAIL_ADDRESS    = "email address not valid"
+    static let DELTE_CUSTOM_ERROR       = "Contact deletion is not successful due to unknown error"
     
     
     static let FAVOURITE_BUTTON_NOT_SELECTED_TAG    = 4000

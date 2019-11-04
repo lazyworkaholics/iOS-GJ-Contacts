@@ -10,7 +10,6 @@ import UIKit
 @testable import GJContactsDemo
 
 class ContactEditProtocol_StubClass: ContactEditProtocol {
-    
     var isShowLoadingIndicator_invoked = false
     var isHideLoadingIndicator_invoked = false
     
@@ -36,7 +35,7 @@ class ContactEditProtocol_StubClass: ContactEditProtocol {
         isHideLoadingIndicator_invoked = true
     }
     
-    func loadData(_ contact:Contact) {
+    func loadData(_ contact:Contact?) {
         is_loadData_invoked = true
     }
     

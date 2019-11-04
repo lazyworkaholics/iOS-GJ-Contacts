@@ -34,6 +34,8 @@ class ContactDetailViewModelTests: XCTestCase {
         
         mockServiceManager.editContact_error = NSError.init(domain: "com.testingErrorDomain", code: 11010101843834, userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
         
+        mockServiceManager.deleteContact_error = NSError.init(domain: "com.testingErrorDomain", code: 11010101843834, userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
+        
         detailVMProtocolStub = ContactDetailViewModelProtocol_StubClass()
         contactDetailViewModel = ContactDetailViewModel(contact_after_serviceCall)
     }
@@ -99,6 +101,28 @@ class ContactDetailViewModelTests: XCTestCase {
         contactDetailViewModel.markFavourite(false)
         XCTAssertTrue(mockServiceManager.is_editContact_SuccessBlock_invoked)
         XCTAssertFalse(mockServiceManager.is_editContact_FailureBlock_invoked)
+    }
+    
+    
+    
+    func testDeleteContact_failure() {
+        mockServiceManager.is_deleteContact_Success =  false
+        contactDetailViewModel.serviceManager = mockServiceManager
+        contactDetailViewModel.detailProtocol = detailVMProtocolStub
+        
+        contactDetailViewModel.delete()
+        XCTAssertFalse(mockServiceManager.is_deleteContact_SuccessBlock_invoked)
+        XCTAssertTrue(mockServiceManager.is_deleteContact_FailureBlock_invoked)
+    }
+    
+    func testDelteContact_success() {
+        mockServiceManager.is_deleteContact_Success = true
+        contactDetailViewModel.serviceManager = mockServiceManager
+        contactDetailViewModel.detailProtocol = detailVMProtocolStub
+        
+        contactDetailViewModel.delete()
+        XCTAssertTrue(mockServiceManager.is_deleteContact_SuccessBlock_invoked)
+        XCTAssertFalse(mockServiceManager.is_deleteContact_FailureBlock_invoked)
     }
     
     

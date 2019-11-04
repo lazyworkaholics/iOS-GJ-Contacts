@@ -23,11 +23,13 @@ protocol ContactListViewModelProtocol: ViewModelProtocol {
 protocol ContactDetailProtocol: ViewModelProtocol {
     
     func loadData(_ contact:Contact)
+    func dismissView()
     func routeToEditView(_ editViewController: ContactEditViewController)
+    
 }
 
 protocol ContactEditProtocol: ViewModelProtocol {
     
     func dismissView()
-    func loadData(_ contact:Contact)
+    func loadData(_ contact:Contact?)
 }
