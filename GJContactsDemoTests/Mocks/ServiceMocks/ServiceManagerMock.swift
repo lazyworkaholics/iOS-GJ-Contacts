@@ -11,12 +11,21 @@ import Foundation
 
 class ServiceManagerMock: ServiceManager {
     
+    //stubs for getContactsList
     var contacts: [Contact]?
     var error: NSError?
     var isSuccess: Bool?
     
     var isSuccessBlock_invoked = false
     var isFailureBlock_invoke = false
+    
+    //stubs for getContactDetails
+    var getContactDetail_contact: Contact?
+    var getContactDetail_error: NSError?
+    var is_getContactDetail_Success: Bool?
+    
+    var is_getContactDetail_SuccessBlock_invoked = false
+    var is_getContactDetail_FailureBlock_invoked = false
     
     override init() {
         super.init()
@@ -35,6 +44,22 @@ class ServiceManagerMock: ServiceManager {
             isSuccessBlock_invoked = false
             isFailureBlock_invoke = true
             failureBlock(error!)
+        }
+    }
+    
+    override func getContactDetails(_ contactId: Int, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+        
+        if is_getContactDetail_Success!
+        {
+            is_getContactDetail_SuccessBlock_invoked = true
+            is_getContactDetail_FailureBlock_invoked = false
+            successBlock(getContactDetail_contact!)
+        }
+        else
+        {
+            is_getContactDetail_SuccessBlock_invoked = false
+            is_getContactDetail_FailureBlock_invoked = true
+            failureBlock(getContactDetail_error!)
         }
     }
 }

@@ -13,6 +13,7 @@ class ContactDetailViewModel {
     
     //MARK:- variables and initializers
     private var dataSource:Contact!
+    private var dataSourceError:NSError?
     
     var detailProtocol:ContactDetailProtocol?
     var serviceManager = ServiceManager.sharedInstance
@@ -23,7 +24,23 @@ class ContactDetailViewModel {
     
     // MARK:- data source functions
     func loadData() {
-        
+        detailProtocol?.loadData(dataSource)
+        detailProtocol?.showLoadingIndicator()
+        serviceManager.getContactDetails(dataSource.id,
+                                         onSuccess: {
+                                            (contact) in
+                                            
+                                            self.dataSource.update(contact: contact)
+                                            self.detailProtocol?.loadData(self.dataSource)
+                                            self.detailProtocol?.hideLoadingIndicator()
+        },
+                                         onFailure: {
+                                            (error) in
+                                            
+                                            self.dataSourceError = error
+                                            self.detailProtocol?.hideLoadingIndicator()
+                                            self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        })
     }
     
     // MARK:- routing functions

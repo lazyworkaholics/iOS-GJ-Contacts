@@ -31,7 +31,7 @@ class ContactsListViewModel {
                 (contacts) in
                 self.contactsRawData = contacts
                 self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-                self.listProtocol?.reloadTableView?()
+                self.listProtocol?.reloadTableView()
                 self.listProtocol?.hideLoadingIndicator()
         },
             onFailure: {
@@ -51,7 +51,7 @@ class ContactsListViewModel {
             self.searchString = ""
         }
         self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-        listProtocol?.reloadTableView?()
+        listProtocol?.reloadTableView()
     }
     
     // MARK:- routing functions

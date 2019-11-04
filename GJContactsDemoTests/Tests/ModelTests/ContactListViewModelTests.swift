@@ -47,7 +47,7 @@ class ContactListViewModelTests: XCTestCase {
         
         // application should go into failure case but not success case
         XCTAssertTrue(mockServiceManager.isFailureBlock_invoke, "Failure block is not invoked")
-        XCTAssertFalse(mockServiceManager.isSuccessBlock_invoked, "Success block is not invoked")
+        XCTAssertFalse(mockServiceManager.isSuccessBlock_invoked, "Success block is invoked")
         
         // listProtocol's showStaticAlert with message as mock error's localized description
         XCTAssertTrue(listViewProtocolStub.showStaticAlert_involed)
@@ -64,7 +64,7 @@ class ContactListViewModelTests: XCTestCase {
         XCTAssertTrue(listViewProtocolStub.isShowLoadingIndicator_involed, "show loading indicator is not fired")
         
         // application should go into failure case but not success case
-        XCTAssertFalse(mockServiceManager.isFailureBlock_invoke, "Failure block is not invoked")
+        XCTAssertFalse(mockServiceManager.isFailureBlock_invoke, "Failure block is invoked")
         XCTAssertTrue(mockServiceManager.isSuccessBlock_invoked, "Success block is not invoked")
         
         // listProtocol's showStaticAlert with message as mock error's localized description

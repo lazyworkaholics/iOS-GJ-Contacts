@@ -11,6 +11,13 @@ import UIKit
 class ContactDetailsViewController: UIViewController {
 
     //MARK:- iboutlets and variables
+    @IBOutlet var profilePic_imgView:UIImageView!
+    @IBOutlet var name_lbl:UILabel!
+    @IBOutlet var favourite_button:UIButton!
+    @IBOutlet var email_lbl:UILabel!
+    @IBOutlet var phoneNumber_lbl:UILabel!
+    @IBOutlet var profilePic_BgView:UIView!
+    
     var viewModel: ContactDetailViewModel!
     
     //MARK:- init and viewDidLoads
@@ -30,7 +37,16 @@ class ContactDetailsViewController: UIViewController {
         
         let rightBarButton = UIBarButtonItem.init(title: StringConstants.EDIT, style: .plain, target: self, action: #selector(ContactDetailsViewController.edit_buttonAction))
         rightBarButton.accessibilityIdentifier = StringConstants.EDIT
-        self.navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
+        
+        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/2;
+        profilePic_imgView.layer.masksToBounds = true;
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.white.cgColor, ColorConstants.NAVBAR_TINT_COLOR.cgColor]
+        profilePic_BgView.layer.addSublayer(gradientLayer)
+        
+        self.viewModel.loadData()
     }
     
     //MARK:- Custom Button Actions
@@ -38,9 +54,41 @@ class ContactDetailsViewController: UIViewController {
         
         viewModel.invokeEditView()
     }
+    
+    @IBAction func message_buttonAction(sender:UIButton) {
+        
+    }
+    
+    @IBAction func phone_buttonAction(sender:UIButton) {
+        
+    }
+    
+    @IBAction func email_buttonAction(sender:UIButton) {
+        
+    }
+    
+    @IBAction func favourite_buttonAction(sender:UIButton) {
+        
+    }
 }
 
 extension ContactDetailsViewController: ContactDetailProtocol {
+    
+    func loadData(_ contact:Contact) {
+        DispatchQueue.main.async(execute: {() -> Void in
+            
+            self.profilePic_imgView.image(urlString: contact.profilePicUrl, withPlaceHolder: UIImage.init(named: StringConstants.Assets.PLACEHOLDER_PHOTO), doOverwrite: false)
+            self.name_lbl.text = contact.fullName
+            if contact.isFavorite {
+                self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON_SELECTED), for: .normal)
+            } else {
+                self.favourite_button.setImage(UIImage.init(named: StringConstants.Assets.FAVOURITE_BUTTON), for: .normal)
+            }
+            self.email_lbl.text = contact.email
+            self.phoneNumber_lbl.text = contact.phoneNumber
+        })
+    }
+    
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in
             

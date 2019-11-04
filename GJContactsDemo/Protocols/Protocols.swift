@@ -9,23 +9,20 @@
 @objc protocol ViewModelProtocol {
     
     func showStaticAlert(_ title: String, message: String)
-    
     func showLoadingIndicator()
     func hideLoadingIndicator()
-    
-    @objc optional func reloadTableView()
-    
 }
 
 protocol ContactListViewModelProtocol: ViewModelProtocol {
     
+    func reloadTableView()
     func routeToDetailView(_ detailViewController: ContactDetailsViewController)
-    
     func routeToAddView(_ addViewController: ContactEditViewController)
 }
 
 protocol ContactDetailProtocol: ViewModelProtocol {
     
+    func loadData(_ contact:Contact)
     func routeToEditView(_ editViewController: ContactEditViewController)
 }
 
