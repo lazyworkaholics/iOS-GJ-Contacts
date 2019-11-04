@@ -39,7 +39,7 @@ class ContactsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         self.attachSearchController()
-        self.viewModel.viewControllerLoaded()
+        self.viewModel.loadData()
     }
     
     //MARK:- Custom Button Actions
@@ -54,7 +54,7 @@ class ContactsListViewController: UIViewController {
     }
 }
 
-extension ContactsListViewController: ContactsListViewModelProtocol {
+extension ContactsListViewController: ViewModelProtocol {
     
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in

@@ -36,7 +36,7 @@ class ContactListViewModelTests: XCTestCase {
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
         
-        contactlistViewModel.viewControllerLoaded()
+        contactlistViewModel.loadData()
         
         // on function invoke, listProtocol's showLoadingIndicator should be called
         XCTAssertTrue(listViewProtocolStub.isShowLoadingIndicator_involed, "show loading indicator is not fired")
@@ -58,7 +58,7 @@ class ContactListViewModelTests: XCTestCase {
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
         
-        contactlistViewModel.viewControllerLoaded()
+        contactlistViewModel.loadData()
         
         // on function invoke, listProtocol's showLoadingIndicator should be called
         XCTAssertTrue(listViewProtocolStub.isShowLoadingIndicator_involed, "show loading indicator is not fired")
@@ -81,7 +81,7 @@ class ContactListViewModelTests: XCTestCase {
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
         
-        contactlistViewModel.viewControllerLoaded()
+        contactlistViewModel.loadData()
         
         let count = contactlistViewModel.getSectionCount()
         XCTAssertEqual(count, 2, "the given mock data should return count as 2 here")
@@ -99,7 +99,7 @@ class ContactListViewModelTests: XCTestCase {
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
         
-        contactlistViewModel.viewControllerLoaded()
+        contactlistViewModel.loadData()
         
         let mockContact_Section1_Row0 = Contact.init(id: 1101, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: nil, isFavorite: false, detailsUrl: nil, phoneNumber: nil, email: nil, createDate: nil, lastUpdateDate: nil)
         
@@ -121,10 +121,9 @@ class ContactListViewModelTests: XCTestCase {
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
         
-        contactlistViewModel.viewControllerLoaded()
-        contactlistViewModel.updateSearchResults(with: "")
-        contactlistViewModel.updateSearchResults(with: "Ha")
-        contactlistViewModel.dismissSearch()
+        contactlistViewModel.loadData()
+        contactlistViewModel.updateSearchResults(with: "Ha", isSearchEnabled: true)
+        contactlistViewModel.updateSearchResults(with: "", isSearchEnabled: false)
         
         let count = contactlistViewModel.getSectionCount()
         XCTAssertEqual(count, 2, "the given mock data should return count as 2 here")

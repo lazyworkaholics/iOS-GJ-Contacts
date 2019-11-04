@@ -9,7 +9,7 @@
 import Foundation
 @testable import GJContactsDemo
 
-class ContactListViewModelProtocol_StubClass: ContactsListViewModelProtocol {
+class ContactListViewModelProtocol_StubClass: ViewModelProtocol {
     
     var isShowLoadingIndicator_involed = false
     var isHideLoadingIndicator_involed = false

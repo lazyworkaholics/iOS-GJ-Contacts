@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		449593126970D2C23239B382 /* Pods_GJContactsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F972B265560C2F9619C04 /* Pods_GJContactsDemo.framework */; };
+		45977BA4236FCC270059A9CB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA3236FCC270059A9CB /* Utilities.swift */; };
+		45977BA6236FCE780059A9CB /* ViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA5236FCE780059A9CB /* ViewModelProtocol.swift */; };
 		45BAD732236C988900B1534F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD731236C988900B1534F /* AppDelegate.swift */; };
 		45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD733236C988900B1534F /* ContactsListViewController.swift */; };
 		45BAD737236C988900B1534F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD735236C988900B1534F /* Main.storyboard */; };
@@ -63,6 +65,8 @@
 /* Begin PBXFileReference section */
 		035B3802D1EEAD3191C2C093 /* Pods-GJContactsDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoUITests/Pods-GJContactsDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45977BA3236FCC270059A9CB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		45977BA5236FCE780059A9CB /* ViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocol.swift; sourceTree = "<group>"; };
 		45BAD72E236C988900B1534F /* GJContactsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GJContactsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BAD731236C988900B1534F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BAD733236C988900B1534F /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
@@ -168,10 +172,10 @@
 				45F3F647236E7205008B7D33 /* Protocols */,
 				45BAD762236C9A2100B1534F /* ViewControllers */,
 				45BAD765236D379F00B1534F /* ViewModels */,
+				45BAD764236D378E00B1534F /* Models */,
 				45BAD786236DF86300B1534F /* Views */,
 				45BAD76A236D3AF700B1534F /* Constants */,
 				45BAD763236C9A3000B1534F /* StoryBoards */,
-				45BAD764236D378E00B1534F /* Models */,
 				45F3F654236E90C0008B7D33 /* Extensions */,
 				45BAD76B236D3B1B00B1534F /* Services */,
 				45F3F65C236EBF3C008B7D33 /* OtherFiles */,
@@ -295,6 +299,7 @@
 		45F3F647236E7205008B7D33 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				45977BA5236FCE780059A9CB /* ViewModelProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -347,6 +352,7 @@
 		45F3F65C236EBF3C008B7D33 /* OtherFiles */ = {
 			isa = PBXGroup;
 			children = (
+				45977BA3236FCC270059A9CB /* Utilities.swift */,
 				45F3F65B236EBEEB008B7D33 /* Bridging-Header.h */,
 			);
 			path = OtherFiles;
@@ -648,9 +654,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45977BA6236FCE780059A9CB /* ViewModelProtocol.swift in Sources */,
 				45BAD76D236D418500B1534F /* NetworkManager.swift in Sources */,
 				45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */,
 				45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */,
+				45977BA4236FCC270059A9CB /* Utilities.swift in Sources */,
 				45BAD779236D729500B1534F /* Contact.swift in Sources */,
 				45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */,
 				45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */,

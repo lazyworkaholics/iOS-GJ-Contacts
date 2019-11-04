@@ -27,13 +27,13 @@ extension ContactsListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text ?? ""
-        viewModel.updateSearchResults(with: searchString)
+        viewModel.updateSearchResults(with: searchString, isSearchEnabled: true)
     }
 }
 
 extension ContactsListViewController: UISearchControllerDelegate {
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        viewModel.dismissSearch()
+        viewModel.updateSearchResults(with: "", isSearchEnabled: false)
     }
 }

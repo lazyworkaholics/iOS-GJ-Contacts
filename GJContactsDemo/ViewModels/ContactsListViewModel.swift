@@ -9,42 +9,27 @@
 import Foundation
 import UIKit
 
-protocol ContactsListViewModelProtocol {
-    
-    func showStaticAlert(_ title: String, message: String)
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
-    func reloadTableView()
-    
-}
-
-//MARK: -
-struct ContactListSection {
-    let sectionTitle: String
-    let contacts: [Contact]
-}
-
 //MARK: - ContactsListViewModel
 class ContactsListViewModel {
     
     private var contactsRawData:[Contact] = []
     private var contactsDataSource:[Int:ContactListSection] = [:]
-    private var contactsSearchDataSource:[Int:ContactListSection] = [:]
     private var dataSourceError:NSError?
     
-    var listProtocol:ContactsListViewModelProtocol?
+    var listProtocol:ViewModelProtocol?
     var serviceManager = ServiceManager.sharedInstance
     
     var isSearchEnabled:Bool = false
     var searchString:String = ""
     
-    func viewControllerLoaded() {
+    func loadData() {
+        
         self.listProtocol?.showLoadingIndicator()
         serviceManager.getContactsList(
             onSuccess: {
                 (contacts) in
                 self.contactsRawData = contacts
-                self.contactsDataSource = self.sortContacts(contacts: contacts)
+                self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
                 self.listProtocol?.reloadTableView()
                 self.listProtocol?.hideLoadingIndicator()
         },
@@ -56,58 +41,41 @@ class ContactsListViewModel {
         })
     }
     
-    func updateSearchResults(with searchString: String) {
-        isSearchEnabled = true
-        let searchContacts:[Contact] = self.search(contacts: contactsRawData, with: searchString)
-        contactsSearchDataSource = self.sortContacts(contacts: searchContacts)
+    func updateSearchResults(with searchString: String, isSearchEnabled: Bool) {
+        
+        self.isSearchEnabled = isSearchEnabled
+        if isSearchEnabled {
+            self.searchString = searchString
+        } else {
+            self.searchString = ""
+        }
+        self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
         listProtocol?.reloadTableView()
     }
     
-    func dismissSearch() {
-        isSearchEnabled = false
-        listProtocol?.reloadTableView()
-    }
-    
-    // MARK:- tableView's data source handler functions
+    // MARK:- tableView data source handler functions
     func getSectionCount() -> Int {
         
-        if isSearchEnabled {
-            return contactsSearchDataSource.keys.count
-        }
         return contactsDataSource.keys.count
     }
     
     func getRowCount(for section:Int) -> Int {
         
-        if isSearchEnabled {
-            return contactsSearchDataSource[section]?.contacts.count ?? 0
-        }
         return contactsDataSource[section]?.contacts.count ?? 0
     }
     
     func getContact(for indexPath:IndexPath) -> Contact {
         
-        var contacts:[Contact]?
-        if isSearchEnabled {
-            contacts = contactsSearchDataSource[indexPath.section]?.contacts
-        } else {
-            contacts = contactsDataSource[indexPath.section]?.contacts
-        }
-        
+        var contacts = contactsDataSource[indexPath.section]?.contacts
         return contacts![indexPath.row]
     }
     
     func getSectionTitles() -> [String] {
         
-        var dataSource = contactsDataSource
-        if isSearchEnabled {
-            dataSource = contactsSearchDataSource
-        }
-        
         var titles:[String] = []
         var index = 0
-        while dataSource[index] != nil {
-            titles.append(dataSource[index]!.sectionTitle)
+        while contactsDataSource[index] != nil {
+            titles.append(contactsDataSource[index]!.sectionTitle)
             index += 1
         }
         return titles
@@ -117,39 +85,5 @@ class ContactsListViewModel {
         
         var titles = self.getSectionTitles()
         return titles[section]
-    }
-    
-    // MARK: - internal functions
-    private func sortContacts(contacts:[Contact]) -> [Int: ContactListSection] {
-        
-        var sortedContactList: [Int: ContactListSection] = [:]
-        
-        let sortedContacts = contacts.sorted(by: { $0.fullName < $1.fullName })
-        let sectionTitles = UILocalizedIndexedCollation.current().sectionTitles
-        
-        var index = 0
-        for title in sectionTitles {
-            let contacts = sortedContacts.filter({ $0.fullName.capitalized.hasPrefix(title)})
-            if contacts.count > 0 {
-                sortedContactList[index] = ContactListSection.init(sectionTitle: title, contacts: contacts)
-                index += 1
-            }
-        }
-        
-        return sortedContactList
-    }
-    
-    private func search(contacts:[Contact], with searchString:String) -> [Contact] {
-        if searchString == "" {
-            return contacts
-        }
-        var searchContacts:[Contact] = []
-        
-        for contact:Contact in contacts {
-            if contact.fullName.contains(searchString) {
-                searchContacts.append(contact)
-            }
-        }
-        return searchContacts
     }
 }

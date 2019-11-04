@@ -6,6 +6,12 @@
 //  Copyright © 2019 SPH. All rights reserved.
 //
 
+//MARK: -
+public struct ContactListSection {
+    let sectionTitle: String
+    let contacts: [Contact]
+}
+
 public struct Contact: Codable, Equatable {
     var id: Int!
     var firstName: String!
