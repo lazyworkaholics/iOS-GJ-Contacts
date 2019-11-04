@@ -65,7 +65,7 @@ class ServiceManager
             })
         }
         catch {
-            print(error.localizedDescription)
+            failureBlock(error as NSError)
         }
     }
 
@@ -88,7 +88,7 @@ class ServiceManager
             })
         }
         catch {
-            print(error.localizedDescription)
+            failureBlock(error as NSError)
         }
     }
 

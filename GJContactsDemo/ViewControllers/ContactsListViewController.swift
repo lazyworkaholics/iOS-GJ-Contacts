@@ -10,15 +10,17 @@ import UIKit
 
 class ContactsListViewController: UIViewController {
     
+    //MARK:- iboutlets and variables
     @IBOutlet var tableView:UITableView!
     
     var viewModel: ContactsListViewModel!
     var searchController:UISearchController!
     
+    //MARK:- init and viewDidLoads
     class func initWithViewModel(_ viewModel:ContactsListViewModel) -> ContactsListViewController {
         
         let storyBoardRef = UIStoryboard.init(name: StringConstants.MAIN, bundle: nil)
-        let viewController = storyBoardRef.instantiateViewController(withIdentifier: StringConstants.ViewControllers.CONTACTSLISTVC) as! ContactsListViewController
+        let viewController = storyBoardRef.instantiateViewController(withIdentifier: StringConstants.ViewControllers.CONTACTS_LIST_VC) as! ContactsListViewController
         
         viewController.viewModel = viewModel
         viewController.viewModel.listProtocol = viewController
@@ -30,11 +32,11 @@ class ContactsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftBarButton = UIBarButtonItem.init(title: StringConstants.GROUPS, style: .plain, target: self, action: #selector(ContactsListViewController.groupsButton_Action))
+        let leftBarButton = UIBarButtonItem.init(title: StringConstants.GROUPS, style: .plain, target: self, action: #selector(ContactsListViewController.groups_buttonAction))
         leftBarButton.accessibilityIdentifier = StringConstants.GROUPS
         self.navigationItem.leftBarButtonItem = leftBarButton
         
-        let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(ContactsListViewController.addButton_Action))
+        let rightBarButton = UIBarButtonItem.init(barButtonSystemItem: .add, target: self, action: #selector(ContactsListViewController.add_buttonAction))
         rightBarButton.accessibilityIdentifier = StringConstants.ADD
         self.navigationItem.rightBarButtonItem = rightBarButton
         
@@ -43,18 +45,19 @@ class ContactsListViewController: UIViewController {
     }
     
     //MARK:- Custom Button Actions
-    @objc func groupsButton_Action() {
+    @objc func groups_buttonAction() {
         
-        self.showStaticAlert("In Progress", message: "To be implmented")
+        showStaticAlert("In Progress", message: "To be implmented")
     }
     
-    @objc func addButton_Action() {
+    @objc func add_buttonAction() {
         
-        self.showStaticAlert("In Progress", message: "To be implmented")
+        viewModel.invokeAddView()
     }
 }
 
-extension ContactsListViewController: ViewModelProtocol {
+//MARK:- ViewModel Protocol functions
+extension ContactsListViewController: ContactListViewModelProtocol {
     
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in
@@ -82,12 +85,24 @@ extension ContactsListViewController: ViewModelProtocol {
     
     func reloadTableView() {
         DispatchQueue.main.async(execute: {() -> Void in
-            
             self.tableView.reloadData()
+        })
+    }
+    
+    func routeToDetailView(_ detailViewController: ContactDetailsViewController) {
+        DispatchQueue.main.async(execute: {() -> Void in
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+        })
+    }
+    
+    func routeToAddView(_ addViewController: ContactEditViewController) {
+        DispatchQueue.main.async(execute: {() -> Void in
+            self.present(UINavigationController.init(rootViewController: addViewController), animated: true, completion: nil)
         })
     }
 }
 
+//MARK:- TableView DataSource Protocol functions
 extension ContactsListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -116,11 +131,13 @@ extension ContactsListViewController: UITableViewDataSource {
     }
 }
 
+//MARK:- TableView Delegate Protocol functions
 extension ContactsListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.invokeDetailView(indexPath)
     }
 }
 

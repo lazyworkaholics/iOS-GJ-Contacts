@@ -16,12 +16,13 @@ class ContactsListViewModel {
     private var contactsDataSource:[Int:ContactListSection] = [:]
     private var dataSourceError:NSError?
     
-    var listProtocol:ViewModelProtocol?
+    var listProtocol:ContactListViewModelProtocol?
     var serviceManager = ServiceManager.sharedInstance
     
     var isSearchEnabled:Bool = false
     var searchString:String = ""
     
+    // MARK:- data source functions
     func loadData() {
         
         self.listProtocol?.showLoadingIndicator()
@@ -30,7 +31,7 @@ class ContactsListViewModel {
                 (contacts) in
                 self.contactsRawData = contacts
                 self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-                self.listProtocol?.reloadTableView()
+                self.listProtocol?.reloadTableView?()
                 self.listProtocol?.hideLoadingIndicator()
         },
             onFailure: {
@@ -50,10 +51,26 @@ class ContactsListViewModel {
             self.searchString = ""
         }
         self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-        listProtocol?.reloadTableView()
+        listProtocol?.reloadTableView?()
     }
     
-    // MARK:- tableView data source handler functions
+    // MARK:- routing functions
+    func invokeDetailView(_ indexPath:IndexPath) {
+        
+        let contact = self.getContact(for: indexPath)
+        let detailViewModel = ContactDetailViewModel.init(contact)
+        let contactDetailVC = ContactDetailsViewController.initWithViewModel(detailViewModel)
+        listProtocol?.routeToDetailView(contactDetailVC)
+    }
+    
+    func invokeAddView() {
+        
+        let editViewModel = ContactEditViewModel.init()
+        let addViewController = ContactEditViewController.initWithViewModel(editViewModel)
+        listProtocol?.routeToAddView(addViewController)
+    }
+    
+    // MARK:- viewcontroller tableView handler functions
     func getSectionCount() -> Int {
         
         return contactsDataSource.keys.count

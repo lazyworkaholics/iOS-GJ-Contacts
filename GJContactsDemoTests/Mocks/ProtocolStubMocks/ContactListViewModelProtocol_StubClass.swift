@@ -9,11 +9,13 @@
 import Foundation
 @testable import GJContactsDemo
 
-class ContactListViewModelProtocol_StubClass: ViewModelProtocol {
+class ContactListViewModelProtocol_StubClass: ContactListViewModelProtocol {
     
     var isShowLoadingIndicator_involed = false
     var isHideLoadingIndicator_involed = false
     var reloadTableView_involed = false
+    var isRouteToDetailView_invoked = false
+    var isRouteToAddView_invoked = false
     
     var showStaticAlert_involed = false
     var showStaticAlert_Title = ""
@@ -35,5 +37,13 @@ class ContactListViewModelProtocol_StubClass: ViewModelProtocol {
     
     func reloadTableView() {
         reloadTableView_involed = true
+    }
+    
+    func routeToDetailView(_ detailViewController: ContactDetailsViewController) {
+        isRouteToDetailView_invoked = true
+    }
+    
+    func routeToAddView(_ addViewController: ContactEditViewController) {
+        isRouteToAddView_invoked = true
     }
 }

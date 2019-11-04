@@ -16,12 +16,17 @@ struct StringConstants {
     static let GROUPS   = "Groups"
     static let ADD      = "Add"
     static let SEARCH   = "Search"
+    static let CANCEL   = "Cancel"
+    static let DONE     = "Done"
+    static let EDIT     = "Edit"
     
     static let LISTVIEW_CELL  = "ListViewCell"
     
     struct ViewControllers {
         
-        static let CONTACTSLISTVC = "ContactsListViewController"
+        static let CONTACTS_LIST_VC     = "ContactsListViewController"
+        static let CONTACT_DETAIL_VC    = "ContactDetailsViewController"
+        static let CONTACT_EDIT_VC      = "ContactEditViewController"
     }
     
     struct Views {

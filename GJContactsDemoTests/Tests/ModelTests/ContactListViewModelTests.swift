@@ -12,6 +12,8 @@ import XCTest
 class ContactListViewModelTests: XCTestCase {
     
     var mockServiceManager:ServiceManagerMock!
+    var listViewProtocolStub:ContactListViewModelProtocol_StubClass!
+    var contactlistViewModel:ContactsListViewModel!
 
     override func setUp() {
         mockServiceManager = ServiceManagerMock.init()
@@ -21,21 +23,23 @@ class ContactListViewModelTests: XCTestCase {
         mockServiceManager.error = NSError.init(domain: "com.testingErrorDomain",
                                                 code: 11010101843834,
                                                 userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
+        
+        listViewProtocolStub = ContactListViewModelProtocol_StubClass()
+        
+        contactlistViewModel = ContactsListViewModel()
     }
 
     override func tearDown() {
         mockServiceManager = nil
+        listViewProtocolStub = nil
+        contactlistViewModel = nil
     }
     
     func testviewController_Loading_WithFailureCase() {
-        let listViewProtocolStub = ContactListViewModelProtocol_StubClass()
         
-        let contactlistViewModel = ContactsListViewModel()
         mockServiceManager.isSuccess = false
-        
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
-        
         contactlistViewModel.loadData()
         
         // on function invoke, listProtocol's showLoadingIndicator should be called
@@ -50,14 +54,10 @@ class ContactListViewModelTests: XCTestCase {
     }
     
     func testviewController_Loading_WithSuccessCase() {
-        let listViewProtocolStub = ContactListViewModelProtocol_StubClass()
         
-        let contactlistViewModel = ContactsListViewModel()
         mockServiceManager.isSuccess = true
-        
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
-        
         contactlistViewModel.loadData()
         
         // on function invoke, listProtocol's showLoadingIndicator should be called
@@ -73,14 +73,10 @@ class ContactListViewModelTests: XCTestCase {
     }
     
     func test_viewModel_TableViewHandlerTests() {
-        let listViewProtocolStub = ContactListViewModelProtocol_StubClass()
         
-        let contactlistViewModel = ContactsListViewModel()
         mockServiceManager.isSuccess = true
-        
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
-        
         contactlistViewModel.loadData()
         
         let count = contactlistViewModel.getSectionCount()
@@ -91,14 +87,10 @@ class ContactListViewModelTests: XCTestCase {
     }
     
     func test_viewMode_TableViewHandler_MoreTests() {
-        let listViewProtocolStub = ContactListViewModelProtocol_StubClass()
         
-        let contactlistViewModel = ContactsListViewModel()
         mockServiceManager.isSuccess = true
-        
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
-        
         contactlistViewModel.loadData()
         
         let mockContact_Section1_Row0 = Contact.init(id: 1101, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: nil, isFavorite: false, detailsUrl: nil, phoneNumber: nil, email: nil, createDate: nil, lastUpdateDate: nil)
@@ -113,15 +105,12 @@ class ContactListViewModelTests: XCTestCase {
     }
     
     func test_viewMode_TableViewHandler_MoreTests1() {
-        let listViewProtocolStub = ContactListViewModelProtocol_StubClass()
         
-        let contactlistViewModel = ContactsListViewModel()
         mockServiceManager.isSuccess = true
-        
         contactlistViewModel.serviceManager = mockServiceManager
         contactlistViewModel.listProtocol = listViewProtocolStub
-        
         contactlistViewModel.loadData()
+        
         contactlistViewModel.updateSearchResults(with: "Ha", isSearchEnabled: true)
         contactlistViewModel.updateSearchResults(with: "", isSearchEnabled: false)
         
@@ -140,6 +129,26 @@ class ContactListViewModelTests: XCTestCase {
         XCTAssertEqual(["A","H"], sectionTitles, "getSectionTitles function is not working as expected")
         
         XCTAssertEqual("A", contactlistViewModel.getSectionHeaderTitle(section: 0), "getSectionHeaderTitle function is not working as expected")
+    }
+    
+    func testInvokeDetailView() {
+        mockServiceManager.isSuccess = true
+        contactlistViewModel.serviceManager = mockServiceManager
+        contactlistViewModel.listProtocol = listViewProtocolStub
+        contactlistViewModel.loadData()
+        
+        contactlistViewModel.invokeDetailView(IndexPath.init(row: 0, section: 0))
+        XCTAssertTrue(listViewProtocolStub.isRouteToDetailView_invoked)
+    }
+    
+    func testInvokeAddContactView() {
+        mockServiceManager.isSuccess = true
+        contactlistViewModel.serviceManager = mockServiceManager
+        contactlistViewModel.listProtocol = listViewProtocolStub
+        contactlistViewModel.loadData()
+        
+        contactlistViewModel.invokeAddView()
+        XCTAssertTrue(listViewProtocolStub.isRouteToAddView_invoked)
     }
 
 }
