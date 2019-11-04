@@ -65,7 +65,7 @@ class ContactsListViewModel {
     
     func invokeAddView() {
         
-        let editViewModel = ContactEditViewModel.init()
+        let editViewModel = ContactEditViewModel.init(nil)
         let addViewController = ContactEditViewController.initWithViewModel(editViewModel)
         listProtocol?.routeToAddView(addViewController)
     }

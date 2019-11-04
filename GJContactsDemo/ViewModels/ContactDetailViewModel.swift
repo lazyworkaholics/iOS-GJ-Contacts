@@ -46,7 +46,7 @@ class ContactDetailViewModel {
     // MARK:- routing functions
     func invokeEditView() {
         
-        let editViewModel = ContactEditViewModel.init()
+        let editViewModel = ContactEditViewModel.init(self.dataSource)
         let editViewController = ContactEditViewController.initWithViewModel(editViewModel)
         detailProtocol?.routeToEditView(editViewController)
     }

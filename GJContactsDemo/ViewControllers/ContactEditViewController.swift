@@ -35,6 +35,8 @@ class ContactEditViewController: UIViewController {
         let rightBarButton = UIBarButtonItem.init(title: StringConstants.DONE, style: .plain, target: self, action: #selector(ContactEditViewController.done_buttonAction))
         rightBarButton.accessibilityIdentifier = StringConstants.DONE
         self.navigationItem.rightBarButtonItem = rightBarButton
+        
+        viewModel.loadData()
     }
     
     //MARK:- Custom Button Actions
@@ -50,6 +52,17 @@ class ContactEditViewController: UIViewController {
 }
 
 extension ContactEditViewController:ContactEditProtocol {
+    func dismissView() {
+        DispatchQueue.main.async(execute: {() -> Void in
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    func loadData(_ contact: Contact) {
+        
+    }
+    
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in
             

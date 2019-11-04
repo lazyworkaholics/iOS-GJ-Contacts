@@ -169,7 +169,7 @@
                                             <constraint firstAttribute="height" constant="44" id="o9k-ED-QtM"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="qxB-eC-prg"/>
                                         </constraints>
-                                        <state key="normal" image="message_button"/>
+                                        <state key="normal" image="call_button"/>
                                         <connections>
                                             <action selector="phone_buttonActionWithSender:" destination="4e6-z9-ROy" eventType="touchUpInside" id="gtL-Jv-pfl"/>
                                         </connections>
@@ -198,7 +198,7 @@
                                             <constraint firstAttribute="width" constant="44" id="juX-Nc-Dzq"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="wSi-aK-54G"/>
                                         </constraints>
-                                        <state key="normal" image="message_button"/>
+                                        <state key="normal" image="email_button"/>
                                         <connections>
                                             <action selector="email_buttonActionWithSender:" destination="4e6-z9-ROy" eventType="touchUpInside" id="PgD-up-P03"/>
                                         </connections>
@@ -414,6 +414,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="call_button" width="45" height="44"/>
+        <image name="email_button" width="45" height="44"/>
         <image name="favourite_button" width="44" height="44"/>
         <image name="home_favourite" width="19" height="18"/>
         <image name="message_button" width="44" height="44"/>
