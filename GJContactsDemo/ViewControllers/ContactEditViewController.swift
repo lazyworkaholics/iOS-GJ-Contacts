@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import QuartzCore
 
 class ContactEditViewController: UIViewController {
 
     //MARK:- iboutlets and variables
     var viewModel: ContactEditViewModel!
+    private var textField_InFocus:UITextField?
+    private var imagePicker:UIImagePickerController?
+    
+    @IBOutlet var profilePic_imageView:UIImageView!
     
     //MARK:- init and viewDidLoads
     class func initWithViewModel(_ viewModel:ContactEditViewModel) -> ContactEditViewController {
@@ -36,7 +41,16 @@ class ContactEditViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.DONE
         self.navigationItem.rightBarButtonItem = rightBarButton
         
+        profilePic_imageView.layer.cornerRadius = profilePic_imageView.bounds.size.width/5;
+        profilePic_imageView.layer.borderColor = UIColor.white.cgColor
+        profilePic_imageView.layer.borderWidth = 1
+        profilePic_imageView.layer.masksToBounds = true;
+        
         viewModel.loadData()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        textField_InFocus?.resignFirstResponder()
     }
     
     //MARK:- Custom Button Actions
@@ -47,20 +61,29 @@ class ContactEditViewController: UIViewController {
     
     @objc func done_buttonAction() {
         
-        showStaticAlert("In Progress", message: "To be implmented")
+//        viewModel.updateContact()
+    }
+    
+    @IBAction func camera_buttonAction() {
+        imagePicker =  UIImagePickerController()
+        imagePicker?.delegate = self
+        imagePicker?.sourceType = .photoLibrary
+        present(imagePicker!, animated: true, completion: nil)
     }
 }
 
-extension ContactEditViewController:ContactEditProtocol {
+extension ContactEditViewController: ContactEditProtocol {
+    func loadData(_ contact:Contact) {
+        DispatchQueue.main.async(execute: {() -> Void in
+            
+            self.profilePic_imageView.image(urlString: contact.profilePicUrl, withPlaceHolder: UIImage.init(named: StringConstants.Assets.PLACEHOLDER_PHOTO), doOverwrite: false)
+        })
+    }
     func dismissView() {
         DispatchQueue.main.async(execute: {() -> Void in
             
             self.dismiss(animated: true, completion: nil)
         })
-    }
-    
-    func loadData(_ contact: Contact?) {
-        
     }
     
     func showLoadingIndicator() {
@@ -84,6 +107,25 @@ extension ContactEditViewController:ContactEditProtocol {
             let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: StringConstants.OK, style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        })
+    }
+} 
+
+extension ContactEditViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField_InFocus = textField
+    }
+}
+
+extension ContactEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.originalImage] as? UIImage else {
+            return picker.dismiss(animated: true, completion: nil)
+        }
+        DispatchQueue.main.async(execute: {() -> Void in
+            self.profilePic_imageView.image = image
+            picker.dismiss(animated: true, completion: nil)
         })
     }
 }

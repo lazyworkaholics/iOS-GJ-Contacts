@@ -19,6 +19,10 @@ struct StringConstants {
     static let CANCEL   = "Cancel"
     static let DONE     = "Done"
     static let EDIT     = "Edit"
+    static let MOBILE   = "mobile"
+    static let EMAIL    = "email"
+    static let FIRST_NAME   = "First Name"
+    static let LAST_NAME    = "Last Name"
     
     static let SMS_URL_PRETEXT      = "sms:"
     static let PHONE_URL_PRETEXT    = "tel:"
@@ -47,6 +51,7 @@ struct StringConstants {
     
     struct Views {
         static let LIST_TABLE_VIEW_CELL = "ListTableViewCell"
+        static let EDIT_TABLE_VIEW_CELL = "EditContactCell"
     }
     
     struct Assets {

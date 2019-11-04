@@ -39,7 +39,9 @@ class ContactDetailsViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.EDIT
         navigationItem.rightBarButtonItem = rightBarButton
         
-        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/2;
+        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/5;
+        profilePic_imgView.layer.borderColor = UIColor.white.cgColor
+        profilePic_imgView.layer.borderWidth = 1
         profilePic_imgView.layer.masksToBounds = true;
         
         let gradientLayer = CAGradientLayer()

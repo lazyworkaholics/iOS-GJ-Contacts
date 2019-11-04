@@ -48,6 +48,7 @@ public struct Contact: Codable, Equatable {
     }
     
     public static func == (lhs: Contact, rhs: Contact) -> Bool {
+        
         if (lhs.id == rhs.id) &&
             (lhs.firstName == rhs.firstName) &&
             (lhs.lastName == rhs.lastName) &&

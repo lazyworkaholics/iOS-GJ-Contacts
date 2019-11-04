@@ -11,54 +11,70 @@ import UIKit
 class ContactEditViewModel {
 
     //MARK:- variables and initializers
-    private var dataSource:Contact?
+    private var originalContact:Contact!
     private var dataSourceError:NSError?
     
     var editProtocol:ContactEditProtocol?
     var serviceManager = ServiceManager.sharedInstance
     
     init(_ contact: Contact?) {
-        self.dataSource = contact
+        
+        if contact != nil {
+            self.originalContact = contact
+        } else {
+            self.originalContact = Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        }
     }
     
+    // MARK:- viewcontroller tableView handler functions
     func loadData() {
-        editProtocol?.loadData(self.dataSource)
+        self.editProtocol?.loadData(originalContact)
     }
     
     func updateContact(_ contact:Contact) {
         
-        if contact == dataSource {
+        if contact == originalContact {
             editProtocol?.dismissView()
         }
         else {
-            if dataSource == nil {
-                editProtocol?.showLoadingIndicator()
-                serviceManager.createNewContact(contact,
-                                                onSuccess: { (contact) in
-
-                                                    self.editProtocol?.hideLoadingIndicator()
-                                                    self.editProtocol?.dismissView()
-                },
-                                                onFailure: {(error) in
-                    
-                                                    self.editProtocol?.hideLoadingIndicator()
-                                                    self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-                })
+            if self.originalContact == Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "") {
+                self.createContact(contact)
             }
             else {
-                editProtocol?.showLoadingIndicator()
-                serviceManager.editContact(contact,
-                                           onSuccess: { (contact) in
+                self.editContact(contact)
+            }
+        }
+    }
+    
+    // MARK:- internal private functions
+    
+    private func createContact(_ contact: Contact) {
+        editProtocol?.showLoadingIndicator()
+        serviceManager.createNewContact(contact,
+                                        onSuccess: { (contact1) in
                                             
                                             self.editProtocol?.hideLoadingIndicator()
                                             self.editProtocol?.dismissView()
-                },
-                                           onFailure: {(error) in
+        },
+                                        onFailure: {(error) in
                                             
                                             self.editProtocol?.hideLoadingIndicator()
                                             self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-                })
-            }
-        }
+        })
+    }
+    
+    private func editContact(_ contact: Contact) {
+        editProtocol?.showLoadingIndicator()
+        serviceManager.editContact(contact,
+                                   onSuccess: { (contact1) in
+                                    
+                                    self.editProtocol?.hideLoadingIndicator()
+                                    self.editProtocol?.dismissView()
+        },
+                                   onFailure: {(error) in
+                                    
+                                    self.editProtocol?.hideLoadingIndicator()
+                                    self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        })
     }
 }
