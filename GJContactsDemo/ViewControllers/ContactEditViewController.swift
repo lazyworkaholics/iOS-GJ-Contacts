@@ -154,6 +154,7 @@ extension ContactEditViewController: UITableViewDataSource {
             cell.field_name_lbl.text = data?.fieldName
             cell.field_value_txtField.text = data?.fieldValue
             cell.field_value_txtField.keyboardType = data?.keyBoardType ?? UIKeyboardType.namePhonePad
+            cell.field_value_txtField.autocorrectionType = .no
             return cell
         }
     }

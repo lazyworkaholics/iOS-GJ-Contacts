@@ -46,11 +46,11 @@ class ContactEditViewModel {
     func populateTableCell(_ index:Int) -> EditContactTableViewCellData? {
         switch index {
         case 0:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.PROFILE_PIC, fieldValue: dataSource.profilePicUrl, keyBoardType: .namePhonePad, profilePic: profilePic)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.PROFILE_PIC, fieldValue: dataSource.profilePicUrl, keyBoardType: .default, profilePic: profilePic)
         case 1:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.FIRST_NAME, fieldValue: dataSource.firstName, keyBoardType: .namePhonePad, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.FIRST_NAME, fieldValue: dataSource.firstName, keyBoardType: .default, profilePic: nil)
         case 2:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.LAST_NAME, fieldValue: dataSource.lastName, keyBoardType: .namePhonePad, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.LAST_NAME, fieldValue: dataSource.lastName, keyBoardType: .default, profilePic: nil)
         case 3:
             return EditContactTableViewCellData.init(fieldName: StringConstants.MOBILE, fieldValue: dataSource.phoneNumber, keyBoardType: .phonePad, profilePic: nil)
         case 4:
