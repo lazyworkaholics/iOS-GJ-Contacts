@@ -204,6 +204,8 @@ extension ContactEditViewController: UIImagePickerControllerDelegate, UINavigati
         }
         DispatchQueue.main.async(execute: {() -> Void in
             self.viewModel.profilePicUpdated(image: image)
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0)) as? EditContactImageViewCell
+            cell?.profilePic_imageView.image = image
             picker.dismiss(animated: true, completion: nil)
         })
     }

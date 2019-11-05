@@ -47,7 +47,9 @@ class ContactDetailsViewController: UIViewController {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.white.cgColor, ColorConstants.NAVBAR_TINT_COLOR.cgColor]
         profilePic_BgView.layer.addSublayer(gradientLayer)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         self.viewModel.loadData()
     }
     

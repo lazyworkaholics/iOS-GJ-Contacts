@@ -41,11 +41,10 @@ class ContactsListViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         self.attachSearchController()
-        self.viewModel.loadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         self.viewModel.loadData()
     }
