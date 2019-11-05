@@ -79,16 +79,18 @@ class ContactEditViewModel {
     }
     
     func pushContact() {
-        
+
         if dataSource == initialValue {
             editProtocol?.dismissView()
         }
         else {
-            if isAddContact {
-                self.createContact(dataSource)
-            }
-            else {
-                self.editContact(dataSource)
+            if self.inputValidations(contact: dataSource) {
+                if isAddContact {
+                    self.createContact(dataSource)
+                }
+                else {
+                    self.editContact(dataSource)
+                }
             }
         }
     }
@@ -125,8 +127,30 @@ class ContactEditViewModel {
         })
     }
     
-    private func cleanContact(_ contact: Contact) -> Contact {
+    private func inputValidations(contact:Contact) -> Bool {
         
-        return Contact(id: contact.id, firstName: contact.firstName, lastName: contact.lastName, profilePicUrl: contact.profilePicUrl, isFavorite: contact.isFavorite, detailsUrl: nil, phoneNumber: contact.phoneNumber, email: contact.email, createDate: nil, lastUpdateDate: nil)
+        var isValid = true
+        
+        if contact.firstName.count < 2 || contact.lastName.count < 2{
+            editProtocol?.showStaticAlert(StringConstants.NAME_INVALID_TITLE, message: StringConstants.NAME_INVALID_MESSAGE)
+            isValid = false
+            return isValid
+        }
+        
+        let phoneNum_length = contact.phoneNumber?.count ?? 0
+        if  phoneNum_length != 0 && phoneNum_length < 10 {
+            editProtocol?.showStaticAlert(StringConstants.INVALID_PHONE_NUMBER, message: StringConstants.PHONE_INVALID_MESSAGE)
+            isValid = false
+            return isValid
+        }
+        
+        if contact.email != nil && contact.email != "" {
+            if !(Utilities().isEmailAddressValid(contact.email!)) {
+                editProtocol?.showStaticAlert(StringConstants.INVALID_EMAIL_ADDRESS, message: StringConstants.INVALID_EMAIL_ADDRESS_MESSAGE)
+                isValid = false
+                return isValid
+            }
+        }
+        return isValid
     }
 }

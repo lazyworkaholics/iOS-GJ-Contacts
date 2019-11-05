@@ -52,7 +52,7 @@ class ContactsListViewController: UIViewController {
     //MARK:- Custom Button Actions
     @objc func groups_buttonAction() {
         
-        showStaticAlert("In Progress", message: "To be implmented")
+        showStaticAlert(StringConstants.GROUPS_FUNCTIONALITY_TITLE, message: StringConstants.GROUPS_FUNCTIONALITY_MESSAGE)
     }
     
     @objc func add_buttonAction() {

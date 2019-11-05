@@ -34,8 +34,15 @@ struct StringConstants {
     static let CANNOT_EMAIL     = "Cannot send a mail"
     
     static let INVALID_PHONE_NUMBER     = "phone number not valid"
-    static let INVALID_EMAIL_ADDRESS    = "email address not valid"
+    static let INVALID_EMAIL_ADDRESS    = "email not valid"
+    static let INVALID_EMAIL_ADDRESS_MESSAGE = "enter a valid email"
     static let DELTE_CUSTOM_ERROR       = "Contact deletion is not successful due to unknown error"
+    
+    static let NAME_INVALID_TITLE       = "Invalid Name"
+    static let NAME_INVALID_MESSAGE     = "First name and Last name should be more than 2 letters each"
+    static let PHONE_INVALID_MESSAGE    = "phone number should be morethan 10 digits"
+    static let GROUPS_FUNCTIONALITY_TITLE = "Groups functionality not implemented"
+    static let GROUPS_FUNCTIONALITY_MESSAGE = "Requirements not specified"
     
     
     static let FAVOURITE_BUTTON_NOT_SELECTED_TAG    = 4000
