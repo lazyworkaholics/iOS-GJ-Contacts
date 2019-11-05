@@ -67,14 +67,16 @@ class ContactEditViewController: UIViewController {
     }
     
     @objc func done_buttonAction() {
-        viewModel.pushContact()
+        
         guard let tag = textfield_in_focus?.tag else {
+            viewModel.pushContact()
             return
         }
         
         let cell = self.tableView.cellForRow(at: IndexPath.init(row: tag, section: 0)) as? EditContactCell
         viewModel.dataUpdated(fieldName: cell?.field_name_lbl.text ?? "", fieldValue: cell?.field_value_txtField.text ?? "")
         cell?.field_value_txtField.resignFirstResponder()
+        viewModel.pushContact()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
