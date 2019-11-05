@@ -43,6 +43,9 @@ class ContactEditViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        self.tableView.tableFooterView = UIView(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0))
+        self.tableView.tableFooterView?.isHidden = true
     }
     
     @objc func showKeyboard(notification:NSNotification) {
@@ -166,6 +169,8 @@ extension ContactEditViewController: UITableViewDelegate {
         if indexPath.row != 0 {
             let cell = tableView.cellForRow(at: indexPath) as! EditContactCell
             cell.field_value_txtField.becomeFirstResponder()
+        } else {
+            self.textfield_in_focus?.resignFirstResponder()
         }
     }
 }

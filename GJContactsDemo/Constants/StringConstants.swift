@@ -39,11 +39,11 @@ struct StringConstants {
     static let DELTE_CUSTOM_ERROR       = "Contact deletion is not successful due to unknown error"
     
     static let NAME_INVALID_TITLE       = "Invalid Name"
-    static let NAME_INVALID_MESSAGE     = "First name and Last name should be more than 2 letters each"
-    static let PHONE_INVALID_MESSAGE    = "phone number should be morethan 10 digits"
-    static let GROUPS_FUNCTIONALITY_TITLE = "Groups functionality not implemented"
-    static let GROUPS_FUNCTIONALITY_MESSAGE = "Requirements not specified"
+    static let NAME_INVALID_MESSAGE     = "First name and Last name should be more than 2 characters each"
+    static let PHONE_INVALID_MESSAGE    = "phone number should be more than 10 digits"
     
+    static let GROUPS_FUNCTIONALITY_TITLE = "Groups functionality not implemented"
+    static let GROUPS_FUNCTIONALITY_MESSAGE = "Requirements are not specified in the given document"
     
     static let FAVOURITE_BUTTON_NOT_SELECTED_TAG    = 4000
     static let FAVOURITE_BUTTON_SELECTED_TAG        = 4001

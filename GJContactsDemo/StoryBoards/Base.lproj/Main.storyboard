@@ -493,6 +493,8 @@
                                                 <constraint firstItem="nnu-Kb-yXt" firstAttribute="bottom" secondItem="xdY-Ap-TZM" secondAttribute="bottom" id="v3j-yk-Pk8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.89019607840000003" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.0" green="0.89019607840000003" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="profilePic_imageView" destination="xdY-Ap-TZM" id="5c8-Fd-0xA"/>
                                         </connections>
