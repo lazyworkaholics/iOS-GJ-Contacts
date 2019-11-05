@@ -8,40 +8,87 @@
 
 import UIKit
 
+struct EditContactTableViewCellData {
+    var fieldName: String!
+    var fieldValue: String!
+    var keyBoardType: UIKeyboardType!
+    var profilePic: UIImage?
+}
+
 class ContactEditViewModel {
 
     //MARK:- variables and initializers
-    private var originalContact:Contact!
+    private var dataSource:Contact!
+    private var initialValue:Contact!
     private var dataSourceError:NSError?
     
     var editProtocol:ContactEditProtocol?
     var serviceManager = ServiceManager.sharedInstance
     
+    private var isAddContact:Bool!
+    private var isContactUpdated:Bool!
+    
+    private var profilePic:UIImage?
+    
     init(_ contact: Contact?) {
         
         if contact != nil {
-            self.originalContact = contact
+            isAddContact = false
+            dataSource = contact
         } else {
-            self.originalContact = Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+            isAddContact = true
+            dataSource = Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
         }
+        initialValue = self.dataSource
     }
     
     // MARK:- viewcontroller tableView handler functions
-    func loadData() {
-        self.editProtocol?.loadData(originalContact)
+    func populateTableCell(_ index:Int) -> EditContactTableViewCellData? {
+        switch index {
+        case 0:
+            return EditContactTableViewCellData.init(fieldName: StringConstants.PROFILE_PIC, fieldValue: dataSource.profilePicUrl, keyBoardType: .namePhonePad, profilePic: profilePic)
+        case 1:
+            return EditContactTableViewCellData.init(fieldName: StringConstants.FIRST_NAME, fieldValue: dataSource.firstName, keyBoardType: .namePhonePad, profilePic: nil)
+        case 2:
+            return EditContactTableViewCellData.init(fieldName: StringConstants.LAST_NAME, fieldValue: dataSource.lastName, keyBoardType: .namePhonePad, profilePic: nil)
+        case 3:
+            return EditContactTableViewCellData.init(fieldName: StringConstants.MOBILE, fieldValue: dataSource.phoneNumber, keyBoardType: .phonePad, profilePic: nil)
+        case 4:
+            return EditContactTableViewCellData.init(fieldName: StringConstants.EMAIL, fieldValue: dataSource.email, keyBoardType: .emailAddress, profilePic: nil)
+        default:
+            break
+        }
+        return nil
     }
     
-    func updateContact(_ contact:Contact) {
+    func dataUpdated(fieldName:String, fieldValue:String) {
         
-        if contact == originalContact {
+        if fieldName == StringConstants.FIRST_NAME {
+            dataSource.firstName = fieldValue
+        } else if fieldName == StringConstants.LAST_NAME {
+            dataSource.lastName = fieldValue
+        } else if fieldName == StringConstants.MOBILE {
+            dataSource.phoneNumber = fieldValue
+        } else if fieldName == StringConstants.EMAIL {
+            dataSource.email = fieldValue
+        }
+    }
+    
+    func profilePicUpdated(image:UIImage) {
+        profilePic = image
+    }
+    
+    func pushContact() {
+        
+        if dataSource == initialValue {
             editProtocol?.dismissView()
         }
         else {
-            if self.originalContact == Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "") {
-                self.createContact(contact)
+            if isAddContact {
+                self.createContact(dataSource)
             }
             else {
-                self.editContact(contact)
+                self.editContact(dataSource)
             }
         }
     }

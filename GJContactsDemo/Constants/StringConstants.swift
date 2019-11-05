@@ -23,6 +23,7 @@ struct StringConstants {
     static let EMAIL    = "email"
     static let FIRST_NAME   = "First Name"
     static let LAST_NAME    = "Last Name"
+    static let PROFILE_PIC  = "Profile Pic"
     
     static let SMS_URL_PRETEXT      = "sms:"
     static let PHONE_URL_PRETEXT    = "tel:"
@@ -50,8 +51,9 @@ struct StringConstants {
     }
     
     struct Views {
-        static let LIST_TABLE_VIEW_CELL = "ListTableViewCell"
-        static let EDIT_TABLE_VIEW_CELL = "EditContactCell"
+        static let LIST_TABLE_VIEW_CELL         = "ListTableViewCell"
+        static let EDIT_TABLE_VIEW_CELL         = "EditContactCell"
+        static let EDIT_TABLE_VIEW_IMAGE_CELL   = "EditContactImageViewCell"
     }
     
     struct Assets {

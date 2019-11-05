@@ -31,5 +31,4 @@ protocol ContactDetailProtocol: ViewModelProtocol {
 protocol ContactEditProtocol: ViewModelProtocol {
     
     func dismissView()
-    func loadData(_ contact:Contact)
 }

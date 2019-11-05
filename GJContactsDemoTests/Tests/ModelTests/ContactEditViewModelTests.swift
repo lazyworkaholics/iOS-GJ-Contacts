@@ -19,18 +19,15 @@ class ContactEditViewModelTests: XCTestCase {
         mockServiceManager = ServiceManagerMock()
         
         mockServiceManager.createContactService_contact = Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: "")
-        
         mockServiceManager.createContact_error = NSError.init(domain: "com.testingErrorDomain",
                                                                  code: 11010101843834,
                                                                  userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
         
         mockServiceManager.editContactService_contact = Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: "")
-        
         mockServiceManager.editContact_error = NSError.init(domain: "com.testingErrorDomain",
                                                               code: 11010101843834,
                                                               userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
         editProtocolStub = ContactEditProtocol_StubClass()
-        editViewModel = ContactEditViewModel.init( Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
     }
 
     override func tearDown() {
@@ -39,11 +36,20 @@ class ContactEditViewModelTests: XCTestCase {
         editViewModel = nil
     }
     
-    func testloadDataCall() {
+    func testCreateContact_DismissFlow() {
+        editViewModel = ContactEditViewModel.init(nil)
+        
+        mockServiceManager.is_createContact_Success = false
+        editViewModel.serviceManager = mockServiceManager
         editViewModel.editProtocol = editProtocolStub
         
-        editViewModel.loadData()
-        XCTAssertTrue(editProtocolStub.is_loadData_invoked, "load data fucntion in editViewModel is not invoking the view controllers load data")
+        editViewModel.pushContact()
+        
+        XCTAssertFalse(editProtocolStub.isShowLoadingIndicator_invoked, "show loading indicator is not fired")
+        XCTAssertFalse(mockServiceManager.is_createContact_FailureBlock_invoked, "Failure block is not invoked")
+        XCTAssertFalse(mockServiceManager.is_createContact_SuccessBlock_invoked, "Success block is invoked")
+        XCTAssertFalse(editProtocolStub.showStaticAlert_invoked)
+        
     }
     
     func testCreateContact_FailFlow() {
@@ -53,7 +59,9 @@ class ContactEditViewModelTests: XCTestCase {
         editViewModel.serviceManager = mockServiceManager
         editViewModel.editProtocol = editProtocolStub
         
-        editViewModel.updateContact(Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        editViewModel.dataUpdated(fieldName: "First Name", fieldValue: "Harsha")
+        editViewModel.dataUpdated(fieldName: "Last Name", fieldValue: "Vardhan")
+        editViewModel.pushContact()
         
         XCTAssertTrue(editProtocolStub.isShowLoadingIndicator_invoked, "show loading indicator is not fired")
         XCTAssertTrue(mockServiceManager.is_createContact_FailureBlock_invoked, "Failure block is not invoked")
@@ -68,8 +76,10 @@ class ContactEditViewModelTests: XCTestCase {
         mockServiceManager.is_createContact_Success = true
         editViewModel.serviceManager = mockServiceManager
         editViewModel.editProtocol = editProtocolStub
-        
-        editViewModel.updateContact(Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+
+        editViewModel.dataUpdated(fieldName: "First Name", fieldValue: "Harsha")
+        editViewModel.dataUpdated(fieldName: "Last Name", fieldValue: "Vardhan")
+        editViewModel.pushContact()
         
         XCTAssertTrue(editProtocolStub.isShowLoadingIndicator_invoked, "show loading indicator is not fired")
         XCTAssertFalse(mockServiceManager.is_createContact_FailureBlock_invoked, "Failure block is not invoked")
@@ -78,11 +88,15 @@ class ContactEditViewModelTests: XCTestCase {
     }
     
     func testeditContact_FailFlow() {
+        editViewModel = ContactEditViewModel.init( Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        
         mockServiceManager.is_editContact_Success = false
         editViewModel.serviceManager = mockServiceManager
         editViewModel.editProtocol = editProtocolStub
         
-        editViewModel.updateContact(Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98497897264", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        editViewModel.dataUpdated(fieldName: "mobile", fieldValue: "9849789625")
+        editViewModel.dataUpdated(fieldName: "email", fieldValue: "harsha.pabbineedi@gmail.com")
+        editViewModel.pushContact()
         
         XCTAssertTrue(editProtocolStub.isShowLoadingIndicator_invoked, "show loading indicator is not fired")
         XCTAssertTrue(mockServiceManager.is_editContact_FailureBlock_invoked, "Failure block is not invoked")
@@ -92,16 +106,30 @@ class ContactEditViewModelTests: XCTestCase {
     }
     
     func testeditContact_SuccessFlow() {
+        editViewModel = ContactEditViewModel.init( Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        
         mockServiceManager.is_editContact_Success = true
         editViewModel.serviceManager = mockServiceManager
         editViewModel.editProtocol = editProtocolStub
         
-        editViewModel.updateContact(Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98497897264", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        editViewModel.dataUpdated(fieldName: "mobile", fieldValue: "9849789625")
+        editViewModel.dataUpdated(fieldName: "email", fieldValue: "harsha.pabbineedi@gmail.com")
+        editViewModel.pushContact()
         
         XCTAssertTrue(editProtocolStub.isShowLoadingIndicator_invoked, "show loading indicator is not fired")
         XCTAssertFalse(mockServiceManager.is_editContact_FailureBlock_invoked, "Failure block is not invoked")
         XCTAssertTrue(mockServiceManager.is_editContact_SuccessBlock_invoked, "Success block is invoked")
         XCTAssertFalse(editProtocolStub.showStaticAlert_invoked)
+    }
+    
+    func testPopulateTableCell() {
+        editViewModel = ContactEditViewModel.init( Contact(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: "", lastUpdateDate: ""))
+        
+        XCTAssertEqual(editViewModel.populateTableCell(1)?.fieldValue, "Harsha", "First name should be harsha as per the above mock data")
+        XCTAssertEqual(editViewModel.populateTableCell(2)?.fieldValue, "Vardhan", "Last name should be Vardhan as per the above mock data")
+        XCTAssertEqual(editViewModel.populateTableCell(3)?.fieldValue, "98827533", "phone number should be 98827533 as per the above mock data")
+        XCTAssertEqual(editViewModel.populateTableCell(4)?.fieldValue, "harsha.mvgr@gmail.com", "email should be harsha.mvgr@gmail.com as per the above mock data")
+        XCTAssertEqual(editViewModel.populateTableCell(1)?.fieldName, "First Name", "First name should be the field name")
     }
 
 }
