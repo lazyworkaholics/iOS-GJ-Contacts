@@ -114,7 +114,7 @@ class ServiceManagerTests: XCTestCase {
         mockNetworkManager?.isSuccess = false
         
         serviceManagerToTest?.networkManager = mockNetworkManager!
-        serviceManagerToTest?.editContact(mockContact!,
+        serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!,
                                           onSuccess: { (contact) in
                                                     
                                             XCTFail("Success block should not be called if there is an internal network error.")
@@ -134,7 +134,7 @@ class ServiceManagerTests: XCTestCase {
             mockNetworkManager?.isSuccess = true
             
             serviceManagerToTest?.networkManager = mockNetworkManager!
-            serviceManagerToTest?.editContact(mockContact!,
+            serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!,
                                               onSuccess: { (contacts) in
                                                         
                                                 XCTAssertEqual(contacts, self.mockContact!, "failed to parse the given data into required model")

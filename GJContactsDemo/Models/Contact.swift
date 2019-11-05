@@ -40,7 +40,7 @@ public struct Contact: Codable, Equatable {
         case lastName = "last_name"
         case profilePicUrl = "profile_pic"
         case isFavorite = "favorite"
-        case detailsUrl = "epaper"
+        case detailsUrl = "url"
         case phoneNumber = "phone_number"
         case email = "email"
         case createDate = "created_at"

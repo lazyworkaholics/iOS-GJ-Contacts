@@ -72,12 +72,14 @@ class ServiceManager
     }
 
     public func editContact(_ contact:Contact,
-                                 onSuccess successBlock:@escaping (Contact)->Void,
-                                 onFailure failureBlock:@escaping (NSError)->Void) {
+                            initialValue:Contact,
+                            onSuccess successBlock:@escaping (Contact)->Void,
+                            onFailure failureBlock:@escaping (NSError)->Void) {
         
         let encoder = JSONEncoder.init()
         do {
-            let data = try encoder.encode(contact)
+            let uniquekeyValues = Utilities().keyValuePairForEditContact(contact, initialValue: initialValue)
+            let data = try encoder.encode(uniquekeyValues)
             
             let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
             

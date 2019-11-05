@@ -112,7 +112,7 @@ class ContactEditViewModel {
     
     private func editContact(_ contact: Contact) {
         editProtocol?.showLoadingIndicator()
-        serviceManager.editContact(contact,
+        serviceManager.editContact(contact, initialValue: initialValue,
                                    onSuccess: { (contact1) in
                                     
                                     self.editProtocol?.hideLoadingIndicator()
@@ -123,5 +123,10 @@ class ContactEditViewModel {
                                     self.editProtocol?.hideLoadingIndicator()
                                     self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
         })
+    }
+    
+    private func cleanContact(_ contact: Contact) -> Contact {
+        
+        return Contact(id: contact.id, firstName: contact.firstName, lastName: contact.lastName, profilePicUrl: contact.profilePicUrl, isFavorite: contact.isFavorite, detailsUrl: nil, phoneNumber: contact.phoneNumber, email: contact.email, createDate: nil, lastUpdateDate: nil)
     }
 }
