@@ -60,29 +60,4 @@ class Utilities {
         let result =  phoneTest.evaluate(with: phoneNumber)
         return result
     }
-    
-    func keyValuePairForEditContact(_ contact: Contact, initialValue:Contact) -> [String:String] {
-        
-        var keyValuePair:[String:String] = [:]
-        
-        if contact.firstName != initialValue.firstName {
-            keyValuePair["first_name"] = contact.firstName
-        }
-        if contact.lastName != initialValue.lastName {
-            keyValuePair["last_name"] = contact.lastName
-        }
-        if contact.profilePicUrl != initialValue.profilePicUrl {
-            keyValuePair["profile_pic"] = contact.profilePicUrl
-        }
-        if contact.isFavorite != initialValue.isFavorite {
-            keyValuePair["favorite"] = String(contact.isFavorite)
-        }
-        if contact.phoneNumber != initialValue.phoneNumber {
-            keyValuePair["phone_number"] = contact.phoneNumber
-        }
-        if contact.email != initialValue.email {
-            keyValuePair["email"] = contact.email
-        }
-        return keyValuePair
-    }
 }

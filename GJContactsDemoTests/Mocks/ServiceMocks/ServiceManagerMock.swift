@@ -86,7 +86,7 @@ class ServiceManagerMock: ServiceManager {
         }
     }
     
-    override func editContact(_ contact: Contact, initialValue: Contact, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+    override func editContact(_ contact: Contact, initialValue: Contact, profilePic: UIImage?, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
         if is_editContact_Success!
         {
             is_editContact_SuccessBlock_invoked = true
@@ -101,7 +101,7 @@ class ServiceManagerMock: ServiceManager {
         }
     }
     
-    override func createNewContact(_ contact: Contact, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+    override func createNewContact(_ contact: Contact, profilePic: UIImage?, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
         if is_createContact_Success!
         {
             is_createContact_SuccessBlock_invoked = true

@@ -96,7 +96,7 @@ class ContactDetailViewModel {
         detailProtocol?.showLoadingIndicator()
         let initialValue = dataSource
         dataSource.isFavorite = isFavourite
-        serviceManager.editContact(dataSource, initialValue: initialValue!,
+        serviceManager.editContact(dataSource, initialValue: initialValue!, profilePic: nil,
                                    onSuccess: { (contact) in
                                     
                                     self.dataSource.update(contact: contact)

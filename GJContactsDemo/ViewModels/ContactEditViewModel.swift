@@ -99,7 +99,7 @@ class ContactEditViewModel {
     
     private func createContact(_ contact: Contact) {
         editProtocol?.showLoadingIndicator()
-        serviceManager.createNewContact(contact,
+        serviceManager.createNewContact(contact, profilePic: profilePic,
                                         onSuccess: { (contact1) in
                                             
                                             self.editProtocol?.hideLoadingIndicator()
@@ -114,7 +114,7 @@ class ContactEditViewModel {
     
     private func editContact(_ contact: Contact) {
         editProtocol?.showLoadingIndicator()
-        serviceManager.editContact(contact, initialValue: initialValue,
+        serviceManager.editContact(contact, initialValue: initialValue, profilePic: profilePic,
                                    onSuccess: { (contact1) in
                                     
                                     self.editProtocol?.hideLoadingIndicator()

@@ -114,7 +114,7 @@ class ServiceManagerTests: XCTestCase {
         mockNetworkManager?.isSuccess = false
         
         serviceManagerToTest?.networkManager = mockNetworkManager!
-        serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!,
+        serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!, profilePic: nil,
                                           onSuccess: { (contact) in
                                                     
                                             XCTFail("Success block should not be called if there is an internal network error.")
@@ -134,7 +134,7 @@ class ServiceManagerTests: XCTestCase {
             mockNetworkManager?.isSuccess = true
             
             serviceManagerToTest?.networkManager = mockNetworkManager!
-            serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!,
+            serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!, profilePic: nil,
                                               onSuccess: { (contacts) in
                                                         
                                                 XCTAssertEqual(contacts, self.mockContact!, "failed to parse the given data into required model")
@@ -153,7 +153,7 @@ class ServiceManagerTests: XCTestCase {
         mockNetworkManager?.isSuccess = false
         
         serviceManagerToTest?.networkManager = mockNetworkManager!
-        serviceManagerToTest?.createNewContact(mockContact!,
+        serviceManagerToTest?.createNewContact(mockContact!, profilePic: nil,
                                           onSuccess: { (contact) in
                                             
                                             XCTFail("Success block should not be called if there is an internal network error.")
@@ -173,7 +173,7 @@ class ServiceManagerTests: XCTestCase {
             mockNetworkManager?.isSuccess = true
             
             serviceManagerToTest?.networkManager = mockNetworkManager!
-            serviceManagerToTest?.createNewContact(mockContact!,
+            serviceManagerToTest?.createNewContact(mockContact!, profilePic: nil,
                                               onSuccess: { (contact) in
                                                 
                                                 XCTAssertEqual(contact, self.mockContact!, "failed to parse the given data into required model")

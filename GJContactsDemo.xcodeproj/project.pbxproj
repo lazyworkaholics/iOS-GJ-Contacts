@@ -19,6 +19,7 @@
 		45977BB423704E690059A9CB /* ContactEditViewModelProtocol_StubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BB323704E690059A9CB /* ContactEditViewModelProtocol_StubClass.swift */; };
 		45977BB6237074E80059A9CB /* EditContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BB5237074E80059A9CB /* EditContactCell.swift */; };
 		45977BDA237189F70059A9CB /* EditContactImageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BD9237189F70059A9CB /* EditContactImageViewCell.swift */; };
+		4599EB132372843E004A1E0C /* UploadContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4599EB122372843E004A1E0C /* UploadContact.swift */; };
 		45BAD732236C988900B1534F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD731236C988900B1534F /* AppDelegate.swift */; };
 		45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD733236C988900B1534F /* ContactsListViewController.swift */; };
 		45BAD737236C988900B1534F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD735236C988900B1534F /* Main.storyboard */; };
@@ -84,6 +85,7 @@
 		45977BB323704E690059A9CB /* ContactEditViewModelProtocol_StubClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditViewModelProtocol_StubClass.swift; sourceTree = "<group>"; };
 		45977BB5237074E80059A9CB /* EditContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactCell.swift; sourceTree = "<group>"; };
 		45977BD9237189F70059A9CB /* EditContactImageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactImageViewCell.swift; sourceTree = "<group>"; };
+		4599EB122372843E004A1E0C /* UploadContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContact.swift; sourceTree = "<group>"; };
 		45BAD72E236C988900B1534F /* GJContactsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GJContactsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BAD731236C988900B1534F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BAD733236C988900B1534F /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				45BAD778236D729500B1534F /* Contact.swift */,
+				4599EB122372843E004A1E0C /* UploadContact.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -684,6 +687,7 @@
 				45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */,
 				45F3F668236F2312008B7D33 /* ContactsListViewControllerExtension.swift in Sources */,
 				45977BAA236FE85A0059A9CB /* ContactEditViewModel.swift in Sources */,
+				4599EB132372843E004A1E0C /* UploadContact.swift in Sources */,
 				45BAD76F236D434100B1534F /* NetworkConstants.swift in Sources */,
 				45F3F646236E715E008B7D33 /* StringConstants.swift in Sources */,
 				45BAD769236D389C00B1534F /* ContactEditViewController.swift in Sources */,

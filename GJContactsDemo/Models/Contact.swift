@@ -94,4 +94,35 @@ public struct Contact: Codable, Equatable {
         self.createDate = contact.createDate
         self.lastUpdateDate = contact.lastUpdateDate
     }
+    
+    func getUploadContact(_ profilePic: UIImage?) -> UploadContact {
+        
+        return UploadContact.init(firstName: self.firstName, lastName: self.lastName, isFavorite: self.isFavorite, phoneNumber: self.phoneNumber, email: self.email, profilePic: profilePic?.pngData())
+    }
+    
+    func getUniqueUploadContact(_ initialContact:Contact, profilePic: UIImage?) -> UploadContact {
+        
+        var firstName:String? = nil
+        if self.firstName != initialContact.firstName {
+            firstName = self.firstName
+        }
+        var lastName:String? = nil
+        if self.lastName != initialContact.lastName {
+            lastName = self.lastName
+        }
+        var isfavorite:Bool? = nil
+        if self.isFavorite != initialContact.isFavorite {
+            isfavorite = self.isFavorite
+        }
+        var phoneNumber:String? = nil
+        if self.phoneNumber != initialContact.phoneNumber {
+            phoneNumber = self.phoneNumber
+        }
+        var email:String? = nil
+        if self.email != initialContact.email {
+            email = self.email
+        }
+        
+        return UploadContact.init(firstName: firstName, lastName: lastName, isFavorite: isfavorite, phoneNumber: phoneNumber, email: email, profilePic: profilePic?.pngData())
+    }
 }

@@ -48,13 +48,14 @@ class ServiceManager
         })
     }
 
-    public func createNewContact(_ contact:Contact,
+    public func createNewContact(_ contact: Contact, profilePic: UIImage?,
                                  onSuccess successBlock:@escaping (Contact)->Void,
                                  onFailure failureBlock:@escaping (NSError)->Void) {
         
+        let uploadContact = contact.getUploadContact(profilePic)
         let encoder = JSONEncoder.init()
         do {
-            let data = try encoder.encode(contact)
+            let data = try encoder.encode(uploadContact)
             let headers = [Network_Constants.HTTP_HEADER_CONTENT_TYPE_KEY : Network_Constants.HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON]
             self.networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .POST, headers: headers, body: data,
                                 onSuccess: { (updatedContact) in
@@ -72,14 +73,14 @@ class ServiceManager
     }
 
     public func editContact(_ contact:Contact,
-                            initialValue:Contact,
+                            initialValue:Contact, profilePic: UIImage?,
                             onSuccess successBlock:@escaping (Contact)->Void,
                             onFailure failureBlock:@escaping (NSError)->Void) {
         
         let encoder = JSONEncoder.init()
         do {
-            let uniquekeyValues = Utilities().keyValuePairForEditContact(contact, initialValue: initialValue)
-            let data = try encoder.encode(uniquekeyValues)
+            let uniqueContact = contact.getUniqueUploadContact(initialValue, profilePic: profilePic)
+            let data = try encoder.encode(uniqueContact)
             
             let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
             
