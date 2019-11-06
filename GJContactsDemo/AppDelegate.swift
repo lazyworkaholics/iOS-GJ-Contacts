@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.tintColor = ColorConstants.NAVBAR_TINT_COLOR
+        self.window?.tintColor = UIColor.init(named: StringConstants.Colors.APP_COLOR)
         self.window?.rootViewController = AppLauncher().initialViewController()
         self.window?.makeKeyAndVisible()
         

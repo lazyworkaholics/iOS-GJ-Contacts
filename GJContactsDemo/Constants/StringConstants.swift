@@ -69,8 +69,8 @@ struct StringConstants {
         static let FAVOURITE_BUTTON = "favourite_button"
         static let FAVOURITE_BUTTON_SELECTED = "favourite_button_selected"
     }
-}
-
-struct ColorConstants {
-    static let NAVBAR_TINT_COLOR = #colorLiteral(red: 0.3140000105, green: 0.8899999857, blue: 0.7609999776, alpha: 1)
+    
+    struct Colors {
+        static let APP_COLOR        = "appColor"
+    }
 }

@@ -21,6 +21,10 @@ class ListTableViewCell: UITableViewCell {
         
         name_lbl.text = contact.fullName
         profilePic_imgView.image(urlString: contact.profilePicUrl, withPlaceHolder: UIImage.init(named: StringConstants.Assets.PLACEHOLDER_PHOTO), doOverwrite: false)
+        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/2;
+        profilePic_imgView.layer.borderColor = UIColor.white.cgColor
+        profilePic_imgView.layer.borderWidth = 1
+        profilePic_imgView.layer.masksToBounds = true;
         
         if contact.isFavorite {
             isFavourite_imgView.isHidden = false

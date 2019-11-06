@@ -131,8 +131,20 @@ extension ContactsListViewController: UITableViewDataSource {
         return viewModel.getSectionTitles()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.getSectionHeaderTitle(section: section)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.view.bounds.size.width, height: 28))
+        view.backgroundColor = UIColor.lightGray
+        
+        let titleLabel = UILabel.init(frame: CGRect.init(x: 16, y: 10, width: 20, height: 16))
+        titleLabel.text = viewModel.getSectionHeaderTitle(section: section)
+        titleLabel.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        titleLabel.backgroundColor = UIColor.clear
+        view.addSubview(titleLabel)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 36
     }
 }
 

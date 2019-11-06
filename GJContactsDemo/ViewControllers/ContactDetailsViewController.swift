@@ -39,14 +39,15 @@ class ContactDetailsViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.EDIT
         navigationItem.rightBarButtonItem = rightBarButton
         
-        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/5;
+        profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/2;
         profilePic_imgView.layer.borderColor = UIColor.white.cgColor
         profilePic_imgView.layer.borderWidth = 1
         profilePic_imgView.layer.masksToBounds = true;
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.white.cgColor, ColorConstants.NAVBAR_TINT_COLOR.cgColor]
-        profilePic_BgView.layer.addSublayer(gradientLayer)
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor.init(red: 50, green: 227, blue: 194, alpha: 0.28).cgColor]
+        gradientLayer.frame = profilePic_BgView.bounds
+        profilePic_BgView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
