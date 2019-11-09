@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		449593126970D2C23239B382 /* Pods_GJContactsDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA4F972B265560C2F9619C04 /* Pods_GJContactsDemo.framework */; };
+		45214C9223747C4F00348D94 /* ContactsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214C9123747C4F00348D94 /* ContactsList.swift */; };
+		45214C9423766DFD00348D94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45214C9323766DFD00348D94 /* Colors.xcassets */; };
 		45977BA4236FCC270059A9CB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA3236FCC270059A9CB /* Utilities.swift */; };
 		45977BA6236FCE780059A9CB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA5236FCE780059A9CB /* Protocols.swift */; };
 		45977BA8236FD8970059A9CB /* ContactDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA7236FD8970059A9CB /* ContactDetailViewModel.swift */; };
@@ -23,7 +25,7 @@
 		45BAD732236C988900B1534F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD731236C988900B1534F /* AppDelegate.swift */; };
 		45BAD734236C988900B1534F /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD733236C988900B1534F /* ContactsListViewController.swift */; };
 		45BAD737236C988900B1534F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD735236C988900B1534F /* Main.storyboard */; };
-		45BAD73C236C988A00B1534F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73B236C988A00B1534F /* Assets.xcassets */; };
+		45BAD73C236C988A00B1534F /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73B236C988A00B1534F /* Icons.xcassets */; };
 		45BAD73F236C988A00B1534F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73D236C988A00B1534F /* LaunchScreen.storyboard */; };
 		45BAD755236C988A00B1534F /* GJContactsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD754236C988A00B1534F /* GJContactsDemoUITests.swift */; };
 		45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD766236D386400B1534F /* ContactDetailsViewController.swift */; };
@@ -74,6 +76,8 @@
 /* Begin PBXFileReference section */
 		035B3802D1EEAD3191C2C093 /* Pods-GJContactsDemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GJContactsDemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-GJContactsDemoUITests/Pods-GJContactsDemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GJContactsDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45214C9123747C4F00348D94 /* ContactsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsList.swift; sourceTree = "<group>"; };
+		45214C9323766DFD00348D94 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		45977BA3236FCC270059A9CB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		45977BA5236FCE780059A9CB /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		45977BA7236FD8970059A9CB /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewModel.swift; sourceTree = "<group>"; };
@@ -90,7 +94,7 @@
 		45BAD731236C988900B1534F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BAD733236C988900B1534F /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 		45BAD736236C988900B1534F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		45BAD73B236C988A00B1534F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		45BAD73B236C988A00B1534F /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		45BAD73E236C988A00B1534F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45BAD740236C988A00B1534F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BAD745236C988A00B1534F /* GJContactsDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GJContactsDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +164,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45214C9523766E5D00348D94 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				45BAD73B236C988A00B1534F /* Icons.xcassets */,
+				45214C9323766DFD00348D94 /* Colors.xcassets */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		45BAD725236C988900B1534F = {
 			isa = PBXGroup;
 			children = (
@@ -197,8 +210,8 @@
 				45F3F654236E90C0008B7D33 /* Extensions */,
 				45BAD76B236D3B1B00B1534F /* Services */,
 				45F3F65C236EBF3C008B7D33 /* OtherFiles */,
-				45BAD73B236C988A00B1534F /* Assets.xcassets */,
 				45BAD740236C988A00B1534F /* Info.plist */,
+				45214C9523766E5D00348D94 /* Assets */,
 			);
 			path = GJContactsDemo;
 			sourceTree = "<group>";
@@ -245,6 +258,7 @@
 		45BAD764236D378E00B1534F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				45214C9123747C4F00348D94 /* ContactsList.swift */,
 				45BAD778236D729500B1534F /* Contact.swift */,
 				4599EB122372843E004A1E0C /* UploadContact.swift */,
 			);
@@ -527,7 +541,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				45BAD73F236C988A00B1534F /* LaunchScreen.storyboard in Resources */,
-				45BAD73C236C988A00B1534F /* Assets.xcassets in Resources */,
+				45214C9423766DFD00348D94 /* Colors.xcassets in Resources */,
+				45BAD73C236C988A00B1534F /* Icons.xcassets in Resources */,
 				45BAD737236C988900B1534F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +698,7 @@
 				45BAD77D236D826800B1534F /* ServiceManager.swift in Sources */,
 				45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */,
 				45977BB6237074E80059A9CB /* EditContactCell.swift in Sources */,
+				45214C9223747C4F00348D94 /* ContactsList.swift in Sources */,
 				45977BA8236FD8970059A9CB /* ContactDetailViewModel.swift in Sources */,
 				45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */,
 				45F3F668236F2312008B7D33 /* ContactsListViewControllerExtension.swift in Sources */,

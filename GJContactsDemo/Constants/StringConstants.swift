@@ -71,6 +71,12 @@ struct StringConstants {
     }
     
     struct Colors {
-        static let APP_COLOR        = "appColor"
+        static let APP_COLOR                = "appColor"
+        static let LIST_VIEW_HEADER_COLOR   = "listViewHeaderColor"
+    }
+    
+    struct Fonts {
+        static let APP_FONT_NAME         = "Helvetica"
+        static let APP_FONT_SIZE:CGFloat = 14
     }
 }

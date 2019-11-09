@@ -11,6 +11,8 @@
     func showStaticAlert(_ title: String, message: String)
     func showLoadingIndicator()
     func hideLoadingIndicator()
+    
+    @objc optional func twoActionAlert(_ title: String, message: String, firstTitle:String, secondTitle:String, onfirstClick:(() -> Void), onSecondClick:(() -> Void))
 }
 
 protocol ContactListViewModelProtocol: ViewModelProtocol {
