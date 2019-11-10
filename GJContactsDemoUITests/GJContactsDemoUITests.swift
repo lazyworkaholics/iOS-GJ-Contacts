@@ -13,9 +13,6 @@ class GJContactsDemoUITests: XCTestCase {
     private var application:XCUIApplication!
 
     override func setUp() {
-        continueAfterFailure = false
-        application = XCUIApplication()
-        application.launch()
     }
 
     override func tearDown() {

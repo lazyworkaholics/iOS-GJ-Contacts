@@ -21,10 +21,12 @@ class ContactEditViewModel {
     //MARK:- variables and initializers
     var editProtocol:ViewModelProtocol?
     
-    private var dataSource:Contact!
-    private var dataSourceError:NSError?
-    private var isAddContact:Bool!
-    private var profilePic:UIImage?
+    var dataSource:Contact!
+    var dataSourceError:NSError?
+    var isAddContact:Bool!
+    var profilePic:UIImage?
+    
+    var router:RouterProtocol = Router.sharedInstance
     
     init(_ contact: Contact?) {
         
@@ -34,7 +36,7 @@ class ContactEditViewModel {
             dataSource = contact
         } else {
             isAddContact = true
-            dataSource = Contact()
+            dataSource = Contact.init(nil, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "")
         }
     }
     
@@ -59,19 +61,16 @@ class ContactEditViewModel {
     
     func dataUpdated(fieldName:String, fieldValue:String) {
         
-        if dataSource == nil {
-            dataSource = Contact()
-        }
         if fieldName == StringConstants.FIRST_NAME {
-            dataSource!.firstName = fieldValue
+            dataSource.firstName = fieldValue
         } else if fieldName == StringConstants.LAST_NAME {
-            dataSource!.lastName = fieldValue
+            dataSource.lastName = fieldValue
         } else if fieldName == StringConstants.MOBILE {
-            dataSource!.phoneNumber = fieldValue
+            dataSource.phoneNumber = fieldValue
         } else if fieldName == StringConstants.EMAIL {
-            dataSource!.email = fieldValue
+            dataSource.email = fieldValue
         }
-        dataSource!.isContactModifiedLocally = true
+        dataSource.isContactModifiedLocally = true
     }
     
     func profilePicUpdated(image:UIImage) {
@@ -92,7 +91,7 @@ class ContactEditViewModel {
                                                           firstTitle: StringConstants.OK, secondTitle: nil,
                                                           onfirstClick: {
                                                             
-                                                            Router.sharedInstance.dismissEditView(true)
+                                                            self.router.dismissEditView(true)
                 },
                                                           onSecondClick: nil)
             } else if serviceEvent == .ContactUpdate {
@@ -101,7 +100,7 @@ class ContactEditViewModel {
                                                           firstTitle: StringConstants.OK, secondTitle: nil,
                                                           onfirstClick: {
                                                             
-                                                            Router.sharedInstance.dismissEditView(true)
+                                                            self.router.dismissEditView(true)
                 },
                                                           onSecondClick: nil)
             }
@@ -130,7 +129,7 @@ class ContactEditViewModel {
     
     func dismissView() {
         
-        Router.sharedInstance.dismissEditView(false)
+        router.dismissEditView(false)
     }
     
     // MARK:- internal private functions

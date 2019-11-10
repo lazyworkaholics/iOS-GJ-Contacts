@@ -36,7 +36,6 @@ class ContactsList {
         
         self.contactListObserver = contactsObserver
         self.errorObserver = errorObserver
-        self.fetch()
     }
     
     func fetch() {

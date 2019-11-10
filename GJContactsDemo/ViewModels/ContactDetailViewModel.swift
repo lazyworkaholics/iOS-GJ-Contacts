@@ -17,6 +17,8 @@ class ContactDetailViewModel {
     
     var detailProtocol:ContactDetailProtocol?
     
+    var router:RouterProtocol = Router.sharedInstance
+    
     init(_ contact: Contact) {
         
         dataSource = contact
@@ -45,7 +47,7 @@ class ContactDetailViewModel {
             switch serviceEvent {
             case ContactServiceEvent.ContactDelete:
                 
-                Router.sharedInstance.popDetailView()
+                router.popDetailView()
                 break
             case ContactServiceEvent.ContactDetailsFetch:
                 
@@ -62,7 +64,7 @@ class ContactDetailViewModel {
     // MARK:- routing functions
     func invokeEditView() {
         
-        Router.sharedInstance.launchEditView(with: self.dataSource)
+        router.launchEditView(with: self.dataSource)
     }
     
     // MARK:- viewcontroller handler functions
@@ -129,6 +131,6 @@ class ContactDetailViewModel {
     
     func dismissDetailView() {
         
-        Router.sharedInstance.popDetailView()
+        router.popDetailView()
     }
 }

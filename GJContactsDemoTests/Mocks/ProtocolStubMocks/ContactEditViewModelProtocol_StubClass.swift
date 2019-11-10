@@ -9,7 +9,7 @@
 import UIKit
 @testable import GJContactsDemo
 
-class ContactEditProtocol_StubClass: ContactEditProtocol {
+class ContactEditProtocol_StubClass: ViewModelProtocol {
     
     var isShowLoadingIndicator_invoked = false
     var isHideLoadingIndicator_invoked = false

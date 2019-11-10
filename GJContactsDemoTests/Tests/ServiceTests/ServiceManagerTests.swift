@@ -14,11 +14,15 @@ class ServiceManagerTests: XCTestCase {
     
     var serviceManagerToTest:ServiceManager?
     var mockNetworkManager:NetworkManagerMock?
+    
     var mockContact:Contact?
+    var mockUploadContact:UploadContact?
     var testError:NSError?
     
     override func setUp() {
-        mockContact = Contact.init(id: 1101, firstName: "Test_FirstName", lastName: "Test_FirstName", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
+        mockContact = Contact.init(1101, firstName: "test firstName", lastName: "test lastName", profilePicUrl: "", isFavorite: false, detailsUrl: "")
+        
+        mockUploadContact = UploadContact.init(id: "1101", firstName: "test first name", lastName: "test last name", isFavorite: false, phoneNumber: nil, email: nil, profilePic: nil)
         
         testError = NSError.init(domain: "com.testingErrorDomain",
                                  code: 11010101843834,
@@ -32,6 +36,7 @@ class ServiceManagerTests: XCTestCase {
     override func tearDown() {
         mockContact = nil
         testError = nil
+        mockUploadContact = nil
         mockNetworkManager = nil
         serviceManagerToTest?.networkManager = NetworkManager.sharedInstance
     }
@@ -114,7 +119,8 @@ class ServiceManagerTests: XCTestCase {
         mockNetworkManager?.isSuccess = false
         
         serviceManagerToTest?.networkManager = mockNetworkManager!
-        serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!, profilePic: nil,
+        
+        serviceManagerToTest?.editContact(mockUploadContact!,
                                           onSuccess: { (contact) in
                                                     
                                             XCTFail("Success block should not be called if there is an internal network error.")
@@ -134,7 +140,7 @@ class ServiceManagerTests: XCTestCase {
             mockNetworkManager?.isSuccess = true
             
             serviceManagerToTest?.networkManager = mockNetworkManager!
-            serviceManagerToTest?.editContact(mockContact!, initialValue: mockContact!, profilePic: nil,
+            serviceManagerToTest?.editContact(mockUploadContact!,
                                               onSuccess: { (contacts) in
                                                         
                                                 XCTAssertEqual(contacts, self.mockContact!, "failed to parse the given data into required model")
@@ -153,7 +159,7 @@ class ServiceManagerTests: XCTestCase {
         mockNetworkManager?.isSuccess = false
         
         serviceManagerToTest?.networkManager = mockNetworkManager!
-        serviceManagerToTest?.createNewContact(mockContact!, profilePic: nil,
+        serviceManagerToTest?.createNewContact(mockUploadContact!,
                                           onSuccess: { (contact) in
                                             
                                             XCTFail("Success block should not be called if there is an internal network error.")
@@ -173,7 +179,7 @@ class ServiceManagerTests: XCTestCase {
             mockNetworkManager?.isSuccess = true
             
             serviceManagerToTest?.networkManager = mockNetworkManager!
-            serviceManagerToTest?.createNewContact(mockContact!, profilePic: nil,
+            serviceManagerToTest?.createNewContact(mockUploadContact!,
                                               onSuccess: { (contact) in
                                                 
                                                 XCTAssertEqual(contact, self.mockContact!, "failed to parse the given data into required model")

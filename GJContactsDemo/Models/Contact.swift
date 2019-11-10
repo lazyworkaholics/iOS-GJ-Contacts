@@ -36,6 +36,23 @@ class Contact: Codable, Equatable {
         return firstName + lastName
     }
     
+    private init() {
+        
+    }
+    
+    convenience init(_ id: Int?, firstName:String, lastName:String, profilePicUrl:String, isFavorite:Bool, detailsUrl:String) {
+        
+        self.init()
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.profilePicUrl = profilePicUrl
+        self.detailsUrl = detailsUrl
+        self.isFavorite =  isFavorite
+    }
+    
+    
+    
     //MARK:- Codable and Equatable confirmations
     enum CodingKeys: String, CodingKey {
         
@@ -94,7 +111,7 @@ class Contact: Codable, Equatable {
             self.contactObserver?(contact, nil, ContactServiceEvent.ContactDetailsFetch)
         }, onFailure: { (error) in
             
-            self.contactObserver?(self, error, ContactServiceEvent.ContactDetailsFetch)
+            self.contactObserver?(nil, error, ContactServiceEvent.ContactDetailsFetch)
         })
     }
     
@@ -105,15 +122,15 @@ class Contact: Codable, Equatable {
             let uploadContact = self._getUploadContact(profilePic)
             self.serviceManager.editContact(uploadContact, onSuccess: { (contact) in
                 
-                self.contactObserver?(self, nil, ContactServiceEvent.ContactUpdate)
+                self.contactObserver?(contact, nil, ContactServiceEvent.ContactUpdate)
             }, onFailure: { (error) in
                 
-                self.contactObserver?(self, error, ContactServiceEvent.ContactUpdate)
+                self.contactObserver?(nil, error, ContactServiceEvent.ContactUpdate)
             })
         } else {
             
             let error = NSError.init(domain: Network_Error_Constants.LOCAL_ERROR_DOMAIN, code: Network_Error_Constants.EDIT_CONTACT_NOCHANGES_ERROR, userInfo: [NSLocalizedDescriptionKey: Network_Error_Constants.EDIT_CONTACT_NOCHANGES_LOCAL_DESCRIPTION])
-            self.contactObserver?(self, error, ContactServiceEvent.ContactUpdate)
+            self.contactObserver?(nil, error, ContactServiceEvent.ContactUpdate)
         }
     }
     
@@ -122,10 +139,10 @@ class Contact: Codable, Equatable {
         let uploadContact = self._getUploadContact(profilePic)
         self.serviceManager.createNewContact(uploadContact, onSuccess: { (contact) in
             
-            self.contactObserver?(self, nil, ContactServiceEvent.ContactCreate)
+            self.contactObserver?(contact, nil, ContactServiceEvent.ContactCreate)
         }, onFailure: { (error) in
             
-            self.contactObserver?(self, error, ContactServiceEvent.ContactUpdate)
+            self.contactObserver?(nil, error, ContactServiceEvent.ContactCreate)
         })
     }
     
@@ -136,7 +153,7 @@ class Contact: Codable, Equatable {
             self.contactObserver?(nil, nil, ContactServiceEvent.ContactDelete)
         }, onFailure: { (error) in
             
-            self.contactObserver?(self, error, ContactServiceEvent.ContactDelete)
+            self.contactObserver?(nil, error, ContactServiceEvent.ContactDelete)
         })
     }
     

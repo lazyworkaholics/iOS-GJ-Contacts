@@ -11,6 +11,8 @@ import Foundation
 
 class ServiceManagerMock: ServiceManagerProtocol {
     
+    
+    
     static var sharedInstance: ServiceManagerProtocol = ServiceManagerMock()
     
     
@@ -85,7 +87,7 @@ class ServiceManagerMock: ServiceManagerProtocol {
         }
     }
     
-    func editContact(_ contact: Contact, initialValue: Contact, profilePic: UIImage?, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+    func editContact(_ uploadContact: UploadContact, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
         if is_editContact_Success!
         {
             is_editContact_SuccessBlock_invoked = true
@@ -100,7 +102,7 @@ class ServiceManagerMock: ServiceManagerProtocol {
         }
     }
     
-    func createNewContact(_ contact: Contact, profilePic: UIImage?, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
+    func createNewContact(_ uploadContact: UploadContact, onSuccess successBlock: @escaping (Contact) -> Void, onFailure failureBlock: @escaping (NSError) -> Void) {
         if is_createContact_Success!
         {
             is_createContact_SuccessBlock_invoked = true

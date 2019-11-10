@@ -17,25 +17,29 @@ class ContactsListViewModel {
     var isSearchEnabled:Bool = false
     var searchString:String = ""
     
-    private var _dataSource:ContactsList?
+    var dataSource:ContactsList?
     private var _dataSourceError:NSError?
     private var _sortedDataSource:[Int:ContactListSection] = [:]
     
-    // MARK:- data source functions
-    func fetch() {
-        
-        listProtocol?.showLoadingIndicator()
-        _dataSource = ContactsList.init({ (contacts, event) in
+    var router:RouterProtocol = Router.sharedInstance
+    
+    init() {
+        dataSource = ContactsList.init({ (contacts, event) in
             
             self.updateResults(with: "", isSearchEnabled: false)
-            self.listProtocol?.reloadTableView()
             self.listProtocol?.hideLoadingIndicator()
         }, errorObserver: { (error, event) in
             
             self.listProtocol?.hideLoadingIndicator()
             self.listProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
         })
-        _dataSource?.fetch()
+    }
+    
+    // MARK:- data source functions
+    func fetch() {
+        
+        listProtocol?.showLoadingIndicator()
+        dataSource?.fetch()
     }
     
     func updateResults(with searchString: String, isSearchEnabled: Bool) {
@@ -46,19 +50,20 @@ class ContactsListViewModel {
         } else {
             self.searchString = ""
         }
-        _sortedDataSource = Utilities().searchAndSort(contacts: self._dataSource?.contacts ?? [], with: self.searchString)
+        _sortedDataSource = Utilities().searchAndSort(contacts: self.dataSource?.contacts ?? [], with: self.searchString)
+        self.listProtocol?.reloadTableView()
     }
     
     // MARK:- routing functions
     func invokeDetailView(_ indexPath:IndexPath) {
         
         let contact = self.getContact(for: indexPath)
-        Router.sharedInstance.navigateToDetailView(with: contact)
+        router.navigateToDetailView(with: contact)
     }
     
     func invokeAddView() {
         
-        Router.sharedInstance.launchCreateView()
+        router.launchCreateView()
     }
     
     // MARK:- viewcontroller tableView handler functions

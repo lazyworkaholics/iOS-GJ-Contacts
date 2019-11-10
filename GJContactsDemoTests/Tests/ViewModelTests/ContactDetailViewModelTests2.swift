@@ -20,9 +20,13 @@ class ContactDetailViewModelTests2: XCTestCase {
     
     override func setUp() {
         
-        invalidContact = Contact.init(id: 1101, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: nil, isFavorite: false, detailsUrl: nil, phoneNumber: "xi148y", email: "enfhekd", createDate: nil, lastUpdateDate: nil)
+        invalidContact = Contact.init(1101, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "")
+        invalidContact.phoneNumber = "xi148y"
+        invalidContact.email = "enfhekd"
         
-        validContact = Contact.init(id: 1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: nil, isFavorite: false, detailsUrl: nil, phoneNumber: "98827533", email: "harsha.mvgr@gmail.com", createDate: nil, lastUpdateDate: nil)
+        validContact = Contact.init(1102, firstName: "Harsha", lastName: "Vardhan", profilePicUrl: "", isFavorite: false, detailsUrl: "")
+        validContact.phoneNumber = "98827533"
+        validContact.email = "harsha.mvgr@gmail.com"
         
         detailVMProtocolStub = ContactDetailViewModelProtocol_StubClass()
     }

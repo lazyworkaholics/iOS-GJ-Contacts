@@ -14,9 +14,7 @@ class ContactListViewModelProtocol_StubClass: ContactListViewModelProtocol {
     var isShowLoadingIndicator_involed = false
     var isHideLoadingIndicator_involed = false
     var reloadTableView_involed = false
-    var isRouteToDetailView_invoked = false
-    var isRouteToAddView_invoked = false
-    
+
     var showStaticAlert_involed = false
     var showStaticAlert_Title = ""
     var showStaticAlert_Message = ""
@@ -37,13 +35,5 @@ class ContactListViewModelProtocol_StubClass: ContactListViewModelProtocol {
     
     func reloadTableView() {
         reloadTableView_involed = true
-    }
-    
-    func routeToDetailView(_ detailViewController: ContactDetailsViewController) {
-        isRouteToDetailView_invoked = true
-    }
-    
-    func routeToAddView(_ addViewController: ContactEditViewController) {
-        isRouteToAddView_invoked = true
     }
 }
