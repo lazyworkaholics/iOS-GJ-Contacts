@@ -40,7 +40,6 @@
 		45BAD737236C988900B1534F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD735236C988900B1534F /* Main.storyboard */; };
 		45BAD73C236C988A00B1534F /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73B236C988A00B1534F /* Icons.xcassets */; };
 		45BAD73F236C988A00B1534F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45BAD73D236C988A00B1534F /* LaunchScreen.storyboard */; };
-		45BAD755236C988A00B1534F /* GJContactsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD754236C988A00B1534F /* GJContactsDemoUITests.swift */; };
 		45BAD767236D386400B1534F /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD766236D386400B1534F /* ContactDetailsViewController.swift */; };
 		45BAD769236D389C00B1534F /* ContactEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD768236D389C00B1534F /* ContactEditViewController.swift */; };
 		45BAD76D236D418500B1534F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD76C236D418500B1534F /* NetworkManager.swift */; };
@@ -55,22 +54,13 @@
 		45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */; };
 		45F3F646236E715E008B7D33 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F645236E715E008B7D33 /* StringConstants.swift */; };
 		45F3F64D236E777D008B7D33 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64C236E777D008B7D33 /* Router.swift */; };
-		45F3F650236E7FBB008B7D33 /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */; };
 		45F3F656236E90DF008B7D33 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */; };
 		45F3F668236F2312008B7D33 /* ContactsListViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F667236F2312008B7D33 /* ContactsListViewControllerExtension.swift */; };
 		9C3821E5ECC68BB22FD52317 /* Pods_GJContactsDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 765B05C4F47EE12478224E6C /* Pods_GJContactsDemoTests.framework */; };
-		FC37A7EA49391AE13F691B9B /* Pods_GJContactsDemoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1180EE7E903996AED23FB53D /* Pods_GJContactsDemoUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		45BAD746236C988A00B1534F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45BAD726236C988900B1534F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 45BAD72D236C988900B1534F;
-			remoteInfo = GJContactsDemo;
-		};
-		45BAD751236C988A00B1534F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45BAD726236C988900B1534F /* Project object */;
 			proxyType = 1;
@@ -113,8 +103,6 @@
 		45BAD740236C988A00B1534F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BAD745236C988A00B1534F /* GJContactsDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GJContactsDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BAD74B236C988A00B1534F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45BAD750236C988A00B1534F /* GJContactsDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GJContactsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		45BAD754236C988A00B1534F /* GJContactsDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GJContactsDemoUITests.swift; sourceTree = "<group>"; };
 		45BAD756236C988A00B1534F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BAD766236D386400B1534F /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
 		45BAD768236D389C00B1534F /* ContactEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditViewController.swift; sourceTree = "<group>"; };
@@ -132,7 +120,6 @@
 		45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		45F3F645236E715E008B7D33 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		45F3F64C236E777D008B7D33 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 		45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		45F3F65B236EBEEB008B7D33 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		45F3F65D236ED850008B7D33 /* ContactListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModelTests.swift; sourceTree = "<group>"; };
@@ -162,14 +149,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C3821E5ECC68BB22FD52317 /* Pods_GJContactsDemoTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45BAD74D236C988A00B1534F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC37A7EA49391AE13F691B9B /* Pods_GJContactsDemoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +209,6 @@
 			children = (
 				45BAD72E236C988900B1534F /* GJContactsDemo.app */,
 				45BAD745236C988A00B1534F /* GJContactsDemoTests.xctest */,
-				45BAD750236C988A00B1534F /* GJContactsDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -269,8 +247,6 @@
 		45BAD753236C988A00B1534F /* GJContactsDemoUITests */ = {
 			isa = PBXGroup;
 			children = (
-				45F3F64E236E7F9F008B7D33 /* AppLaunchTests */,
-				45BAD754236C988A00B1534F /* GJContactsDemoUITests.swift */,
 				45BAD756236C988A00B1534F /* Info.plist */,
 			);
 			path = GJContactsDemoUITests;
@@ -383,14 +359,6 @@
 				45214C9C2377FFFE00348D94 /* NetworkManagerProtocol.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		45F3F64E236E7F9F008B7D33 /* AppLaunchTests */ = {
-			isa = PBXGroup;
-			children = (
-				45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */,
-			);
-			path = AppLaunchTests;
 			sourceTree = "<group>";
 		};
 		45F3F653236E85BE008B7D33 /* ModelTests */ = {
@@ -506,26 +474,6 @@
 			productReference = 45BAD745236C988A00B1534F /* GJContactsDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		45BAD74F236C988A00B1534F /* GJContactsDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 45BAD75F236C988A00B1534F /* Build configuration list for PBXNativeTarget "GJContactsDemoUITests" */;
-			buildPhases = (
-				9D4AB08DDEA094C62F5FFB83 /* [CP] Check Pods Manifest.lock */,
-				45BAD74C236C988A00B1534F /* Sources */,
-				45BAD74D236C988A00B1534F /* Frameworks */,
-				45BAD74E236C988A00B1534F /* Resources */,
-				C2C91EF9EEEEF080BFAFB8AE /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				45BAD752236C988A00B1534F /* PBXTargetDependency */,
-			);
-			name = GJContactsDemoUITests;
-			productName = GJContactsDemoUITests;
-			productReference = 45BAD750236C988A00B1534F /* GJContactsDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -540,10 +488,6 @@
 						CreatedOnToolsVersion = 10.2.1;
 					};
 					45BAD744236C988A00B1534F = {
-						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 45BAD72D236C988900B1534F;
-					};
-					45BAD74F236C988A00B1534F = {
 						CreatedOnToolsVersion = 10.2.1;
 						TestTargetID = 45BAD72D236C988900B1534F;
 					};
@@ -564,7 +508,6 @@
 			targets = (
 				45BAD72D236C988900B1534F /* GJContactsDemo */,
 				45BAD744236C988A00B1534F /* GJContactsDemoTests */,
-				45BAD74F236C988A00B1534F /* GJContactsDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -582,13 +525,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		45BAD743236C988A00B1534F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45BAD74E236C988A00B1534F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -637,28 +573,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9D4AB08DDEA094C62F5FFB83 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GJContactsDemoUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9E017AC18EB5213ABA469D99 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -696,23 +610,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GJContactsDemo/Pods-GJContactsDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C2C91EF9EEEEF080BFAFB8AE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GJContactsDemoUITests/Pods-GJContactsDemoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-GJContactsDemoUITests/Pods-GJContactsDemoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GJContactsDemoUITests/Pods-GJContactsDemoUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -776,15 +673,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45BAD74C236C988A00B1534F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45F3F650236E7FBB008B7D33 /* AppLaunchTests.swift in Sources */,
-				45BAD755236C988A00B1534F /* GJContactsDemoUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -792,11 +680,6 @@
 			isa = PBXTargetDependency;
 			target = 45BAD72D236C988900B1534F /* GJContactsDemo */;
 			targetProxy = 45BAD746236C988A00B1534F /* PBXContainerItemProxy */;
-		};
-		45BAD752236C988A00B1534F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 45BAD72D236C988900B1534F /* GJContactsDemo */;
-			targetProxy = 45BAD751236C988A00B1534F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1022,48 +905,6 @@
 			};
 			name = Release;
 		};
-		45BAD760236C988A00B1534F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 035B3802D1EEAD3191C2C093 /* Pods-GJContactsDemoUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L6TLAD67NF;
-				INFOPLIST_FILE = GJContactsDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gojek.GJContactsDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GJContactsDemo;
-			};
-			name = Debug;
-		};
-		45BAD761236C988A00B1534F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F84C76C7D9727C22B9633066 /* Pods-GJContactsDemoUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = L6TLAD67NF;
-				INFOPLIST_FILE = GJContactsDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gojek.GJContactsDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = GJContactsDemo;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1090,15 +931,6 @@
 			buildConfigurations = (
 				45BAD75D236C988A00B1534F /* Debug */,
 				45BAD75E236C988A00B1534F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		45BAD75F236C988A00B1534F /* Build configuration list for PBXNativeTarget "GJContactsDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				45BAD760236C988A00B1534F /* Debug */,
-				45BAD761236C988A00B1534F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
