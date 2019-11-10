@@ -27,11 +27,9 @@ protocol RouterProtocol {
     
     func launchEditView(with contact:Contact)
     
-    func dismissEditView(_ isContactUpdated:Bool)
-    
     func launchCreateView()
     
-    func dismissCreateView()
+    func dismissEditView(_ isContactUpdated:Bool)
 }
 
 class Router: RouterProtocol {
@@ -105,21 +103,6 @@ class Router: RouterProtocol {
         }
     }
     
-    func dismissEditView(_ isContactUpdated:Bool) {
-        
-        if self.currentRouteState == AppRouteState.editView {
-            
-            DispatchQueue.main.async(execute: {() -> Void in
-                self.editNavigationController?.dismiss(animated: true, completion: nil)
-                self.currentRouteState = AppRouteState.detailView
-                
-                if isContactUpdated {
-                    self.detailsViewModel?.fetch()
-                }
-            })
-        }
-    }
-    
     func launchCreateView() {
         
         if self.currentRouteState == AppRouteState.listView {
@@ -135,12 +118,23 @@ class Router: RouterProtocol {
         }
     }
     
-    func dismissCreateView() {
+    func dismissEditView(_ isContactUpdated:Bool) {
         
-        if self.currentRouteState == AppRouteState.createView {
+        if self.currentRouteState == AppRouteState.editView {
             
             DispatchQueue.main.async(execute: {() -> Void in
-                self.editNavigationController?.dismiss(animated: true, completion: nil)
+                self.editNavigationController?.topViewController?.dismiss(animated: true, completion: nil)
+                self.currentRouteState = AppRouteState.detailView
+                
+                if isContactUpdated {
+                    self.detailsViewModel?.fetch()
+                }
+            })
+        }
+        else if self.currentRouteState == AppRouteState.createView {
+            
+            DispatchQueue.main.async(execute: {() -> Void in
+                self.editNavigationController?.topViewController?.dismiss(animated: true, completion: nil)
                 self.currentRouteState = AppRouteState.listView
                 
                 self.listViewModel?.fetch()

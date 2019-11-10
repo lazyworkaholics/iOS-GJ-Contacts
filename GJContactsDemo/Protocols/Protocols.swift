@@ -12,7 +12,7 @@
     func showLoadingIndicator()
     func hideLoadingIndicator()
     
-    @objc optional func showDoubleActionAlert(_ title: String, message: String, firstTitle:String, secondTitle:String, onfirstClick:(() -> Void), onSecondClick:(() -> Void))
+    @objc optional func showDoubleActionAlert(_ title: String, message: String?, firstTitle:String, secondTitle:String?, onfirstClick:@escaping (() -> Void), onSecondClick:(() -> Void)?)
 }
 
 protocol ContactListViewModelProtocol: ViewModelProtocol {

@@ -9,8 +9,9 @@
 import UIKit
 
 struct EditContactTableViewCellData {
+    
     var fieldName: String!
-    var fieldValue: String!
+    var fieldValue: String? = nil
     var keyBoardType: UIKeyboardType!
     var profilePic: UIImage?
 }
@@ -31,13 +32,9 @@ class ContactEditViewModel {
             
             isAddContact = false
             dataSource = contact
-            
-            dataSource.contactObserver = ({
-                (contact, error, serviceEvent) -> Void in
-                self.contactObserver(contact, error, serviceEvent)
-            })
         } else {
             isAddContact = true
+            dataSource = Contact()
         }
     }
     
@@ -45,15 +42,15 @@ class ContactEditViewModel {
     func populateTableCell(_ index:Int) -> EditContactTableViewCellData? {
         switch index {
         case 0:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.PROFILE_PIC, fieldValue: dataSource.profilePicUrl, keyBoardType: .default, profilePic: profilePic)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.PROFILE_PIC, fieldValue: dataSource?.profilePicUrl, keyBoardType: .default, profilePic: profilePic)
         case 1:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.FIRST_NAME, fieldValue: dataSource.firstName, keyBoardType: .default, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.FIRST_NAME, fieldValue: dataSource?.firstName, keyBoardType: .default, profilePic: nil)
         case 2:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.LAST_NAME, fieldValue: dataSource.lastName, keyBoardType: .default, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.LAST_NAME, fieldValue: dataSource?.lastName, keyBoardType: .default, profilePic: nil)
         case 3:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.MOBILE, fieldValue: dataSource.phoneNumber, keyBoardType: .phonePad, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.MOBILE, fieldValue: dataSource?.phoneNumber, keyBoardType: .phonePad, profilePic: nil)
         case 4:
-            return EditContactTableViewCellData.init(fieldName: StringConstants.EMAIL, fieldValue: dataSource.email, keyBoardType: .emailAddress, profilePic: nil)
+            return EditContactTableViewCellData.init(fieldName: StringConstants.EMAIL, fieldValue: dataSource?.email, keyBoardType: .emailAddress, profilePic: nil)
         default:
             break
         }
@@ -62,21 +59,24 @@ class ContactEditViewModel {
     
     func dataUpdated(fieldName:String, fieldValue:String) {
         
-        if fieldName == StringConstants.FIRST_NAME {
-            dataSource.firstName = fieldValue
-        } else if fieldName == StringConstants.LAST_NAME {
-            dataSource.lastName = fieldValue
-        } else if fieldName == StringConstants.MOBILE {
-            dataSource.phoneNumber = fieldValue
-        } else if fieldName == StringConstants.EMAIL {
-            dataSource.email = fieldValue
+        if dataSource == nil {
+            dataSource = Contact()
         }
-        dataSource.isContactModifiedLocally = true
+        if fieldName == StringConstants.FIRST_NAME {
+            dataSource!.firstName = fieldValue
+        } else if fieldName == StringConstants.LAST_NAME {
+            dataSource!.lastName = fieldValue
+        } else if fieldName == StringConstants.MOBILE {
+            dataSource!.phoneNumber = fieldValue
+        } else if fieldName == StringConstants.EMAIL {
+            dataSource!.email = fieldValue
+        }
+        dataSource!.isContactModifiedLocally = true
     }
     
     func profilePicUpdated(image:UIImage) {
         profilePic = image
-        dataSource.isContactModifiedLocally = true
+        dataSource?.isContactModifiedLocally = true
     }
     
     func contactObserver(_ contact:Contact?, _ error:NSError?, _ serviceEvent:ContactServiceEvent) {
@@ -84,19 +84,41 @@ class ContactEditViewModel {
         if error != nil {
             
             self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error!.localizedDescription)
-            self.editProtocol?.hideLoadingIndicator()
         } else {
             
-            if serviceEvent == .ContactUpdate || serviceEvent == .ContactCreate {
-                self.editProtocol?.hideLoadingIndicator()
-                Router.sharedInstance.dismissEditView(true)
+            if serviceEvent == .ContactCreate {
+                
+                self.editProtocol?.showDoubleActionAlert?(StringConstants.CONTACT_CREATE, message: StringConstants.SUCCESSFUL,
+                                                          firstTitle: StringConstants.OK, secondTitle: nil,
+                                                          onfirstClick: {
+                                                            
+                                                            Router.sharedInstance.dismissEditView(true)
+                },
+                                                          onSecondClick: nil)
+            } else if serviceEvent == .ContactUpdate {
+                
+                self.editProtocol?.showDoubleActionAlert?(StringConstants.CONTACT_UPDATE, message: StringConstants.SUCCESSFUL,
+                                                          firstTitle: StringConstants.OK, secondTitle: nil,
+                                                          onfirstClick: {
+                                                            
+                                                            Router.sharedInstance.dismissEditView(true)
+                },
+                                                          onSecondClick: nil)
             }
         }
+        self.editProtocol?.hideLoadingIndicator()
     }
     
     func pushContact() {
         
-        if self._inputValidations(contact: dataSource) {
+        if self._inputValidations(contact: dataSource!) {
+            
+            dataSource.contactObserver = ({
+                (contact, error, serviceEvent) -> Void in
+                self.contactObserver(contact, error, serviceEvent)
+            })
+            self.editProtocol?.showLoadingIndicator()
+            
             if isAddContact {
                 dataSource?.create(profilePic)
             }
@@ -116,7 +138,9 @@ class ContactEditViewModel {
         
         var isValid = true
         
-        if contact.firstName.count < 2 || contact.lastName.count < 2{
+        let firstNameCount = contact.firstName?.count ?? 0
+        let lastNameCount = contact.lastName?.count ?? 0
+        if firstNameCount < 2 || lastNameCount < 2{
             editProtocol?.showStaticAlert(StringConstants.NAME_INVALID_TITLE, message: StringConstants.NAME_INVALID_MESSAGE)
             isValid = false
             return isValid

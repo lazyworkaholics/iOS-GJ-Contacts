@@ -24,7 +24,9 @@ struct StringConstants {
     static let FIRST_NAME   = "First Name"
     static let LAST_NAME    = "Last Name"
     static let PROFILE_PIC  = "Profile Pic"
-    static let CONTACT_BACK  = "< Contact"
+    static let CONTACT_CREATE  = "New Contact Create"
+    static let CONTACT_UPDATE  = "Contact Update"
+    static let SUCCESSFUL  = "Successful"
     
     static let SMS_URL_PRETEXT      = "sms:"
     static let PHONE_URL_PRETEXT    = "tel:"

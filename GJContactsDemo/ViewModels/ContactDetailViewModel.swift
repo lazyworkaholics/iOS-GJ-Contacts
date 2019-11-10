@@ -16,18 +16,19 @@ class ContactDetailViewModel {
     private var dataSourceError:NSError?
     
     var detailProtocol:ContactDetailProtocol?
-    var serviceManager = ServiceManager.sharedInstance
     
     init(_ contact: Contact) {
+        
         dataSource = contact
-        dataSource.contactObserver =  ({
-            (contact, error, serviceEvent) -> Void in
-            self.contactObserver(contact, error, serviceEvent)
-        })
     }
     
     // MARK:- data source functions
     func fetch() {
+        
+        dataSource.contactObserver =  ({
+            (contact, error, serviceEvent) -> Void in
+            self.contactObserver(contact, error, serviceEvent)
+        })
         detailProtocol?.loadUI(dataSource)
         detailProtocol?.showLoadingIndicator()
         dataSource.getDetails()
@@ -43,9 +44,12 @@ class ContactDetailViewModel {
             
             switch serviceEvent {
             case ContactServiceEvent.ContactDelete:
+                
                 Router.sharedInstance.popDetailView()
                 break
             case ContactServiceEvent.ContactDetailsFetch:
+                
+                dataSource = contact!
                 detailProtocol?.loadUI(dataSource)
                 break
             default:
@@ -106,16 +110,25 @@ class ContactDetailViewModel {
         detailProtocol?.showLoadingIndicator()
         dataSource.isFavorite = isFavourite
         dataSource.isContactModifiedLocally = true
+        dataSource.contactObserver =  ({
+            (contact, error, serviceEvent) -> Void in
+            self.contactObserver(contact, error, serviceEvent)
+        })
         dataSource.push(nil)
     }
     
     func delete() {
         
+        dataSource.contactObserver =  ({
+            (contact, error, serviceEvent) -> Void in
+            self.contactObserver(contact, error, serviceEvent)
+        })
         detailProtocol?.showLoadingIndicator()
         dataSource.delete()
     }
     
     func dismissDetailView() {
+        
         Router.sharedInstance.popDetailView()
     }
 }

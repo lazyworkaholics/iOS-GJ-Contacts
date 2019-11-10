@@ -112,6 +112,24 @@ extension ContactEditViewController: ViewModelProtocol {
             self.present(alert, animated: true, completion: nil)
         })
     }
+    
+    func showDoubleActionAlert(_ title: String, message: String?, firstTitle:String, secondTitle:String?, onfirstClick:@escaping (() -> Void), onSecondClick:(() -> Void)?) {
+        DispatchQueue.main.async(execute: {() -> Void in
+            
+            let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction.init(title: firstTitle, style: .default, handler: { (nil) in
+                onfirstClick()
+            }))
+            
+            if secondTitle != nil && onSecondClick != nil {
+                alert.addAction(UIAlertAction.init(title: secondTitle!, style: .default, handler: { (nil) in
+                    onSecondClick!()
+                }))
+            }
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+    }
 }
 
 extension ContactEditViewController: UITableViewDataSource {

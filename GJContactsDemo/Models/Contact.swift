@@ -92,27 +92,12 @@ class Contact: Codable, Equatable {
         return false
     }
     
-    func update(contact:Contact, contactObserver:((Contact?, NSError?, ContactServiceEvent)-> Void)?) {
-        self.id = contact.id
-        self.firstName = contact.firstName
-        self.lastName = contact.lastName
-        self.profilePicUrl = contact.profilePicUrl
-        self.isFavorite = contact.isFavorite
-        self.detailsUrl = contact.detailsUrl
-        self.phoneNumber = contact.phoneNumber
-        self.email = contact.email
-        self.createDate = contact.createDate
-        self.lastUpdateDate = contact.lastUpdateDate
-        self.contactObserver = contactObserver
-    }
-    
     //MARK: - webservice functions
     func getDetails() {
         
         self.serviceManager.getContactDetails(self.id!, onSuccess: { (contact) in
             
-            self.update(contact: contact, contactObserver: self.contactObserver)
-            self.contactObserver?(self, nil, ContactServiceEvent.ContactDetailsFetch)
+            self.contactObserver?(contact, nil, ContactServiceEvent.ContactDetailsFetch)
         }, onFailure: { (error) in
             
             self.contactObserver?(self, error, ContactServiceEvent.ContactDetailsFetch)
@@ -126,7 +111,6 @@ class Contact: Codable, Equatable {
             let uploadContact = self._getUploadContact(profilePic)
             self.serviceManager.editContact(uploadContact, onSuccess: { (contact) in
                 
-                self.update(contact: contact, contactObserver: self.contactObserver)
                 self.contactObserver?(self, nil, ContactServiceEvent.ContactUpdate)
             }, onFailure: { (error) in
                 
@@ -144,7 +128,6 @@ class Contact: Codable, Equatable {
         let uploadContact = self._getUploadContact(profilePic)
         self.serviceManager.createNewContact(uploadContact, onSuccess: { (contact) in
             
-            self.update(contact: contact, contactObserver: self.contactObserver)
             self.contactObserver?(self, nil, ContactServiceEvent.ContactCreate)
         }, onFailure: { (error) in
             
