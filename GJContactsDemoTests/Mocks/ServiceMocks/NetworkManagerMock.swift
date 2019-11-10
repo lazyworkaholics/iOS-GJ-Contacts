@@ -9,17 +9,15 @@
 import UIKit
 @testable import GJContactsDemo
 
-class NetworkManagerMock: NetworkManager {
+class NetworkManagerMock: NetworkManagerProtocol {
 
     var data: Data?
     var error: NSError?
     var isSuccess: Bool?
     
-    override init() {
-        super.init()
-    }
+    static var sharedInstance:NetworkManagerProtocol = NetworkManagerMock()
     
-    override func httpRequest(_ urlPath:String,
+    func httpRequest(_ urlPath:String,
                      params: [String: String]?,
                      method: HTTPRequestType,
                      headers: [String:String]?,

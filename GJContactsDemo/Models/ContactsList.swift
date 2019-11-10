@@ -8,29 +8,42 @@
 
 import Foundation
 
+enum ContactServiceEvent:String {
+    case ListFetch
+    case ContactDetailsFetch
+    case ContactCreate
+    case ContactUpdate
+    case ContactDelete
+}
+
 class ContactsList {
     
-    var contacts:[Contact] = [] // add an observer on this contacts
-    var error:NSError? = nil    // add an observer on this error
+    var contacts: [Contact] = []
+    var error: NSError? = nil
     
-    init() {
+    var contactListObserver: (([Contact], ContactServiceEvent)-> Void)?
+    var errorObserver: ((NSError, ContactServiceEvent)-> Void)?
+    
+    lazy var serviceManager:ServiceManagerProtocol = ServiceManager.sharedInstance
+    
+    required init(_ contactsObserver:@escaping ([Contact], ContactServiceEvent)-> Void, errorObserver:@escaping (NSError, ContactServiceEvent)-> Void) {
+        
+        self.contactListObserver = contactsObserver
+        self.errorObserver = errorObserver
         self.fetch()
     }
     
     func fetch() {
-        ServiceManager.sharedInstance.getContactsList(onSuccess: { (contacts) in
-            self.contacts = contacts
+        
+        self.serviceManager.getContactsList(onSuccess: { (contacts) in
+            
+            self.contacts = contacts.sorted(by: { $0.fullName < $1.fullName })
+            self.contactListObserver?(self.contacts, ContactServiceEvent.ListFetch)
         }, onFailure: { (error) in
-            // here we can fetch the data from cached data from local database
+            
+            // here we can fetch the data from local cache if the app has offline access
             self.error = error
-        })
-    }
-    
-    func createContact(contact:Contact, profilePic:UIImage?) {
-        ServiceManager.sharedInstance.createNewContact(contact, profilePic: profilePic, onSuccess: { (contact) in
-            self.contacts.append(contact)
-        }, onFailure: { (error) in
-            self.error = error
+            self.errorObserver?(self.error!, ContactServiceEvent.ListFetch)
         })
     }
 }

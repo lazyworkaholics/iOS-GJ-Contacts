@@ -66,7 +66,7 @@ class ContactEditViewController: UIViewController {
     //MARK:- Custom Button Actions
     @objc func cancel_buttonAction() {
         
-        self.dismiss(animated: true, completion: nil)
+        self.viewModel.dismissView()
     }
     
     @objc func done_buttonAction() {
@@ -87,15 +87,8 @@ class ContactEditViewController: UIViewController {
     }
 }
 
-extension ContactEditViewController: ContactEditProtocol {
-    
-    func dismissView() {
-        DispatchQueue.main.async(execute: {() -> Void in
-            
-            self.dismiss(animated: true, completion: nil)
-        })
-    }
-    
+extension ContactEditViewController: ViewModelProtocol {
+
     func showLoadingIndicator() {
         DispatchQueue.main.async(execute: {() -> Void in
             

@@ -23,4 +23,7 @@ struct Network_Error_Constants {
     static let URLSESSION_ERROR = 0
     static let NOT_REACHABLE = 1
     static let PARSING_ERROR = 2
+    static let EDIT_CONTACT_NOCHANGES_ERROR = 3
+    static let LOCAL_ERROR_DOMAIN = "com.gojek.localErrorDomain"
+    static let EDIT_CONTACT_NOCHANGES_LOCAL_DESCRIPTION = "There are no changes in this contact to push to repositorys"
 }

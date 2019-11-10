@@ -39,6 +39,10 @@ class ContactDetailsViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.EDIT
         navigationItem.rightBarButtonItem = rightBarButton
         
+        let leftBarButton = UIBarButtonItem.init(title: StringConstants.CONTACT_BACK, style: .plain, target: self, action: #selector(ContactDetailsViewController.back_buttonAction))
+        leftBarButton.accessibilityIdentifier = StringConstants.CONTACT
+        navigationItem.leftBarButtonItem = leftBarButton
+        
         profilePic_imgView.layer.cornerRadius = profilePic_imgView.bounds.size.width/2;
         profilePic_imgView.layer.borderColor = UIColor.white.cgColor
         profilePic_imgView.layer.borderWidth = 1
@@ -50,14 +54,15 @@ class ContactDetailsViewController: UIViewController {
         profilePic_BgView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.viewModel.loadData()
-    }
-    
     //MARK:- Custom Button Actions
     @objc func edit_buttonAction() {
         
         viewModel.invokeEditView()
+    }
+    
+    @objc func back_buttonAction() {
+        
+        viewModel.dismissDetailView()
     }
     
     @IBAction func message_buttonAction(sender:UIButton) {
@@ -104,7 +109,7 @@ class ContactDetailsViewController: UIViewController {
 
 extension ContactDetailsViewController: ContactDetailProtocol {
     
-    func loadData(_ contact:Contact) {
+    func loadUI(_ contact:Contact) {
         DispatchQueue.main.async(execute: {() -> Void in
             
             self.profilePic_imgView.image(urlString: contact.profilePicUrl, withPlaceHolder: UIImage.init(named: StringConstants.Assets.PLACEHOLDER_PHOTO), doOverwrite: false)
@@ -142,18 +147,6 @@ extension ContactDetailsViewController: ContactDetailProtocol {
             let alert = UIAlertController.init(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction.init(title: StringConstants.OK, style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-        })
-    }
-    
-    func routeToEditView(_ editViewController: ContactEditViewController) {
-        DispatchQueue.main.async(execute: {() -> Void in
-            self.present(UINavigationController.init(rootViewController: editViewController), animated: true, completion: nil)
-        })
-    }
-    
-    func dismissView() {
-        DispatchQueue.main.async(execute: {() -> Void in
-            self.navigationController?.popViewController(animated: true)
         })
     }
 }

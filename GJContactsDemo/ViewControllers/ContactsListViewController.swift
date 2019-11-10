@@ -43,12 +43,6 @@ class ContactsListViewController: UIViewController {
         self.attachSearchController()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.viewModel.loadData()
-    }
-    
     //MARK:- Custom Button Actions
     @objc func groups_buttonAction() {
         
@@ -91,18 +85,6 @@ extension ContactsListViewController: ContactListViewModelProtocol {
     func reloadTableView() {
         DispatchQueue.main.async(execute: {() -> Void in
             self.tableView.reloadData()
-        })
-    }
-    
-    func routeToDetailView(_ detailViewController: ContactDetailsViewController) {
-        DispatchQueue.main.async(execute: {() -> Void in
-            self.navigationController?.pushViewController(detailViewController, animated: true)
-        })
-    }
-    
-    func routeToAddView(_ addViewController: ContactEditViewController) {
-        DispatchQueue.main.async(execute: {() -> Void in
-            self.present(UINavigationController.init(rootViewController: addViewController), animated: true, completion: nil)
         })
     }
 }

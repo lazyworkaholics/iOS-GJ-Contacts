@@ -18,28 +18,27 @@ struct EditContactTableViewCellData {
 class ContactEditViewModel {
 
     //MARK:- variables and initializers
+    var editProtocol:ViewModelProtocol?
+    
     private var dataSource:Contact!
-    private var initialValue:Contact!
     private var dataSourceError:NSError?
-    
-    var editProtocol:ContactEditProtocol?
-    var serviceManager = ServiceManager.sharedInstance
-    
     private var isAddContact:Bool!
-    private var isContactUpdated:Bool!
-    
     private var profilePic:UIImage?
     
     init(_ contact: Contact?) {
         
         if contact != nil {
+            
             isAddContact = false
             dataSource = contact
+            
+            dataSource.contactObserver = ({
+                (contact, error, serviceEvent) -> Void in
+                self.contactObserver(contact, error, serviceEvent)
+            })
         } else {
             isAddContact = true
-            dataSource = Contact(id: 0, firstName: "", lastName: "", profilePicUrl: "", isFavorite: false, detailsUrl: "", phoneNumber: "", email: "", createDate: "", lastUpdateDate: "")
         }
-        initialValue = self.dataSource
     }
     
     // MARK:- viewcontroller tableView handler functions
@@ -72,62 +71,48 @@ class ContactEditViewModel {
         } else if fieldName == StringConstants.EMAIL {
             dataSource.email = fieldValue
         }
+        dataSource.isContactModifiedLocally = true
     }
     
     func profilePicUpdated(image:UIImage) {
         profilePic = image
+        dataSource.isContactModifiedLocally = true
     }
     
-    func pushContact() {
-
-        if dataSource == initialValue {
-            editProtocol?.dismissView()
-        }
-        else {
-            if self.inputValidations(contact: dataSource) {
-                if isAddContact {
-                    self.createContact(dataSource)
-                }
-                else {
-                    self.editContact(dataSource)
-                }
+    func contactObserver(_ contact:Contact?, _ error:NSError?, _ serviceEvent:ContactServiceEvent) {
+        
+        if error != nil {
+            
+            self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error!.localizedDescription)
+            self.editProtocol?.hideLoadingIndicator()
+        } else {
+            
+            if serviceEvent == .ContactUpdate || serviceEvent == .ContactCreate {
+                self.editProtocol?.hideLoadingIndicator()
+                Router.sharedInstance.dismissEditView(true)
             }
         }
     }
     
+    func pushContact() {
+        
+        if self._inputValidations(contact: dataSource) {
+            if isAddContact {
+                dataSource?.create(profilePic)
+            }
+            else {
+                dataSource?.push(profilePic)
+            }
+        }
+    }
+    
+    func dismissView() {
+        
+        Router.sharedInstance.dismissEditView(false)
+    }
+    
     // MARK:- internal private functions
-    
-    private func createContact(_ contact: Contact) {
-        editProtocol?.showLoadingIndicator()
-        serviceManager.createNewContact(contact, profilePic: profilePic,
-                                        onSuccess: { (contact1) in
-                                            
-                                            self.editProtocol?.hideLoadingIndicator()
-                                            self.editProtocol?.dismissView()
-        },
-                                        onFailure: {(error) in
-                                            
-                                            self.editProtocol?.hideLoadingIndicator()
-                                            self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-        })
-    }
-    
-    private func editContact(_ contact: Contact) {
-        editProtocol?.showLoadingIndicator()
-        serviceManager.editContact(contact, initialValue: initialValue, profilePic: profilePic,
-                                   onSuccess: { (contact1) in
-                                    
-                                    self.editProtocol?.hideLoadingIndicator()
-                                    self.editProtocol?.dismissView()
-        },
-                                   onFailure: {(error) in
-                                    
-                                    self.editProtocol?.hideLoadingIndicator()
-                                    self.editProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-        })
-    }
-    
-    private func inputValidations(contact:Contact) -> Bool {
+    private func _inputValidations(contact:Contact) -> Bool {
         
         var isValid = true
         

@@ -7,12 +7,37 @@
 //
 import Foundation
 
-class ServiceManager
-{
-    static let sharedInstance = ServiceManager()
-    var networkManager : NetworkManager
+protocol ServiceManagerProtocol {
     
-    init() {
+    static var sharedInstance:ServiceManagerProtocol {get set}
+    
+    func getContactsList(onSuccess successBlock:@escaping ([Contact])->Void,
+                                onFailure failureBlock:@escaping (NSError)->Void)
+    
+    func getContactDetails(_ contactId:Int,
+                           onSuccess successBlock:@escaping (Contact)->Void,
+                           onFailure failureBlock:@escaping (NSError)->Void)
+    
+    func editContact(_ uploadContact:UploadContact,
+                     onSuccess successBlock:@escaping (Contact)->Void,
+                     onFailure failureBlock:@escaping (NSError)->Void)
+    
+    func createNewContact(_ uploadContact: UploadContact,
+                          onSuccess successBlock:@escaping (Contact)->Void,
+                          onFailure failureBlock:@escaping (NSError)->Void)
+    
+    func deleteContact(_ contact:Contact,
+                       onSuccess successBlock:@escaping (Bool)->Void,
+                       onFailure failureBlock:@escaping (NSError)->Void)
+}
+
+class ServiceManager: ServiceManagerProtocol
+{
+    
+    static var sharedInstance:ServiceManagerProtocol = ServiceManager()
+    var networkManager:NetworkManagerProtocol
+    
+    private init() {
         networkManager = NetworkManager.sharedInstance
     }
     
@@ -20,7 +45,7 @@ class ServiceManager
     public func getContactsList(onSuccess successBlock:@escaping ([Contact])->Void,
                                 onFailure failureBlock:@escaping (NSError)->Void) {
         
-        self.networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .GET, headers: nil, body: nil,
+        _networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .GET, headers: nil, body: nil,
                             onSuccess: { (contacts) in
                                 
                                 successBlock(contacts)
@@ -37,7 +62,7 @@ class ServiceManager
         
         let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contactId) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
 
-        self.networkRequest(urlPath: relativePath, params: nil, method: .GET, headers: nil, body: nil,
+        _networkRequest(urlPath: relativePath, params: nil, method: .GET, headers: nil, body: nil,
                             onSuccess: { (updatedContact) in
                                 
                                 successBlock(updatedContact)
@@ -48,16 +73,15 @@ class ServiceManager
         })
     }
 
-    public func createNewContact(_ contact: Contact, profilePic: UIImage?,
+    public func createNewContact(_ uploadContact: UploadContact,
                                  onSuccess successBlock:@escaping (Contact)->Void,
                                  onFailure failureBlock:@escaping (NSError)->Void) {
         
-        let uploadContact = contact.getUploadContact(profilePic)
         let encoder = JSONEncoder.init()
         do {
             let data = try encoder.encode(uploadContact)
             let headers = [Network_Constants.HTTP_HEADER_CONTENT_TYPE_KEY : Network_Constants.HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON]
-            self.networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .POST, headers: headers, body: data,
+            _networkRequest(urlPath: Network_Constants.CONTACTS_LIST_PATH, params: nil, method: .POST, headers: headers, body: data,
                                 onSuccess: { (updatedContact) in
                                     
                                     successBlock(updatedContact)
@@ -72,21 +96,19 @@ class ServiceManager
         }
     }
 
-    public func editContact(_ contact:Contact,
-                            initialValue:Contact, profilePic: UIImage?,
+    public func editContact(_ uploadContact:UploadContact,
                             onSuccess successBlock:@escaping (Contact)->Void,
                             onFailure failureBlock:@escaping (NSError)->Void) {
         
         let encoder = JSONEncoder.init()
         do {
-            let uniqueContact = contact.getUniqueUploadContact(initialValue, profilePic: profilePic)
-            let data = try encoder.encode(uniqueContact)
+            let data = try encoder.encode(uploadContact)
             
-            let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
+            let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(uploadContact.id!) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
             
             let headers = [Network_Constants.HTTP_HEADER_CONTENT_TYPE_KEY : Network_Constants.HTTP_HEADER_CONTENT_TYPE_VALUE_APP_JSON]
             
-            self.networkRequest(urlPath: relativePath, params: nil, method: .PUT, headers: headers, body: data,
+            _networkRequest(urlPath: relativePath, params: nil, method: .PUT, headers: headers, body: data,
                                 onSuccess: { (updatedContact) in
                 
                                     successBlock(updatedContact)
@@ -105,7 +127,7 @@ class ServiceManager
                             onSuccess successBlock:@escaping (Bool)->Void,
                             onFailure failureBlock:@escaping (NSError)->Void) {
         
-        let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
+        let relativePath = Network_Constants.EDIT_CONTACT_PRE_RELATIVE_PATH + String(contact.id!) + Network_Constants.EDIT_CONTACT_POST_RELATIVE_PATH
         networkManager.httpRequest(relativePath, params: nil, method: .DELETE, headers: nil, body: nil,
                                    onSuccess: { (data) in
                                     
@@ -118,7 +140,7 @@ class ServiceManager
     }
     
     //MARK: - Internal functions
-    private func networkRequest<T:Codable>(urlPath:String,
+    private func _networkRequest<T:Codable>(urlPath:String,
                                            params: [String: String]?,
                                            method: HTTPRequestType,
                                            headers: [String: String]?,

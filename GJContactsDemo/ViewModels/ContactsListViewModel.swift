@@ -12,37 +12,33 @@ import UIKit
 //MARK: - ContactsListViewModel
 class ContactsListViewModel {
     
-    private var contactsRawData:[Contact] = []
-    private var contactsDataSource:[Int:ContactListSection] = [:]
-    private var dataSourceError:NSError?
-    
     var listProtocol:ContactListViewModelProtocol?
-    var serviceManager = ServiceManager.sharedInstance
-    
+
     var isSearchEnabled:Bool = false
     var searchString:String = ""
     
+    private var _dataSource:ContactsList?
+    private var _dataSourceError:NSError?
+    private var _sortedDataSource:[Int:ContactListSection] = [:]
+    
     // MARK:- data source functions
-    func loadData() {
+    func fetch() {
         
-        self.listProtocol?.showLoadingIndicator()
-        serviceManager.getContactsList(
-            onSuccess: {
-                (contacts) in
-                self.contactsRawData = contacts
-                self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-                self.listProtocol?.reloadTableView()
-                self.listProtocol?.hideLoadingIndicator()
-        },
-            onFailure: {
-                (error) in
-                self.dataSourceError = error
-                self.listProtocol?.hideLoadingIndicator()
-                self.listProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
+        listProtocol?.showLoadingIndicator()
+        _dataSource = ContactsList.init({ (contacts, event) in
+            
+            self.updateResults(with: "", isSearchEnabled: false)
+            self.listProtocol?.reloadTableView()
+            self.listProtocol?.hideLoadingIndicator()
+        }, errorObserver: { (error, event) in
+            
+            self.listProtocol?.hideLoadingIndicator()
+            self.listProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
         })
+        _dataSource?.fetch()
     }
     
-    func updateSearchResults(with searchString: String, isSearchEnabled: Bool) {
+    func updateResults(with searchString: String, isSearchEnabled: Bool) {
         
         self.isSearchEnabled = isSearchEnabled
         if isSearchEnabled {
@@ -50,40 +46,35 @@ class ContactsListViewModel {
         } else {
             self.searchString = ""
         }
-        self.contactsDataSource = Utilities().searchAndSort(contacts: self.contactsRawData, with: self.searchString)
-        listProtocol?.reloadTableView()
+        _sortedDataSource = Utilities().searchAndSort(contacts: self._dataSource?.contacts ?? [], with: self.searchString)
     }
     
     // MARK:- routing functions
     func invokeDetailView(_ indexPath:IndexPath) {
         
         let contact = self.getContact(for: indexPath)
-        let detailViewModel = ContactDetailViewModel.init(contact)
-        let contactDetailVC = ContactDetailsViewController.initWithViewModel(detailViewModel)
-        listProtocol?.routeToDetailView(contactDetailVC)
+        Router.sharedInstance.navigateToDetailView(with: contact)
     }
     
     func invokeAddView() {
         
-        let editViewModel = ContactEditViewModel.init(nil)
-        let addViewController = ContactEditViewController.initWithViewModel(editViewModel)
-        listProtocol?.routeToAddView(addViewController)
+        Router.sharedInstance.launchCreateView()
     }
     
     // MARK:- viewcontroller tableView handler functions
     func getSectionCount() -> Int {
         
-        return contactsDataSource.keys.count
+        return _sortedDataSource.keys.count
     }
     
     func getRowCount(for section:Int) -> Int {
         
-        return contactsDataSource[section]?.contacts.count ?? 0
+        return _sortedDataSource[section]?.contacts.count ?? 0
     }
     
     func getContact(for indexPath:IndexPath) -> Contact {
         
-        var contacts = contactsDataSource[indexPath.section]?.contacts
+        var contacts = _sortedDataSource[indexPath.section]?.contacts
         return contacts![indexPath.row]
     }
     
@@ -91,8 +82,8 @@ class ContactsListViewModel {
         
         var titles:[String] = []
         var index = 0
-        while contactsDataSource[index] != nil {
-            titles.append(contactsDataSource[index]!.sectionTitle)
+        while _sortedDataSource[index] != nil {
+            titles.append(_sortedDataSource[index]!.sectionTitle)
             index += 1
         }
         return titles

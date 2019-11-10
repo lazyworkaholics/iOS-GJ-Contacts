@@ -9,6 +9,19 @@
 import Foundation
 import Reachability
 
+protocol NetworkManagerProtocol {
+    
+    static var sharedInstance:NetworkManagerProtocol {get set}
+    
+    func httpRequest(_ urlPath:String,
+                     params: [String: String]?,
+                     method: HTTPRequestType,
+                     headers: [String: String]?,
+                     body: Data?,
+                     onSuccess successBlock:@escaping (Data)->Void,
+                     onFailure failureBlock:@escaping (NSError)->Void)
+}
+
 enum HTTPRequestType:String {
     case GET
     case POST
@@ -16,13 +29,13 @@ enum HTTPRequestType:String {
     case DELETE
 }
 
-class NetworkManager
+class NetworkManager: NetworkManagerProtocol
 {
-    static let sharedInstance = NetworkManager()
+    static var sharedInstance:NetworkManagerProtocol = NetworkManager()
     var urlSession : URLSession
     var reachability : Reachability
     
-    init() {
+    private init() {
         let defaultConfiguration = URLSessionConfiguration.default
         self.urlSession = URLSession.init(configuration: defaultConfiguration)
         self.reachability = Reachability.forInternetConnection()
@@ -41,17 +54,17 @@ class NetworkManager
         if reachability.isReachableViaWiFi() == false &&
             reachability.isReachableViaWWAN() == false
         {
-            let errorObject = self.errorObjectFromString("No network connection detected", errorCode: Network_Error_Constants.NOT_REACHABLE)
+            let errorObject = self._errorObjectFromString("No network connection detected", errorCode: Network_Error_Constants.NOT_REACHABLE)
             failureBlock(errorObject)
             return
         }
         
         // check if a valid urlRequest be constructed out of the given input fields
-        guard let urlRequest = self.requestConstructor(urlPath, params: params, method: method, headers: headers, body: body) else {
+        guard let urlRequest = self._requestConstructor(urlPath, params: params, method: method, headers: headers, body: body) else {
             return
         }
         
-        self.sessionDataTask(urlRequest, onSuccess: successBlock, onFailure: failureBlock)
+        self._sessionDataTask(urlRequest, onSuccess: successBlock, onFailure: failureBlock)
         
     }
     
@@ -59,7 +72,7 @@ class NetworkManager
     // core function to handle urlSession's dataTask
     // calls and validates the network response
     // with appropriate success and failure blocks
-    private func sessionDataTask(_ urlRequest:URLRequest,
+    private func _sessionDataTask(_ urlRequest:URLRequest,
                      onSuccess successBlock:@escaping (Data)->Void,
                      onFailure failureBlock:@escaping (NSError)->Void)
     {
@@ -81,14 +94,14 @@ class NetworkManager
                         else
                         {
                             //Oops we should never get here in the first place. Abort!
-                            let errorObject = self.errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
+                            let errorObject = self._errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
                             failureBlock(errorObject)
                         }
                     }
                     else
                     {
                         let localizedErrorString = HTTPURLResponse.localizedString(forStatusCode: urlResponse.statusCode)
-                        let errorObject = self.errorObjectFromString(localizedErrorString,
+                        let errorObject = self._errorObjectFromString(localizedErrorString,
                                                                      errorCode: urlResponse.statusCode)
                         failureBlock(errorObject)
                     }
@@ -96,13 +109,13 @@ class NetworkManager
                 else
                 {
                     //Oops we should never get here in the first place. Abort!
-                    let errorObject = self.errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
+                    let errorObject = self._errorObjectFromString("Cannot parse the response", errorCode: Network_Error_Constants.PARSING_ERROR)
                     failureBlock(errorObject)
                 }
             }
             else
             {
-                let errorObject = self.errorObjectFromString(error!.localizedDescription, errorCode: Network_Error_Constants.URLSESSION_ERROR)
+                let errorObject = self._errorObjectFromString(error!.localizedDescription, errorCode: Network_Error_Constants.URLSESSION_ERROR)
                 failureBlock(errorObject)
             }
         }
@@ -110,7 +123,7 @@ class NetworkManager
     }
     
     // helper function to construct a urlRequest from given relative path, parameters, body etc
-    private func requestConstructor(_ urlPath:String,
+    private func _requestConstructor(_ urlPath:String,
                             params: [String: String]?,
                             method: HTTPRequestType,
                             headers: [String: String]?,
@@ -154,7 +167,7 @@ class NetworkManager
     }
     
     // helper function to construct an Error object from Error String and Error Code
-    private func errorObjectFromString(_ errorString:String, errorCode:Int) -> NSError
+    private func _errorObjectFromString(_ errorString:String, errorCode:Int) -> NSError
     {
         let error = NSError.init(domain: Network_Error_Constants.ERROR_DOMAIN,
                                  code: errorCode,

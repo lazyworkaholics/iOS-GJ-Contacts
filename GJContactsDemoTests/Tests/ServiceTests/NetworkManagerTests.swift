@@ -16,7 +16,7 @@ class NetworkManagerTests: XCTestCase {
     var networkManagerToTest: NetworkManager?
     
     override func setUp() {
-        networkManagerToTest = NetworkManager.sharedInstance
+        networkManagerToTest = NetworkManager.sharedInstance as! NetworkManager
     }
     
     override func tearDown() {

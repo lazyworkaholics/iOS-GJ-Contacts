@@ -12,25 +12,15 @@
     func showLoadingIndicator()
     func hideLoadingIndicator()
     
-    @objc optional func twoActionAlert(_ title: String, message: String, firstTitle:String, secondTitle:String, onfirstClick:(() -> Void), onSecondClick:(() -> Void))
+    @objc optional func showDoubleActionAlert(_ title: String, message: String, firstTitle:String, secondTitle:String, onfirstClick:(() -> Void), onSecondClick:(() -> Void))
 }
 
 protocol ContactListViewModelProtocol: ViewModelProtocol {
     
     func reloadTableView()
-    func routeToDetailView(_ detailViewController: ContactDetailsViewController)
-    func routeToAddView(_ addViewController: ContactEditViewController)
 }
 
 protocol ContactDetailProtocol: ViewModelProtocol {
     
-    func loadData(_ contact:Contact)
-    func dismissView()
-    func routeToEditView(_ editViewController: ContactEditViewController)
-    
-}
-
-protocol ContactEditProtocol: ViewModelProtocol {
-    
-    func dismissView()
+    func loadUI(_ contact:Contact)
 }

@@ -24,8 +24,8 @@ class ServiceManagerTests: XCTestCase {
                                  code: 11010101843834,
                                  userInfo: [NSLocalizedDescriptionKey:"Mock constructed Error"])
         
-        serviceManagerToTest = ServiceManager.sharedInstance
-        mockNetworkManager = NetworkManagerMock()
+        serviceManagerToTest = ServiceManager.sharedInstance as? ServiceManager
+        mockNetworkManager = NetworkManagerMock.sharedInstance as? NetworkManagerMock
         mockNetworkManager?.error = testError
     }
     

@@ -8,6 +8,7 @@
 
 public struct UploadContact: Codable, Equatable {
     
+    var id: String?
     var firstName: String?
     var lastName: String?
     var isFavorite: Bool?
@@ -16,6 +17,8 @@ public struct UploadContact: Codable, Equatable {
     var profilePic: Data?
     
     enum CodingKeys: String, CodingKey {
+        
+        case id = "id"
         case firstName = "first_name"
         case lastName = "last_name"
         case isFavorite = "favorite"

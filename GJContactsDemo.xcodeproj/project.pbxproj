@@ -43,7 +43,7 @@
 		45BAD788236DFAA900B1534F /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD787236DFAA900B1534F /* ListTableViewCell.swift */; };
 		45BAD78A236DFD9100B1534F /* ContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */; };
 		45F3F646236E715E008B7D33 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F645236E715E008B7D33 /* StringConstants.swift */; };
-		45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64C236E777D008B7D33 /* AppLauncher.swift */; };
+		45F3F64D236E777D008B7D33 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64C236E777D008B7D33 /* Router.swift */; };
 		45F3F650236E7FBB008B7D33 /* AppLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */; };
 		45F3F652236E83D5008B7D33 /* OtherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F651236E83D5008B7D33 /* OtherTests.swift */; };
 		45F3F656236E90DF008B7D33 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */; };
@@ -117,7 +117,7 @@
 		45BAD787236DFAA900B1534F /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		45BAD789236DFD9100B1534F /* ContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewModel.swift; sourceTree = "<group>"; };
 		45F3F645236E715E008B7D33 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
-		45F3F64C236E777D008B7D33 /* AppLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLauncher.swift; sourceTree = "<group>"; };
+		45F3F64C236E777D008B7D33 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		45F3F64F236E7FBB008B7D33 /* AppLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLaunchTests.swift; sourceTree = "<group>"; };
 		45F3F651236E83D5008B7D33 /* OtherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherTests.swift; sourceTree = "<group>"; };
 		45F3F655236E90DF008B7D33 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				45BAD731236C988900B1534F /* AppDelegate.swift */,
-				45F3F64C236E777D008B7D33 /* AppLauncher.swift */,
+				45F3F64C236E777D008B7D33 /* Router.swift */,
 				45F3F647236E7205008B7D33 /* Protocols */,
 				45BAD762236C9A2100B1534F /* ViewControllers */,
 				45BAD765236D379F00B1534F /* ViewModels */,
@@ -700,7 +700,7 @@
 				45977BB6237074E80059A9CB /* EditContactCell.swift in Sources */,
 				45214C9223747C4F00348D94 /* ContactsList.swift in Sources */,
 				45977BA8236FD8970059A9CB /* ContactDetailViewModel.swift in Sources */,
-				45F3F64D236E777D008B7D33 /* AppLauncher.swift in Sources */,
+				45F3F64D236E777D008B7D33 /* Router.swift in Sources */,
 				45F3F668236F2312008B7D33 /* ContactsListViewControllerExtension.swift in Sources */,
 				45977BAA236FE85A0059A9CB /* ContactEditViewModel.swift in Sources */,
 				4599EB132372843E004A1E0C /* UploadContact.swift in Sources */,

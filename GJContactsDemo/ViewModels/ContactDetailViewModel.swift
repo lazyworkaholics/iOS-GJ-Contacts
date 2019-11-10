@@ -19,36 +19,46 @@ class ContactDetailViewModel {
     var serviceManager = ServiceManager.sharedInstance
     
     init(_ contact: Contact) {
-        self.dataSource = contact
+        dataSource = contact
+        dataSource.contactObserver =  ({
+            (contact, error, serviceEvent) -> Void in
+            self.contactObserver(contact, error, serviceEvent)
+        })
     }
     
     // MARK:- data source functions
-    func loadData() {
-        detailProtocol?.loadData(dataSource)
+    func fetch() {
+        detailProtocol?.loadUI(dataSource)
         detailProtocol?.showLoadingIndicator()
-        serviceManager.getContactDetails(dataSource.id,
-                                         onSuccess: {
-                                            (contact) in
-                                            
-                                            self.dataSource.update(contact: contact)
-                                            self.detailProtocol?.loadData(self.dataSource)
-                                            self.detailProtocol?.hideLoadingIndicator()
-        },
-                                         onFailure: {
-                                            (error) in
-                                            
-                                            self.dataSourceError = error
-                                            self.detailProtocol?.hideLoadingIndicator()
-                                            self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-        })
+        dataSource.getDetails()
+    }
+    
+    func contactObserver(_ contact:Contact?, _ error:NSError?, _ serviceEvent:ContactServiceEvent) {
+        
+        if error != nil {
+            
+            dataSourceError = error
+            detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error!.localizedDescription)
+        } else {
+            
+            switch serviceEvent {
+            case ContactServiceEvent.ContactDelete:
+                Router.sharedInstance.popDetailView()
+                break
+            case ContactServiceEvent.ContactDetailsFetch:
+                detailProtocol?.loadUI(dataSource)
+                break
+            default:
+                break
+            }
+        }
+        detailProtocol?.hideLoadingIndicator()
     }
     
     // MARK:- routing functions
     func invokeEditView() {
         
-        let editViewModel = ContactEditViewModel.init(self.dataSource)
-        let editViewController = ContactEditViewController.initWithViewModel(editViewModel)
-        detailProtocol?.routeToEditView(editViewController)
+        Router.sharedInstance.launchEditView(with: self.dataSource)
     }
     
     // MARK:- viewcontroller handler functions
@@ -94,45 +104,18 @@ class ContactDetailViewModel {
     func markFavourite(_ isFavourite:Bool) {
         
         detailProtocol?.showLoadingIndicator()
-        let initialValue = dataSource
         dataSource.isFavorite = isFavourite
-        serviceManager.editContact(dataSource, initialValue: initialValue!, profilePic: nil,
-                                   onSuccess: { (contact) in
-                                    
-                                    self.dataSource.update(contact: contact)
-                                    self.detailProtocol?.loadData(self.dataSource)
-                                    self.detailProtocol?.hideLoadingIndicator()
-        },
-                                   onFailure:  { (error) in
-                                    
-                                    self.dataSource.isFavorite = !isFavourite
-                                    self.detailProtocol?.loadData(self.dataSource)
-                                    self.dataSourceError = error
-                                    self.detailProtocol?.hideLoadingIndicator()
-                                    self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-        })
+        dataSource.isContactModifiedLocally = true
+        dataSource.push(nil)
     }
     
     func delete() {
         
         detailProtocol?.showLoadingIndicator()
-        serviceManager.deleteContact(dataSource,
-                                     onSuccess: { (isSuccess) in
-            
-                                        self.detailProtocol?.hideLoadingIndicator()
-                                        if isSuccess{
-                                            self.detailProtocol?.dismissView()
-                                        } else {
-                                            self.detailProtocol?.hideLoadingIndicator()
-                                            self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: StringConstants.DELTE_CUSTOM_ERROR)
-                                        }
-        },
-                                     onFailure: {(error) in
-                                        
-                                        self.dataSourceError = error
-                                        self.detailProtocol?.hideLoadingIndicator()
-                                        self.detailProtocol?.showStaticAlert(StringConstants.ERROR, message: error.localizedDescription)
-        })
-        
+        dataSource.delete()
+    }
+    
+    func dismissDetailView() {
+        Router.sharedInstance.popDetailView()
     }
 }
