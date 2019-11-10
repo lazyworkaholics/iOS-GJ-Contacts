@@ -39,7 +39,7 @@ class ContactDetailsViewController: UIViewController {
         rightBarButton.accessibilityIdentifier = StringConstants.EDIT
         navigationItem.rightBarButtonItem = rightBarButton
         
-        let leftBarButton = UIBarButtonItem.init(title: StringConstants.CONTACT_BACK, style: .plain, target: self, action: #selector(ContactDetailsViewController.back_buttonAction))
+        let leftBarButton = UIBarButtonItem.init(title: StringConstants.CONTACT, style: .plain, target: self, action: #selector(ContactDetailsViewController.back_buttonAction))
         leftBarButton.accessibilityIdentifier = StringConstants.CONTACT
         navigationItem.leftBarButtonItem = leftBarButton
         
@@ -107,6 +107,7 @@ class ContactDetailsViewController: UIViewController {
     }
 }
 
+//MARK:- ContactDetailProtocol functions
 extension ContactDetailsViewController: ContactDetailProtocol {
     
     func loadUI(_ contact:Contact) {

@@ -7,12 +7,6 @@
 //
 
 //MARK: -
-public struct ContactListSection {
-    
-    let sectionTitle: String
-    let contacts: [Contact]
-}
-
 class Contact: Codable, Equatable {
     
     //MARK:- Variables
@@ -136,6 +130,7 @@ class Contact: Codable, Equatable {
     }
     
     func delete() {
+        
         self.serviceManager.deleteContact(self, onSuccess: { (isSuccess) in
             
             self.contactObserver?(nil, nil, ContactServiceEvent.ContactDelete)

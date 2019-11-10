@@ -87,6 +87,7 @@ class ContactEditViewController: UIViewController {
     }
 }
 
+//MARK:- ViewModelProtocol functions
 extension ContactEditViewController: ViewModelProtocol {
 
     func showLoadingIndicator() {
@@ -132,6 +133,7 @@ extension ContactEditViewController: ViewModelProtocol {
     }
 }
 
+//MARK: - UITableViewDataSource functions
 extension ContactEditViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -174,6 +176,7 @@ extension ContactEditViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate functions
 extension ContactEditViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -186,6 +189,7 @@ extension ContactEditViewController: UITableViewDelegate {
     }
 }
 
+//MARK: - UITextFieldDelegate functions
 extension ContactEditViewController: UITextFieldDelegate {
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -215,6 +219,7 @@ extension ContactEditViewController: UITextFieldDelegate {
     }
 }
 
+//MARK: - UIImagePickerControllerDelegate functions
 extension ContactEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

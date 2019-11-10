@@ -17,21 +17,6 @@ enum AppRouteState:String {
     case createView
 }
 
-protocol RouterProtocol {
-    
-    func appLaunch(_ window:UIWindow)
-    
-    func navigateToDetailView(with contact:Contact)
-    
-    func popDetailView()
-    
-    func launchEditView(with contact:Contact)
-    
-    func launchCreateView()
-    
-    func dismissEditView(_ isContactUpdated:Bool)
-}
-
 class Router: RouterProtocol {
     
     static var sharedInstance:Router = Router()

@@ -9,19 +9,6 @@
 import Foundation
 import Reachability
 
-protocol NetworkManagerProtocol {
-    
-    static var sharedInstance:NetworkManagerProtocol {get set}
-    
-    func httpRequest(_ urlPath:String,
-                     params: [String: String]?,
-                     method: HTTPRequestType,
-                     headers: [String: String]?,
-                     body: Data?,
-                     onSuccess successBlock:@escaping (Data)->Void,
-                     onFailure failureBlock:@escaping (NSError)->Void)
-}
-
 enum HTTPRequestType:String {
     case GET
     case POST

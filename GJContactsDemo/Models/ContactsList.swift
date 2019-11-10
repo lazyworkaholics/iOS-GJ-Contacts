@@ -16,6 +16,12 @@ enum ContactServiceEvent:String {
     case ContactDelete
 }
 
+public struct ContactListSection {
+    
+    let sectionTitle: String
+    let contacts: [Contact]
+}
+
 class ContactsList {
     
     var contacts: [Contact] = []
