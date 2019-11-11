@@ -30,6 +30,10 @@
 		45214CB52378951000348D94 /* ContactEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BB1237046020059A9CB /* ContactEditViewModelTests.swift */; };
 		45214CF6237907EA00348D94 /* MockContactsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214CF5237907EA00348D94 /* MockContactsListViewModel.swift */; };
 		45214CF823790A8D00348D94 /* ContactsListVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214CF723790A8D00348D94 /* ContactsListVCTests.swift */; };
+		45214CFB237919CE00348D94 /* MockContactDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214CFA237919CE00348D94 /* MockContactDetailsViewModel.swift */; };
+		45214CFD2379223400348D94 /* ContactDetailsVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214CFC2379223400348D94 /* ContactDetailsVCTests.swift */; };
+		45214CFF2379258D00348D94 /* MockContactEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214CFE2379258D00348D94 /* MockContactEditViewModel.swift */; };
+		45214D012379263800348D94 /* ContactEditVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45214D002379263800348D94 /* ContactEditVCTests.swift */; };
 		45977BA4236FCC270059A9CB /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA3236FCC270059A9CB /* Utilities.swift */; };
 		45977BA6236FCE780059A9CB /* ViewModelProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA5236FCE780059A9CB /* ViewModelProtocols.swift */; };
 		45977BA8236FD8970059A9CB /* ContactDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45977BA7236FD8970059A9CB /* ContactDetailViewModel.swift */; };
@@ -86,6 +90,10 @@
 		45214CB32378930200348D94 /* MockContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContact.swift; sourceTree = "<group>"; };
 		45214CF5237907EA00348D94 /* MockContactsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContactsListViewModel.swift; sourceTree = "<group>"; };
 		45214CF723790A8D00348D94 /* ContactsListVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListVCTests.swift; sourceTree = "<group>"; };
+		45214CFA237919CE00348D94 /* MockContactDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContactDetailsViewModel.swift; sourceTree = "<group>"; };
+		45214CFC2379223400348D94 /* ContactDetailsVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsVCTests.swift; sourceTree = "<group>"; };
+		45214CFE2379258D00348D94 /* MockContactEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockContactEditViewModel.swift; sourceTree = "<group>"; };
+		45214D002379263800348D94 /* ContactEditVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactEditVCTests.swift; sourceTree = "<group>"; };
 		45977BA3236FCC270059A9CB /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		45977BA5236FCE780059A9CB /* ViewModelProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelProtocols.swift; sourceTree = "<group>"; };
 		45977BA7236FD8970059A9CB /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewModel.swift; sourceTree = "<group>"; };
@@ -200,6 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				45214CF5237907EA00348D94 /* MockContactsListViewModel.swift */,
+				45214CFA237919CE00348D94 /* MockContactDetailsViewModel.swift */,
+				45214CFE2379258D00348D94 /* MockContactEditViewModel.swift */,
 			);
 			path = MockViewModels;
 			sourceTree = "<group>";
@@ -208,6 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				45214CF723790A8D00348D94 /* ContactsListVCTests.swift */,
+				45214CFC2379223400348D94 /* ContactDetailsVCTests.swift */,
+				45214D002379263800348D94 /* ContactEditVCTests.swift */,
 			);
 			path = ViewControllerTests;
 			sourceTree = "<group>";
@@ -404,10 +416,10 @@
 		45F3F657236E9A2F008B7D33 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				45214CF923790BE000348D94 /* ViewControllerTests */,
-				45214CA423786FF300348D94 /* ViewModelTests */,
-				45F3F653236E85BE008B7D33 /* ModelTests */,
 				45BAD780236D90BB00B1534F /* ServiceTests */,
+				45F3F653236E85BE008B7D33 /* ModelTests */,
+				45214CA423786FF300348D94 /* ViewModelTests */,
+				45214CF923790BE000348D94 /* ViewControllerTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -674,6 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45214CF823790A8D00348D94 /* ContactsListVCTests.swift in Sources */,
+				45214CFD2379223400348D94 /* ContactDetailsVCTests.swift in Sources */,
 				45214CAF2378897F00348D94 /* ContactDetailViewModelTests.swift in Sources */,
 				45214CB12378919200348D94 /* ContactDetailViewModelTests2.swift in Sources */,
 				45214CB22378922500348D94 /* ContactEditViewModelProtocol_StubClass.swift in Sources */,
@@ -681,18 +694,21 @@
 				45214CA62378702800348D94 /* ContactListTests.swift in Sources */,
 				45214CAB2378780F00348D94 /* MockContactsList.swift in Sources */,
 				45BAD785236D95C100B1534F /* NetworkManagerMock.swift in Sources */,
+				45214CFF2379258D00348D94 /* MockContactEditViewModel.swift in Sources */,
 				45214CA32378635300348D94 /* ContactModel_ServiceCallTests.swift in Sources */,
 				45214CA82378743900348D94 /* ContactListViewModelProtocol_StubClass.swift in Sources */,
 				45214CAE237887EE00348D94 /* RouterMock.swift in Sources */,
 				45214CB42378930200348D94 /* MockContact.swift in Sources */,
 				45214CF6237907EA00348D94 /* MockContactsListViewModel.swift in Sources */,
 				45214CA02378066F00348D94 /* ContactModelTests.swift in Sources */,
+				45214D012379263800348D94 /* ContactEditVCTests.swift in Sources */,
 				45214C9E2378020400348D94 /* ServiceManagerTests.swift in Sources */,
 				45BAD774236D665000B1534F /* URLSessionMock.swift in Sources */,
 				45214CA1237861C400348D94 /* ServiceManagerMock.swift in Sources */,
 				45BAD772236D660900B1534F /* ReachabilityMock.swift in Sources */,
 				45214CB023788DF100348D94 /* ContactDetailViewModelProtocol_StubClass.swift in Sources */,
 				45214CA7237873A500348D94 /* ContactListViewModelTests.swift in Sources */,
+				45214CFB237919CE00348D94 /* MockContactDetailsViewModel.swift in Sources */,
 				45214CB52378951000348D94 /* ContactEditViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

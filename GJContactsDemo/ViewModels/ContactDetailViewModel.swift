@@ -12,7 +12,7 @@ import UIKit
 class ContactDetailViewModel {
     
     //MARK:- variables and initializers
-    private var dataSource:Contact!
+    var dataSource:Contact!
     private var dataSourceError:NSError?
     
     var detailProtocol:ContactDetailProtocol?
