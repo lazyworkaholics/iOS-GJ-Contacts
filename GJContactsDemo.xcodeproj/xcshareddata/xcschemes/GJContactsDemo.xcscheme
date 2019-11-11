@@ -49,16 +49,6 @@
                ReferencedContainer = "container:GJContactsDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45BAD74F236C988A00B1534F"
-               BuildableName = "GJContactsDemoUITests.xctest"
-               BlueprintName = "GJContactsDemoUITests"
-               ReferencedContainer = "container:GJContactsDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
