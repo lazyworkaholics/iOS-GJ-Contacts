@@ -33,7 +33,7 @@ class ContactListTests: XCTestCase {
         mockServiceManager!.contacts = self.contacts
         mockServiceManager!.isSuccess = true
         
-        var contactsList = ContactsList.init({ (contacts, serviceEvent) in
+        let contactsList = ContactsList.init({ (contacts, serviceEvent) in
             XCTAssertEqual(contacts, self.contacts, "contacts received different")
             XCTAssertEqual(serviceEvent, ContactServiceEvent.ListFetch)
         }, errorObserver: { (error, serviceEvent) in
@@ -49,7 +49,7 @@ class ContactListTests: XCTestCase {
         mockServiceManager!.error = self.serviceError
         mockServiceManager!.isSuccess = false
         
-        var contactsList = ContactsList.init({ (contacts, serviceEvent) in
+        let contactsList = ContactsList.init({ (contacts, serviceEvent) in
             XCTFail()
             
         }, errorObserver: { (error, serviceEvent) in
