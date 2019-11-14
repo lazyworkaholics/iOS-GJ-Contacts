@@ -16,17 +16,20 @@ class Utilities {
         
         var sortedContactList: [Int: ContactListSection] = [:]
         
-        let sortedContacts = searchContacts.sorted(by: { $0.fullName < $1.fullName })
-        let sectionTitles = UILocalizedIndexedCollation.current().sectionTitles
+        var sortedContacts = searchContacts.sorted(by: { $0.fullName < $1.fullName })
+        var sectionTitles = UILocalizedIndexedCollation.current().sectionTitles
+        sectionTitles.removeLast()
         
         var index = 0
         for title in sectionTitles {
             let contacts1 = sortedContacts.filter({ $0.fullName.capitalized.hasPrefix(title)})
+            sortedContacts.removeAll(where: { $0.fullName.capitalized.hasPrefix(title)})
             if contacts1.count > 0 {
                 sortedContactList[index] = ContactListSection.init(sectionTitle: title, contacts: contacts1)
                 index += 1
             }
         }
+        sortedContactList[index] = ContactListSection.init(sectionTitle: "#", contacts: sortedContacts)
         return sortedContactList
     }
     
