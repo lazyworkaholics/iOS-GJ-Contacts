@@ -344,11 +344,11 @@
 		45BAD770236D65E700B1534F /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				45BAD783236D944E00B1534F /* ServiceMocks */,
+				45214CA9237877E800348D94 /* ModelMocks */,
 				45214CF4237907C700348D94 /* MockViewModels */,
 				45214CAC237887D900348D94 /* MockRouter */,
-				45214CA9237877E800348D94 /* ModelMocks */,
 				45F3F661236EF012008B7D33 /* ProtocolStubMocks */,
-				45BAD783236D944E00B1534F /* ServiceMocks */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -356,8 +356,8 @@
 		45BAD780236D90BB00B1534F /* ServiceTests */ = {
 			isa = PBXGroup;
 			children = (
-				45BAD781236D92A900B1534F /* ServiceManagerTests.swift */,
 				45BAD775236D668700B1534F /* NetworkManagerTests.swift */,
+				45BAD781236D92A900B1534F /* ServiceManagerTests.swift */,
 			);
 			path = ServiceTests;
 			sourceTree = "<group>";
